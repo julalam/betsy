@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :orderitems, only: [:create, :index, :destroy, :update]
 
-  root 'main#index'
+  resources :products
+
 
   get '/orders', to: 'orders#index', as: 'orders'
   get '/orders/new', to: 'orders#new', as: 'new_order'
@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   patch '/orders/:id', to: 'orders#update'
 
   resources :orders
+  root 'main#index'
 
+  resources :orderitems, only: [:create, :index, :destroy, :update]
 
 end
