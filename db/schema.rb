@@ -34,16 +34,10 @@ ActiveRecord::Schema.define(version: 20171018052441) do
     t.string "status"
     t.string "customer_name"
     t.string "customer_email"
-<<<<<<< HEAD
-    t.integer "cc_number"
-    t.date "cc_exipration"
-    t.integer "cc_ccv"
-=======
     t.string "customer_address"
     t.string "cc_number"
     t.date "cc_expiration"
     t.string "cc_ccv"
->>>>>>> 8f95f564eb21c8e4e6a908d48fbe79f5210ec9a0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "zip_code"
