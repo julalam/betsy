@@ -1,5 +1,11 @@
 require "test_helper"
 
+###None of this is working yet.
+#problems to solve:
+#1. Where are the layouts
+#2. There is something wrong with the strong params
+
+
 describe Product do
   describe "relations" do
 
