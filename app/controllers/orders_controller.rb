@@ -8,6 +8,28 @@ class OrdersController < ApplicationController
   end
 
   def create
+    if params[:work][:status] == " "
+      flash[:failed] = 'Enter a status'
+    else
+      @order = Order.new(
+        status: 'pending',
+        customer_name: params[:order][:customer_name],
+        customer_email: params[:order][:customer_email],
+        customer_address: params[:order][:customer_address],
+        cc_number: params[:order][:cc_number],
+        cc_expiration: params[:order][:cc_expiration],
+        cc_ccv: params[:order][:cc_ccv],
+        zip_code: params[:order][:zip_code],
+      )
+      result = @order.save
+
+      if result
+        flash[:success] = 'Your order has been placed'
+        redirect_to orders_path
+      else
+        flash[:failure] = 'Something went wrong. Please place your order again'
+        redirect_to orders_path
+    end
   end
 
   def update
@@ -26,6 +48,8 @@ class OrdersController < ApplicationController
 
     if result
       flash[:notification] = 'Order was successfully updated'
+    else
+      flash[:failure] = 'Order was not updated'
     end
   end
 
