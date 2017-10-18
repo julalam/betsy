@@ -19,10 +19,11 @@
  /*green header #66ad1f;*/
  /*orange buttons #ff8533;*/
  /*dark orange on hover #e65c00;*/
+ /*yellow #ffd24d;*/
 
- * {
+ /** {
    border: 1px solid red;
- }
+ }*/
 
  .page-header {
    background-color: #66ad1f;
@@ -40,7 +41,28 @@
  }
 
  .ads {
-   height: 10rem;
-   background-color: pink;
+   height: 7rem;
    padding: 1rem;
+   margin: 3% 0;
+   color: #fff;
+   font-weight: bold;
+ }
+
+ .ads:first-of-type {
+   margin-left: 5.5%;
+   background-color: #ffd24d;
+ }
+
+ .ads:last-of-type {
+   margin-right: 5.5%;
+   background-color: #66ad1f;
+ }
+
+ .ads p {
+   text-align: center;
+   margin: 0;
+ }
+
+ .ads h3 {
+   margin: 0;
  }
