@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
-  resources :products
+
 
 
   get '/orders', to: 'orders#index', as: 'orders'
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get '/order_items', to: 'order_items#index', as: 'order_items'
 
-  get '/merchants/:id' to: 'merchants#show', as: 'merchant'
+  get '/merchants/:id', to: 'merchants#show', as: 'merchant'
 
   get '/products', to: 'products#index', as: 'products'
   get '/products/new', to: 'products#new', as: 'new_product'
