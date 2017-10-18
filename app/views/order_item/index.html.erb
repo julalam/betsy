@@ -1,0 +1,10 @@
+<h1> All Order Items </h1>
+
+<% @order_items.each do |order_item| %>
+  <ul>
+    <li>ID:  <%= link_to order_item.id, order_items_path(order_item) %> </li>
+    <li>Quantity:  <%= order_item.quantity %> </li>
+    <li>Product ID:  <%= order_item.product_id %> </li>
+    <li>Order ID:  <%= order_item.order_id %> </li>
+  </ul>
+<% end %>
