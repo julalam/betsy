@@ -7,6 +7,26 @@ require 'csv'
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchant_seeds.csv')
+puts "Loading raw merchant data from #{MERCHANT_FILE}"
+
+merchant_failures = []
+CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
+  merchant = Merchant.new
+  merchant.id = row['id']
+  merchant.username = row['username']
+  merchant.email = row['email']
+  puts "Created merchant: #{merchant.inspect}"
+  successful = merchant.save
+  if !successful
+    merchant_failures << merchant
+  end
+end
+
+puts "Added #{Merchant.count} merchant records"
+puts "#{merchant_failures.length} merchants failed to save"
+
+
 
 PRODUCT_FILE = Rails.root.join('db', 'seed_data', 'product_seeds.csv')
 puts "Loading raw driver data from #{PRODUCT_FILE}"
@@ -31,24 +51,3 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
-
-
-
-MERCHANT_FILE = Rails.root.join('db', 'seed_data', 'merchant_seeds.csv')
-puts "Loading raw driver data from #{MERCHANT_FILE}"
-
-merchant_failures = []
-CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
-  merchant = Merchant.new
-  merchant.id = row['id']
-  merchant.username = row['username']
-  merchant.email = row['email']
-  puts "Created merchant: #{merchant.inspect}"
-  successful = merchant.save
-  if !successful
-    merchant_failures << merchant
-  end
-end
-
-puts "Added #{Merchant.count} merchant records"
-puts "#{merchant_failures.length} merchants failed to save"
