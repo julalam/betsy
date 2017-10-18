@@ -4,8 +4,26 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one:
+  id: 1,
+  customer_name: 'sue'
+  customer_email: 'sue@gmail.com'
+  customer_address: '420 blaze ave'
+  cc_number: '12312312'
+  cc_expiration: '2020-01-01'
+  cc_ccv: '908'
+  zip_code: '98101'
+
 # column: value
 #
-two: {}
+two:
+  id: 2,
+  customer_name: 'suzie'
+  customer_email: 'suzie@gmail.com'
+  customer_address: '123 internet ave'
+  cc_number: '333333'
+  cc_expiration: '2222-22-22'
+  cc_ccv: '222'
+  zip_code: '22222'
+  
 # column: value

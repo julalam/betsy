@@ -4,9 +4,10 @@ class CreateOrders < ActiveRecord::Migration[5.1]
       t.string :status
       t.string :customer_name
       t.string :customer_email
-      t.integer :cc_number
+      t.string :customer_address
+      t.string :cc_number
       t.date :cc_exipration
-      t.integer :cc_ccv
+      t.string :cc_ccv
 
       t.timestamps
     end

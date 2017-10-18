@@ -1,0 +1,33 @@
+<%= form_for @order do |f| %>
+    <%= f.label :status %>
+    <%= f.select :status, [
+                            ['pending', 'pending'],
+                            ['paid', 'paid'],
+                            ['complete', 'complete'],
+                            ['closed', 'closed']
+                          ] %>
+
+    <%= f.label :customer_name %>
+    <%= f.text_field :customer_name %>
+
+    <%= f.label :customer_email %>
+    <%= f.text_field :customer_email %>
+
+    <%= f.label :customer_address %>
+    <%= f.text_field :customer_address %>
+
+    <%= f.label :cc_number %>
+    <%= f.text_area :cc_number %>
+    
+    <%= f.label :cc_expiration %>
+    <%= f.text_area :cc_expiration %>
+
+    <%= f.label :cc_ccv %>
+    <%= f.text_area :cc_ccv %>
+
+    <%= f.label :zip_code %>
+    <%= f.text_area :zip_code %>
+
+    <%= f.submit%>
+
+<% end %>
