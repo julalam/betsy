@@ -9,7 +9,8 @@ class OrdersController < ApplicationController
 
   def create
     if params[:order][:status] == " "
-      flash[:failed] = 'Enter a status'
+      flash[:failure] = 'Please enter the required fields.'
+      redirect_to new_order_path
     else
       @order = Order.new(
         status: 'pending',
