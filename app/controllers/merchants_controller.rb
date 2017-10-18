@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  
+
   def new
   end
 
@@ -7,6 +7,10 @@ class MerchantsController < ApplicationController
   end
 
   def login
+  end
+
+  def show
+    @merchant = Merchant.find(params[:id])
   end
 
   def logout

@@ -1,0 +1,13 @@
+<h1> All Orders </h1>
+
+<% @products.each do |product| %>
+  <ul>
+    <li>ID:  <%= link_to product.id, product_path(product) %> </li>
+    <li>Price:  <%= product.price %> </li>
+    <li>Stock:  <%= product.stock %> </li>
+    <li>Retired?:  <%= product.retired %> </li>
+    <li>Description:  <%= product.description %> </li>
+    <li>Image URL:  <%= product.image_url %> </li>
+  
+  </ul>
+<% end %>
