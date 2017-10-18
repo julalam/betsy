@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if params[:work][:status] == " "
+    if params[:order][:status] == " "
       flash[:failed] = 'Enter a status'
     else
       @order = Order.new(
@@ -36,14 +36,14 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
 
-    @order.status = params[:status]
-    @order.customer_name = params[:customer_name]
-    @order.customer_email = params[:customer_email]
-    @order.customer_address = params[:customer_address]
-    @order.cc_number = params[:cc_number]
-    @order.cc_expiration = params[:cc_expiration]
-    @order.cc_ccv = params[:cc_ccv]
-    @order.zip_code = params[:zip_code]
+    @order.status = params[:order][:status]
+    @order.customer_name = params[:order][:customer_name]
+    @order.customer_email = params[:order][:customer_email]
+    @order.customer_address = params[:order][:customer_address]
+    @order.cc_number = params[:order][:cc_number]
+    @order.cc_expiration = params[:order][:cc_expiration]
+    @order.cc_ccv = params[:order][:cc_ccv]
+    @order.zip_code = params[:order][:zip_code]
 
     result = @order.save
 
@@ -52,6 +52,11 @@ class OrdersController < ApplicationController
     else
       flash[:failure] = 'Order was not updated'
     end
+    redirect_to orders_path
+  end
+
+  def edit
+    @order = Order.find(params[:id])
   end
 
   def show
