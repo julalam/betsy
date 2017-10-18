@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
       else
         flash[:failure] = 'Something went wrong. Please place your order again'
         redirect_to orders_path
+      end
     end
   end
 

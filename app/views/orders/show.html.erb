@@ -1,0 +1,13 @@
+<h1>Order#: <%= @order.id %> </h1>
+
+<ul>
+  <li>Status:  <%= @order.status %> </li>
+  <li>Customer Name:  <%= @order.customer_name %> </li>
+  <li>Customer Email Address:  <%= @order.customer_email %> </li>
+  <li>Credit Card Number:  <%= @order.cc_number %> </li>
+  <li>Credit Card Expiration Date:  <%= @order.cc_expiration %> </li>
+  <li>Credit Card CCV:  <%= @order.cc_ccv %> </li>
+  <li>Billing Zipcode:  <%= @order.zip_code %> </li>
+</ul>
+
+<%= link_to 'All Orders', orders_path %>
