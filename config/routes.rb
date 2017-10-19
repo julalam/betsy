@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   resources :orderitems, only: [:create, :index, :destroy, :update]
 
   get '/auth/:provider/callback', to: 'merchants#login'
+  get 'logout', to: 'merchants#logout', as: 'logout'
 
 end

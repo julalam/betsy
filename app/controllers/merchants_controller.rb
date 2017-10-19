@@ -6,8 +6,6 @@ class MerchantsController < ApplicationController
     if auth_hash['uid']
       merchant = Merchant.find_by(uid: auth_hash[:uid], provider: params[:provider])
       if merchant.nil?
-        #merchant has not logged in before
-        #create a new record
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
         if merchant.save
           flash[:status] = :success
@@ -29,5 +27,9 @@ class MerchantsController < ApplicationController
   end
 
   def logout
+    session[:merchant_id] = nil
+    flash[:status] = :success
+    flash[:notice] = "Successfully logged out"
+    redirect_to root_path
   end
 end

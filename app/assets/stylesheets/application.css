@@ -30,7 +30,7 @@
    max-width: 100%;
  }
 
- .nav a {
+ .nav a, .nav p {
    margin: .5rem .1rem;
    background-color: #ff8533;
    font-weight: bold;
