@@ -11,7 +11,7 @@ one:
   retired: false
   description: testing
   image_url: addtesturl
-  merchant: one
+  merchant_id: eva
 
 # column: value
 #
@@ -22,6 +22,77 @@ two:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant: two
+    merchant_id: eva
 
+three:
+    name: product3
+    price: 4.0
+    stock: 5
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: eva
+
+four:
+    name: product4
+    price: 6.0
+    stock: 7
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
+
+five:
+    name: product5
+    price: 8.0
+    stock: 9
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
+
+six:
+    name: product6
+    price: 10.0
+    stock: 11
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
+
+seven:
+    name: product7
+    price: 12.0
+    stock: 13
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
+
+eight:
+    name: product8
+    price: 14.0
+    stock: 15
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
+
+nine:
+    name: product9
+    price: 16.0
+    stock: 17
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
+
+ten:
+    name: product9
+    price: 18.0
+    stock: 19
+    retired: false
+    description: testing2
+    image_url: addtesturl2
+    merchant_id: emma
 # column: value

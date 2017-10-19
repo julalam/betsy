@@ -22,7 +22,7 @@
 
       <nav class="row nav">
         <%= link_to "home", root_path, class: "button" %>
-        <%= link_to "shop by category", root_path, class: "button" %>
+        <%= link_to "All products", products_path, class: "button" %>
         <%= link_to "shop by merchant", merchants_path, class: "button" %>
         <% if session[:merchant_id] %>
           <div class="float-right">
