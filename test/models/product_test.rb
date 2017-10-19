@@ -9,13 +9,8 @@ require "test_helper"
 describe Product do
   describe "relations" do
 
-    #this is failing. I don't know why.
     it "has a merchant" do
       thneed = products(:one)
-
-      puts thneed.merchant_id
-      puts "***************"
-      puts merchants(:eva).id
 
       thneed.must_respond_to :merchant
       thneed.merchant.must_be_kind_of Merchant

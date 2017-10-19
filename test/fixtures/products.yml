@@ -11,7 +11,7 @@ one:
   retired: false
   description: testing
   image_url: addtesturl
-  merchant_id: eva
+  merchant: eva
 
 # column: value
 #
@@ -22,7 +22,7 @@ two:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: eva
+    merchant: eva
 
 three:
     name: product3
@@ -31,7 +31,7 @@ three:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: eva
+    merchant: eva
 
 four:
     name: product4
@@ -40,7 +40,7 @@ four:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 
 five:
     name: product5
@@ -49,7 +49,7 @@ five:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 
 six:
     name: product6
@@ -58,7 +58,7 @@ six:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 
 seven:
     name: product7
@@ -67,7 +67,7 @@ seven:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 
 eight:
     name: product8
@@ -76,7 +76,7 @@ eight:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 
 nine:
     name: product9
@@ -85,7 +85,7 @@ nine:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 
 ten:
     name: product9
@@ -94,5 +94,5 @@ ten:
     retired: false
     description: testing2
     image_url: addtesturl2
-    merchant_id: emma
+    merchant: emma
 # column: value
