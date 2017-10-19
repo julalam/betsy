@@ -1,5 +1,21 @@
 class MerchantsController < ApplicationController
 
+
+  def new
+    @merchant = Merchant.new
+  end
+
+  def index
+    @merchants = Merchant.all
+  end
+
+  def show
+    @merchant = Merchant.find(params[:id])
+    @products = @merchant.product
+  end
+
+
+
   def login
     auth_hash = request.env['omniauth.auth']
 
