@@ -15,3 +15,14 @@ two:
     email: test2
 
 # column: value
+eva:
+  username: eva
+  email: eva@email.com
+  provider: github
+  uid: 123
+
+emma:
+  username: emma
+  email: emma@email.com
+  provider: github
+  uid: 234
