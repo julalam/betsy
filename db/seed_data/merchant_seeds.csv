@@ -1,4 +1,4 @@
-id,username,email
-1,Eva,eva@email.com
-2,Rebecca,rebecca@email.com
-3,Lindsey,lindsey@email.com
+id,username,email,uid,provider
+1,Eva,eva@email.com,123,github
+2,Rebecca,rebecca@email.com,234,github
+3,Lindsey,lindsey@email.com,345,github
