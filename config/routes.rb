@@ -24,6 +24,14 @@ Rails.application.routes.draw do
 
   resources :orderitems, only: [:create, :index, :destroy, :update]
 
+
+  resources :categories, only: [:new, :create]
+
+  # nested routes
+  resources :categories do
+    resources :products, only: [:index]
+  end
+
   get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
   get 'logout', to: 'merchants#logout', as: 'logout'
 
