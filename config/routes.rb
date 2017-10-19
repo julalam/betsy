@@ -17,4 +17,10 @@ Rails.application.routes.draw do
 
   resources :orderitems, only: [:create, :index, :destroy, :update]
 
+  resources :categories, only: [:new, :create]
+
+  # nested routes
+  resources :categories do
+    resources :products, only: [:index]
+  end
 end
