@@ -7,9 +7,7 @@ describe MerchantsController do
 
       merchant = merchants(:eva)
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-
-      get auth_callback_path(:github)
+      login(merchant)
 
       must_respond_with :redirect
       must_redirect_to root_path
@@ -23,9 +21,7 @@ describe MerchantsController do
 
       merchant = Merchant.new(provider: "github", uid: 456, username: "new_merchant", email: "new@mail.com")
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-
-      get auth_callback_path(:github)
+      login(merchant)
 
       must_respond_with :redirect
       must_redirect_to root_path
@@ -39,14 +35,25 @@ describe MerchantsController do
 
       merchant = Merchant.new(username: "new_merchant", email: "new@mail.com")
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
-
-      get auth_callback_path(:github)
+      login(merchant)
 
       must_respond_with :redirect
       must_redirect_to root_path
       session[:merchant_id].must_equal nil
       Merchant.count.must_equal start_count
+    end
+  end
+
+  describe "logout" do
+    it "logs out merchant and redirects to the root path" do
+      merchant = merchants(:eva)
+
+      login(merchant)
+      get logout_path
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      session[:merchant_id].must_equal nil
     end
   end
 end
