@@ -20,6 +20,8 @@
  /*orange buttons #ff8533;*/
  /*dark orange on hover #e65c00;*/
  /*yellow #ffd24d;*/
+ /*green for text #009933;*/
+ /*grey #cccccc;*/
 
  /** {
    border: 1px solid red;
@@ -38,6 +40,13 @@
 
  .nav a:hover, .nav p:hover {
    background-color: #e65c00;
+ }
+
+ .cart {
+   margin: .5rem .1rem;
+   background-color: #ffd24d;
+   font-weight: bold;
+   margin-top: 3.6rem;
  }
 
  .ads {
@@ -68,10 +77,24 @@
  }
 
  .show-im {
-   max-width: 100%;
-   max-height: 100%;
+   padding: 1rem 0;
+   text-align: center;
  }
 
  .show-desc li {
    list-style-type: none;
+   margin-right: 5rem;
+ }
+
+ .rating {
+   border-bottom: 1px solid #cccccc;
+ }
+
+ .green {
+   color: #009933;
+   font-weight: bold;
+ }
+
+ .product {
+   border-bottom: 1px solid #cccccc;
  }
