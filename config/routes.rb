@@ -12,7 +12,14 @@ Rails.application.routes.draw do
   get '/orders/:id/edit', to: 'orders#edit', as: 'edit_order'
   patch '/orders/:id', to: 'orders#update'
 
+  get '/reviews', to: 'reviews#index', as: 'reviews'
+  get '/reviews/new', to: 'reviews#new', as: 'new_review'
+  post '/reviews', to: 'reviews#create'
+  get '/reviews/:id', to: 'review#show', as: 'review'
+  get '/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
+
   resources :orders
+  resources :reviews
   root 'main#index'
 
   resources :orderitems, only: [:create, :index, :destroy, :update]
