@@ -16,10 +16,12 @@
 
  */
 
- /*green header #66ad1f;*/
+ /*green header&footer #66ad1f;*/
  /*orange buttons #ff8533;*/
  /*dark orange on hover #e65c00;*/
  /*yellow #ffd24d;*/
+ /*green for text #009933;*/
+ /*grey #cccccc;*/
 
  /** {
    border: 1px solid red;
@@ -38,6 +40,13 @@
 
  .nav a:hover, .nav p:hover {
    background-color: #e65c00;
+ }
+
+ .cart {
+   margin: .5rem .1rem;
+   background-color: #ffd24d;
+   font-weight: bold;
+   margin-top: 3.6rem;
  }
 
  .ads {
@@ -65,4 +74,57 @@
 
  .ads h3 {
    margin: 0;
+ }
+
+ .show-im {
+   padding: 1rem 0;
+   text-align: center;
+ }
+
+ .show-desc li {
+   list-style-type: none;
+   margin-right: 5rem;
+ }
+
+ .rating {
+   border-bottom: 1px solid #cccccc;
+ }
+
+ .green {
+   color: #009933;
+   font-weight: bold;
+ }
+
+ .product {
+   border-bottom: 1px solid #cccccc;
+ }
+
+ .media-highlight img {
+   margin-bottom: 1.5rem;
+ }
+
+  aside li {
+   list-style-type: none;
+   border: 1px solid red;
+ }
+
+ aside li img {
+   width: 50px;
+ }
+
+ aside ul {
+   margin: 0;
+ }
+
+ footer {
+   height: 5rem;
+   margin-top: 4rem;
+   background-color: #66ad1f;
+   text-align: center;
+   color: #fff;
+   font-weight: bold;
+ }
+
+ footer p {
+   padding: 2rem;
  }
