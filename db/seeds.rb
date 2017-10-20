@@ -87,6 +87,8 @@ category2.products.each do |product|
   puts "#{category2.name} has #{product.name}"
 end
 
-
+ActiveRecord::Base.connection.tables.each do |t|
+  ActiveRecord::Base.connection.reset_pk_sequence!(t)
+end
 # puts "Added #{CategoriesProducts.count} categories products records"
 # puts "#{categories_failures.length} categories products failed to save"

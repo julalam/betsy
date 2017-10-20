@@ -6,13 +6,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save
-    puts @product.name
-    puts @product.valid?
+    @product[:merchant_id] = session[:merchant_id]
+    @product[:retired] = false
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}, ID number #{@product.id}"
-      redirect_to products_path(@product)
+      redirect_to merchant_products_path(session[:merchant_id])
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@product.name}, ID number #{@product.id}"
@@ -50,6 +49,10 @@ class ProductsController < ApplicationController
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
+    elsif params[:merchant_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @products = @merchant.products
+      render :merchant_products
     else
       @products = Product.all
     end
@@ -58,7 +61,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:price, :stock, :retired, :description, :image_url, :merchant_id)
+    params.require(:product).permit(:name, :price, :stock, :description, :image_url)
   end
 end
 

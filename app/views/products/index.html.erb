@@ -1,9 +1,15 @@
-  <section class="row small-up-2 medium-up-3 large-up-4">
-    <% @products.each do |product| %>
+<% products = @products.where(retired: false) %>
+<section class="row small-up-2 medium-up-3 large-up-4">
+<% if !products.nil? %>
+    <% products.each do |product| %>
     <article class="column">
       <%= link_to (image_tag(product.image_url)), product_path(product) %>
       <p><%= link_to product.name, product_path(product) %>
       <%= product.price %></p>
     </article>
-      <% end %>
-  </section>
+    <% end %>
+</section>
+
+<% else %>
+<p>Sorry! We don't have any products</p>
+<% end %>

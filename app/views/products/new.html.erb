@@ -1,27 +1,22 @@
-<h1>Create new product </h1>
-<%= form_for @product do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<section class="row">
+  <h3>Create new product </h3>
+  <%= form_for @product do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-    <%= f.label :price %>
-    <%= f.text_field :price %>
+      <%= f.label :price %>
+      <%= f.text_field :price %>
 
-    <%= f.label :stock %>
-    <%= f.text_field :stock %>
+      <%= f.label :stock %>
+      <%= f.text_field :stock %>
 
-    <%= f.label :retired %>
-    <%= f.text_field :retired %>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+      <%= f.label :image_url %>
+      <%= f.text_field :image_url %>
 
-    <%= f.label :image_url %>
-    <%= f.text_area :image_url %>
+      <%= f.submit class: "button"%>
 
-    <%= f.label :merchant_id %>
-    <%= f.text_area :merchant_id %>
-
-
-    <%= f.submit%>
-
-<% end %>
+  <% end %>
+</section>

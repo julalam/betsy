@@ -39,6 +39,10 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
+  resources :merchants do
+    resources :products, only: [:index]
+  end
+
   get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
   get 'logout', to: 'merchants#logout', as: 'logout'
 
