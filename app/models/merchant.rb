@@ -1,4 +1,5 @@
 class Merchant < ApplicationRecord
+  has_many :product
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
@@ -9,4 +10,6 @@ class Merchant < ApplicationRecord
 
     return merchant
   end
+
+
 end

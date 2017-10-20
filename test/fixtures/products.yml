@@ -10,8 +10,8 @@ one:
   stock: 3
   retired: false
   description: testing
-  image_url: addtesturl
-  merchant: one
+  image_url: http://www.fillmurray.com/
+  merchant: eva
 
 # column: value
 #
@@ -21,7 +21,78 @@ two:
     stock: 4
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant: two
+    image_url: http://www.fillmurray.com/
+    merchant: eva
 
+three:
+    name: product3
+    price: 4.0
+    stock: 5
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: eva
+
+four:
+    name: product4
+    price: 6.0
+    stock: 7
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
+
+five:
+    name: product5
+    price: 8.0
+    stock: 9
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
+
+six:
+    name: product6
+    price: 10.0
+    stock: 11
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
+
+seven:
+    name: product7
+    price: 12.0
+    stock: 13
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
+
+eight:
+    name: product8
+    price: 14.0
+    stock: 15
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
+
+nine:
+    name: product9
+    price: 16.0
+    stock: 17
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
+
+ten:
+    name: product9
+    price: 18.0
+    stock: 19
+    retired: false
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 # column: value

@@ -1,13 +1,9 @@
-<h1> All Orders </h1>
-
-<% @products.each do |product| %>
-  <ul>
-    <li>ID:  <%= link_to product.id, product_path(product) %> </li>
-    <li>Price:  <%= product.price %> </li>
-    <li>Stock:  <%= product.stock %> </li>
-    <li>Retired?:  <%= product.retired %> </li>
-    <li>Description:  <%= product.description %> </li>
-    <li>Image URL:  <%= product.image_url %> </li>
-
-  </ul>
-<% end %>
+  <section class="row small-up-2 medium-up-3 large-up-4">
+    <% @products.each do |product| %>
+    <article class="column">
+      <%= link_to (image_tag(product.image_url)), product_path(product) %>
+      <p><%= link_to product.name, product_path(product) %>
+      <%= product.price %></p>
+    </article>
+      <% end %>
+  </section>

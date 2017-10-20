@@ -1,6 +1,42 @@
 require "test_helper"
 
 describe MerchantsController do
+  describe "new" do
+    it "works" do
+      get new_product_path
+      must_respond_with :success
+    end
+  end
+
+  describe "show" do
+    it "succeeds for an valid merchant ID" do
+      get merchant_path(Merchant.first)
+      must_respond_with :success
+    end
+
+    it "renders 404 not_found for a bogus product ID" do
+      bogus_merchant_id = Merchant.last.id + 1
+      get merchant_path(bogus_merchant_id)
+      must_respond_with :not_found
+    end
+  end
+
+  describe "index" do
+    it "succeeds when there are merchants" do
+      get merchants_path
+      must_respond_with :success
+    end
+
+    it "succeeds when there are no products" do
+      Product.destroy_all
+      get merchants_path
+      must_respond_with :success
+    end
+  end
+
+
+
+
   describe "login" do
     it "logs in an existing merchant and redirects to the root path" do
       start_count = Merchant.count

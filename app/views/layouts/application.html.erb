@@ -22,15 +22,16 @@
 
       <nav class="row nav">
         <%= link_to "home", root_path, class: "button" %>
+        <%= link_to "all products", products_path, class: "button" %>
+        <%= link_to "shop by merchant", merchants_path, class: "button" %>
         <%= link_to "shop by category", root_path, class: "button" %>
-        <%= link_to "shop by merchant", root_path, class: "button" %>
         <% if session[:merchant_id] %>
           <div class="float-right">
           <p class="button">loggen in as <%= Merchant.find(session[:merchant_id]).username %></p>
           <%= link_to "log out", logout_path, class: "button" %></div>
         <% else %>
           <%= link_to "login", '/auth/github', class: "button float-right" %>
-        <% end %>  
+        <% end %>
       </nav>
     </header>
 
@@ -39,7 +40,7 @@
     </main>
 
     <footer>
-
+      <p>&copy; 2017, The Big Bird, Inc.</p>
     </footer>
 
 

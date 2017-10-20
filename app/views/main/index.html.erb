@@ -1,17 +1,37 @@
-<div class="media-highliht row">
+<div class="media-highlight row">
   <%= image_tag "birds.png" %>
 </div>
 
 <div class="row">
   <aside class="small-3 columns">
-    <h3>new birds</h3>
-    <h3>best seller</h3>
+    <h3 class="button">new birds</h3>
+    <ul>
+      <li><%= image_tag(@products.first.image_url) %>
+          <%= @products.first.name %>
+          <%= @products.first.price %></li>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+    </ul>
+
+
+    <h3 class="button">best seller</h3>
+    <ul>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+      <li><%= @products.first.name %></li>
+    </ul>
   </aside>
 
 
   <article class="small-9 columns">
     <section>
-      <h3>some heading</h3>
+      <div class="small-12 columns">
+        <%= render partial: "random_products", locals: { products: @products.first(3) } %>
+      </div>
     </section>
     <section>
       <div class="ads small-5 columns">
@@ -34,7 +54,9 @@
       </div>
     </section>
     <section>
-      <h3>some heading</h3>
+      <div class="small-12 columns">
+        <%= render partial: "random_products", locals: { products: @products.last(3) } %>
+      </div>
     </section>
 
   </article>
