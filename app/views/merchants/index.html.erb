@@ -1,8 +1,16 @@
 <h1> Shop by merchant</h1>
+
+
+<%unless @merchants.count == 0 %>
   <ul>
   <% @merchants.each do |merchant| %>
-  <li>
+     <li>
     <%=link_to merchant.username, merchant_path(merchant) %>
-  </li>
+     </li>
   <% end %>
   <ul>
+<%else%>
+  <p>
+    No merchants signed up yet!
+  </p>
+<%end%>
