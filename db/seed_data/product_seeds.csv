@@ -1,4 +1,5 @@
 id,name,price,stock,description,retired,image_url,merchant_id
+<<<<<<< HEAD
 1,owl_1,20,5,nice bird,false,http://via.placeholder.com/300x250,3000
 2,owl_2,30,5,nice bird,false,http://via.placeholder.com/300x250,3000
 3,owl_3,25,2,nice bird,false,http://via.placeholder.com/300x250,3000
@@ -9,3 +10,15 @@ id,name,price,stock,description,retired,image_url,merchant_id
 8,eagle_2,60,1,nice bird,false,http://via.placeholder.com/300x250,3002
 9,eagle_3,90,5,nice bird,false,http://via.placeholder.com/300x250,3002
 10,eagle_4,100,3,nice bird,false,http://via.placeholder.com/300x250,3
+=======
+1,Goldfinch,25,2,"The American goldfinch is a small North American bird in the finch family. It is migratory, ranging from mid-Alberta to North Carolina during the breeding season, and from just south of the Canada–United States border to Mexico during the winter.",false,"Goldfinch.jpg",3
+2,Blue Jay,30,5,"The blue jay is a passerine bird in the family Corvidae, native to North America. It is resident through most of eastern and central United States, although western populations may be migratory.",false,"BlueJay.jpg",2
+3,Canary,20,1,"The domestic canary, often simply known as the canary, is a domesticated form of the wild canary, a small songbird in the finch family originating from the Macaronesian Islands. Canaries were first bred in captivity in the 17th century.",false,"Canary.jpg",1
+4,Cockatoo,35,2,"A cockatoo is a parrot that is any of the 21 species belonging to the bird family Cacatuidae, the only family in the superfamily Cacatuoidea.",false,"Cockatoo.jpg",3
+5,Pelican,40,6,"Pelicans are a genus of large water birds that makes up the family Pelecanidae. They are characterised by a long beak and a large throat pouch used for catching prey and draining water from the scooped up contents before swallowing.",false,"Pelican.jpg",2
+6,Flamingo,55,1,"Flamingos or flamingoes are a type of wading bird in the family Phoenicopteridae, the only bird family in the order Phoenicopteriformes.",false,"Flamingo.jpg",1
+7,Hawk,65,2,"Hawks are a group of medium-sized diurnal birds of prey of the family Accipitridae. Hawks are widely distributed and vary greatly in size.",false,"Hawk.jpg",3
+8,Eagle,150,4,"Eagle is a common name for many large birds of prey of the family Accipitridae; it belongs to several groups of genera that are not necessarily closely related to each other.",false,"Eagle.jpg",1
+9,Owl,130,2,"Owls are birds from the order Strigiformes, which includes about 200 species of mostly solitary and nocturnal birds of prey typified by an upright stance, a large, broad head, binocular vision, binaural hearing, sharp talons, and feathers adapted for silent flight.",false,"Owl.jpg",3
+10,Hummingbird,48,7,"Hummingbirds are birds from the Americas that constitute the family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm in length.",false,"Hummingbird.jpg",1
+>>>>>>> c7a125fc8ba93cd4af6268b80dbef29fb13ce177
