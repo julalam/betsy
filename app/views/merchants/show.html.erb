@@ -1,19 +1,24 @@
-<h1><%= @merchant.username %> </h1>
+<div class="merchant-show row">
+  <%= render partial: "nav_aside" %>
+  <section class="smaii-7 columns">
+    <h4>Revenue Summory</h4>
+    <p></p>
+  </section>
 
-<ul>
-  <li>Name:  <%= @merchant.username %> </li>
-  <li>Email:  <%= @merchant.email %> </li>
-</ul>
-<h3>Products sold by <%=@merchant.username%></h3>
-<ul>
-<% @merchant.product.each do |product|%>
-  <li>
-    <fig>
-    <img src = "<%= product.image_url %>"/>
-  <figcaption>
-  <%= link_to product.name, product_path(product) %>
-    </figcaption>
-  </fig>
-  </li>
-  <% end %>
-</ul>
+
+
+  <h3>Products sold by <%=@merchant.username%></h3>
+  <ul>
+  <% @merchant.product.each do |product|%>
+    <li>
+      <fig>
+      <img src = "<%= product.image_url %>"/>
+    <figcaption>
+    <%= link_to product.name, product_path(product) %>
+      </figcaption>
+    </fig>
+    </li>
+    <% end %>
+  </ul>
+
+</div>

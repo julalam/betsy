@@ -103,7 +103,7 @@
    margin-bottom: 1.5rem;
  }
 
-  aside li {
+  aside li, .merchant-show li {
    list-style-type: none;
    border: 1px solid red;
  }
@@ -132,3 +132,15 @@
  main {
    margin-top: 1rem;
  }
+
+.merchant-show section:first-of-type{
+ border-right: 1px solid #cccccc;;
+}
+
+.merchant-show li:nth-child(-n+2) {
+  font-weight: bold;
+}
+
+.merchant-show li {
+  margin: .3rem;
+}

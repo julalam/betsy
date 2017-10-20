@@ -1,0 +1,10 @@
+<section class="small-5 columns">
+  <ul>
+    <li><%= @merchant.username %></li>
+    <li><%= @merchant.email %></li>
+    <li><%= link_to "Dashboard", merchant_path(@merchant.id) %></li>
+    <li><%= link_to "Edit Profile", merchant_path(@merchant.id) %></li>
+    <li><%= link_to "Manage Products", merchant_path(@merchant.id) %></li>
+    <li><%= link_to "Manage Orders", merchant_path(@merchant.id) %></li>
+  </ul>
+</section>
