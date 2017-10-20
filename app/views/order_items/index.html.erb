@@ -1,0 +1,17 @@
+<h1> All Order Items </h1>
+
+<% @order_items.each do |order_item| %>
+  <ul>
+    <img src="<%=order_item.product.image_url%>"/>
+    <li><%= link_to order_item.product.name, order_items_path(order_item) %> </li>
+    <li>Quantity:  <%= order_item.quantity %> </li>
+    <li>Product ID:  <%= order_item.product_id %> </li>
+    <%@order_id = order_item.order_id %>
+    <li>Order ID:  <%= order_item.order_id %> </li>
+  </ul>
+<% end %>
+
+
+<%=link_to "Submit order", edit_order_path(@order_id), class: "button"%>
+
+<!-- Need to get the right params in edit order path -->

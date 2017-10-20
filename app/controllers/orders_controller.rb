@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def index
+
     @orders = Order.all
   end
 
@@ -37,7 +38,6 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
 
-    @order.status = params[:order][:status]
     @order.customer_name = params[:order][:customer_name]
     @order.customer_email = params[:order][:customer_email]
     @order.customer_address = params[:order][:customer_address]
@@ -46,14 +46,19 @@ class OrdersController < ApplicationController
     @order.cc_ccv = params[:order][:cc_ccv]
     @order.zip_code = params[:order][:zip_code]
 
-    result = @order.save
+    # result = @order.save
+    puts "session before #{session[:order_id]}"
 
-    if result
+    if @order.save!
       flash[:notification] = 'Order was successfully updated'
+      @order.status = "paid"
+      @order.save
+      session[:order_id] = nil
     else
       flash[:failure] = 'Order was not updated'
     end
-    redirect_to orders_path
+    puts "session after #{session[:order_id]}"
+    redirect_to order_path(@order.id)
   end
 
   def edit

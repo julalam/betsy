@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get '/orders/new', to: 'orders#new', as: 'new_order'
   post '/orders', to: 'orders#create'
   get '/orders/:id', to: 'orders#show', as: 'order'
-  get '/orders/:id/edit', to: 'orders#edit', as: 'edit_order'
+  get '/orders/:id/edit', to: 'orders#edit'
+  #, as: 'edit_order'
   patch '/orders/:id', to: 'orders#update'
 
   get '/reviews', to: 'reviews#index', as: 'reviews'
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
   resources :reviews
   root 'main#index'
 
-  resources :orderitems, only: [:create, :index, :destroy, :update]
+  resources :order_items, only: [:create, :index, :destroy, :update]
 
 
   resources :categories, only: [:new, :create]
