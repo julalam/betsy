@@ -25,9 +25,9 @@
         <%= link_to "all products", products_path, class: "button" %>
         <%= link_to "shop by merchant", merchants_path, class: "button" %>
         <%= link_to "shop by category", root_path, class: "button" %>
-        <% if session[:merchant_id] %>
+        <% if session[:merchant_id] &&  Merchant.find_by(id: session[:merchant_id]) %>
           <div class="float-right">
-          <p class="button">loggen in as <%= Merchant.find(session[:merchant_id]).username %></p>
+          <%= link_to "logged in as #{Merchant.find(session[:merchant_id]).username}",merchant_path(session[:merchant_id]),class:"button"  %>
           <%= link_to "log out", logout_path, class: "button" %></div>
         <% else %>
           <%= link_to "login", '/auth/github', class: "button float-right" %>
