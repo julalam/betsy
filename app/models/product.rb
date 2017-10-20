@@ -8,9 +8,9 @@ class Product < ApplicationRecord
   validates_numericality_of :price, greater_than: 0
 
 
-  def self.three_random_products
+  def self.six_random_products
     number = (Product.count)
-    if number <= 3
+    if number <= 6
       @rand_products = []
       Product.all.each do |product|
         @rand_products << product
@@ -19,7 +19,7 @@ class Product < ApplicationRecord
     end
 
     rand_index= []
-    3.times do
+    6.times do
       rand_number = rand(number)
       while rand_index.include?(rand_number)
         rand_number = rand(number)

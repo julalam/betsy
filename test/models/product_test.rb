@@ -75,26 +75,26 @@ describe Product do
 
   describe "custom methods" do
     describe "three_random_products"  do
-      it "For >3 products, must return an array of 3 products" do
-        rand_products = Product.three_random_products
+      it "For >6 products, must return an array of 3 products" do
+        rand_products = Product.six_random_products
         rand_products.must_be_kind_of Array
-        rand_products.length.must_equal 3
+        rand_products.length.must_equal 6
       end
 
-      it "For 0 to 2 products, must return an array of as many products as there are" do
+      it "For 0 to 5 products, must return an array of as many products as there are" do
         Product.destroy_all
-        rand_products = Product.three_random_products
+        rand_products = Product.six_random_products
         rand_products.must_be_kind_of Array
         rand_products.length.must_equal 0
 
         thneed_1 = Product.create(name: "blue_thneed", price: 10, merchant: merchants(:emma))
-        rand_products = Product.three_random_products
+        rand_products = Product.six_random_products
         rand_products.length.must_equal 1
       end
 
       it "The products selected are not the same every time" do
-        rand_products_1 = Product.three_random_products
-        rand_products_2 = Product.three_random_products
+        rand_products_1 = Product.six_random_products
+        rand_products_2 = Product.six_random_products
         rand_products_1.wont_equal rand_products_2
       end
 

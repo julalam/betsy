@@ -1,5 +1,5 @@
 class MainController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.six_random_products
   end
 end

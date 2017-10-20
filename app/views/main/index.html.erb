@@ -29,23 +29,8 @@
 
   <article class="small-9 columns">
     <section>
-      <!-- <h3>some heading</h3> -->
       <div class="small-12 columns">
-        <div class="small-4 columns">
-          <%= image_tag(@products.first.image_url) %>
-          <%= @products.first.name %>
-          <%= @products.first.price %>
-        </div>
-        <div class="small-4 columns">
-          <%= image_tag(@products.last.image_url) %>
-          <%= @products.last.name %>
-          <%= @products.last.price %>
-        </div>
-        <div class="small-4 columns">
-          <%= image_tag(@products.first.image_url) %>
-          <%= @products.first.name %>
-          <%= @products.first.price %>
-        </div>
+        <%= render partial: "random_products", locals: { products: @products.first(3) } %>
       </div>
     </section>
     <section>
@@ -69,23 +54,8 @@
       </div>
     </section>
     <section>
-      <!-- <h3>some heading</h3> -->
       <div class="small-12 columns">
-        <div class="small-4 columns">
-          <%= image_tag(@products.first.image_url) %>
-          <%= @products.first.name %>
-          <%= @products.first.price %>
-        </div>
-        <div class="small-4 columns">
-          <%= image_tag(@products.last.image_url) %>
-          <%= @products.last.name %>
-          <%= @products.last.price %>
-        </div>
-        <div class="small-4 columns">
-          <%= image_tag(@products.first.image_url) %>
-          <%= @products.first.name %>
-          <%= @products.first.price %>
-        </div>
+        <%= render partial: "random_products", locals: { products: @products.last(3) } %>
       </div>
     </section>
 
