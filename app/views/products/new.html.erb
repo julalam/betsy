@@ -10,7 +10,7 @@
     <%= f.text_field :stock %>
 
     <%= f.label :retired %>
-    <%= f.text_field :retired %>
+    <%= f.select :retired, [[false, false], [true, true]] %>
 
     <%= f.label :description %>
     <%= f.text_area :description %>
@@ -19,7 +19,7 @@
     <%= f.text_area :image_url %>
 
     <%= f.label :merchant_id %>
-    <%= f.text_area :merchant_id %>
+    <%= collection_select(:merchant_id, 0, Merchant.all, :id, :username)  %>
 
 
     <%= f.submit%>

@@ -3,6 +3,7 @@
 <ul>
   <li>Name:  <%= @merchant.username %> </li>
   <li>Email:  <%= @merchant.email %> </li>
+  <li><%= link_to 'Add new product', new_product_path %> </li>
 </ul>
 <h3>Products sold by <%=@merchant.username%></h3>
 <ul>

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/reviews/:id', to: 'review#show', as: 'review'
   get '/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
 
+  get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
+
   resources :orders
   resources :reviews
   root 'main#index'
@@ -33,7 +35,8 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
+
+
   get 'logout', to: 'merchants#logout', as: 'logout'
 
 end
