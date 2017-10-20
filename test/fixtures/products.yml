@@ -10,8 +10,8 @@ one:
   stock: 3
   retired: false
   description: testing
-  image_url: addtesturl
-  merchant_id: eva
+  image_url: http://www.fillmurray.com/
+  merchant: eva
 
 # column: value
 #
@@ -21,8 +21,8 @@ two:
     stock: 4
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: eva
+    image_url: http://www.fillmurray.com/
+    merchant: eva
 
 three:
     name: product3
@@ -30,8 +30,8 @@ three:
     stock: 5
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: eva
+    image_url: http://www.fillmurray.com/
+    merchant: eva
 
 four:
     name: product4
@@ -39,8 +39,8 @@ four:
     stock: 7
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 
 five:
     name: product5
@@ -48,8 +48,8 @@ five:
     stock: 9
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 
 six:
     name: product6
@@ -57,8 +57,8 @@ six:
     stock: 11
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 
 seven:
     name: product7
@@ -66,8 +66,8 @@ seven:
     stock: 13
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 
 eight:
     name: product8
@@ -75,8 +75,8 @@ eight:
     stock: 15
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 
 nine:
     name: product9
@@ -84,8 +84,8 @@ nine:
     stock: 17
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 
 ten:
     name: product9
@@ -93,6 +93,6 @@ ten:
     stock: 19
     retired: false
     description: testing2
-    image_url: addtesturl2
-    merchant_id: emma
+    image_url: http://www.fillmurray.com/
+    merchant: emma
 # column: value
