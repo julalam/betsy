@@ -6,12 +6,13 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.save
     puts @product.name
     puts @product.valid?
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}, ID number #{@product.id}"
-      redirect_to product_path(@product)
+      redirect_to products_path(@product)
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@product.name}, ID number #{@product.id}"
