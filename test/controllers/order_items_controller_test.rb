@@ -17,24 +17,25 @@ describe OrderItemsController do
       must_respond_with :success
     end
   end
+
   describe "destroy" do
     it "succeeds for an extant order item ID" do
       order_item_id = OrderItem.first.id
 
-      delete work_path(order_item_id)
+      delete order_item_path(order_item_id)
       must_redirect_to root_path
 
       OrderItem.find_by(id: order_item_id).must_be_nil
     end
 
-    # it "renders 404 not_found and does not update the DB for a bogus work ID" do
+    # it "renders 404 not_found and does not update the DB for a bogus order_item ID" do
     #   start_count = OrderItem.count
     #
     #   bogus_order_item_id = OrderItem.last.id + 1
-    #   delete work_path(bogus_order_item_id)
+    #   delete order_item_path(bogus_order_item_id)
     #   must_respond_with :not_found
     #
-    #   Work.count.must_equal start_count
+    #   order_item.count.must_equal start_count
     # end
 
   end

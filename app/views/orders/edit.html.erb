@@ -1,12 +1,6 @@
-<%= form_for @order do |f| %>
-    <%= f.label :status %>
-    <%= f.select :status, [
-                            ['pending', 'pending'],
-                            ['paid', 'paid'],
-                            ['complete', 'complete'],
-                            ['closed', 'closed']
-                          ] %>
+<h2>Please enter billing and shipping information</h2>
 
+<%= form_for @order do |f| %>
     <%= f.label :customer_name %>
     <%= f.text_field :customer_name %>
 
@@ -18,7 +12,7 @@
 
     <%= f.label :cc_number %>
     <%= f.text_area :cc_number %>
-    
+
     <%= f.label :cc_expiration %>
     <%= f.text_area :cc_expiration %>
 
@@ -28,6 +22,6 @@
     <%= f.label :zip_code %>
     <%= f.text_area :zip_code %>
 
-    <%= f.submit%>
+    <%= f.submit "Checkout"%>
 
 <% end %>

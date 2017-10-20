@@ -1,4 +1,4 @@
-<h1>Order#: <%= @order.id %> </h1>
+<h1>Confirmation page for Order#: <%= @order.id %> </h1>
 
 <ul>
   <li>Status:  <%= @order.status %> </li>
@@ -10,5 +10,5 @@
   <li>Billing Zipcode:  <%= @order.zip_code %> </li>
 </ul>
 
-<%= link_to 'All Orders', orders_path %>
+<%#= link_to 'All Orders', orders_path %>
 <%= link_to 'Edit Order', edit_order_path %>

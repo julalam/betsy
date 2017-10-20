@@ -3,14 +3,14 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  def index
-    @categoty = Category.all
-  end
-
-  def show
-    @categories = Category.find(params[:id])
-    @category = @category.product
-  end
+  # def index
+  #   @categoty = Category.all
+  # end
+  #
+  # def show
+  #   @categories = Category.find(params[:id])
+  #   @category = @category.product
+  # end
 
 
   def create

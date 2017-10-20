@@ -64,13 +64,17 @@ describe ProductsController do
           merchant: merchants(:eva)
         }
       }
+      new_product = Product.new(product_data[:product])
+      new_product.must_be :valid?
+
       start_count = Product.count
 
       post products_path, params: product_data
-#binding.pry
+binding.pry
       must_redirect_to product_path(Product.last)
       Product.count.must_equal start_count + 1
     end
+
 
     it "renders bad_request and does not update the DB for bogus data" do
       product_data = {
@@ -103,7 +107,8 @@ describe ProductsController do
           merchant: Merchant.last
         }
       }
-
+      product.update_attributes(product_data[:product])
+      product.must_be :valid?
       patch product_path(product), params: product_data
 
       must_redirect_to product_path(product)
@@ -119,12 +124,12 @@ describe ProductsController do
           name: ""
         }
       }
-      start_count = Product.count
 
+      product.update_attributes(product_data[:product])
+      product.valid?.wont_equal true
       patch product_path(product), params: product_data
 
       must_respond_with :bad_request
-      Product.count.must_equal start_count
     end
 
     it "renders 404 not_found for a bogus product ID" do

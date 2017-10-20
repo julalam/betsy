@@ -27,14 +27,12 @@ describe MerchantsController do
       must_respond_with :success
     end
 
-    it "succeeds when there are no products" do
+    it "succeeds when there are no merchantss" do
       Product.destroy_all
       get merchants_path
       must_respond_with :success
     end
   end
-
-
 
 
   describe "login" do

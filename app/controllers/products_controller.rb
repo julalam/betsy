@@ -8,8 +8,6 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product[:merchant_id] = session[:merchant_id]
     @product[:retired] = false
-    puts "products merchant = #{@product[:merchant_id]}"
-    puts "retired: #{@product[:retired]}"
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}, ID number #{@product.id}"
@@ -28,6 +26,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @order_item = OrderItem.new(product_id: params[:id])
   end
 
   def update
