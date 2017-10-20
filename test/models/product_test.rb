@@ -9,13 +9,8 @@ require "test_helper"
 describe Product do
   describe "relations" do
 
-    #this is failing. I don't know why.
     it "has a merchant" do
       thneed = products(:one)
-
-      puts thneed.merchant_id
-      puts "***************"
-      puts merchants(:eva).id
 
       thneed.must_respond_to :merchant
       thneed.merchant.must_be_kind_of Merchant
@@ -93,9 +88,11 @@ describe Product do
       end
 
       it "The products selected are not the same every time" do
-        rand_products_1 = Product.six_random_products
-        rand_products_2 = Product.six_random_products
-        rand_products_1.wont_equal rand_products_2
+        3.times do
+          rand_products_1 = Product.three_random_products
+          rand_products_2 = Product.three_random_products
+          rand_products_1.wont_equal rand_products_2
+        end
       end
 
 

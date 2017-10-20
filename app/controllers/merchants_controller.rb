@@ -14,8 +14,6 @@ class MerchantsController < ApplicationController
     @products = @merchant.product
   end
 
-
-
   def login
     auth_hash = request.env['omniauth.auth']
 
