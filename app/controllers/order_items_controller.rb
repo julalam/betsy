@@ -29,14 +29,17 @@ class OrderItemsController < ApplicationController
     else
       # render :edit
     end
+
+    @order_item.update_attributes(order_item_params)
+
+    if save_and_flash(@order_item, "update")
+      redirect_to order_item_path(@order_item.id)
+    else
+      render :edit, status: :bad_request
+    end
   end
 
-  @work.update_attributes(work_params)
-  if save_and_flash(@work, "update")
-    redirect_to work_path(@work.id)
-  else
-    render :edit, status: :bad_request
-  end
+
   def destroy
     current_merchant = Merchant.find_by(id: session[:logged_in_merchant])
     @order = OrderItem.find_by(id: params[:id])
