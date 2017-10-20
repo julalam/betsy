@@ -9,3 +9,4 @@ id,name,price,stock,description,retired,image_url,merchant_id
 8,eagle_2,60,1,nice bird,false,http://via.placeholder.com/300x250,3
 9,eagle_3,90,5,nice bird,false,http://via.placeholder.com/300x250,3
 10,eagle_4,100,3,nice bird,false,http://via.placeholder.com/300x250,3
+11,Goldfinch,25,2,"The American goldfinch is a small North American bird in the finch family. It is migratory, ranging from mid-Alberta to North Carolina during the breeding season, and from just south of the Canada–United States border to Mexico during the winter.",false,http://via.placeholder.com/300x250,3
