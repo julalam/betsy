@@ -48,6 +48,9 @@ class ProductsController < ApplicationController
     if params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
+    elsif params[:merchant_id]
+      merchant = Merchant.find_by(id: params[:merchant_id])
+      @products = merchant.products
     else
       @products = Product.all
     end

@@ -9,7 +9,7 @@
 
   <h3>Products sold by <%=@merchant.username%></h3>
   <ul>
-  <% @merchant.product.each do |product|%>
+  <% @merchant.products.each do |product|%>
     <li>
       <fig>
       <img src = "<%= product.image_url %>"/>
