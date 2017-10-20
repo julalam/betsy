@@ -53,3 +53,40 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
+
+CATEGORY_FILE = Rails.root.join('db', 'seed_data', 'category_seeds.csv')
+puts "Loading raw categories products data from #{CATEGORY_FILE}"
+
+categories_failures = []
+CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
+  category = Category.new
+  category.id = row['id']
+  category.name = row['name']
+  puts "Created category: #{category.inspect}"
+  successful = category.save
+  if !successful
+    categories_failures << category
+  end
+end
+
+puts "Added #{Category.count} categories  records"
+puts "#{categories_failures.length} categories failed to save"
+
+#### Making categories products seeds data###
+category1 = Category.first
+category2 = Category.last
+category1.products << Product.first
+category1.products << Product.last
+category2.products << Product.last
+category2.products << Product.first
+
+category1.products.each do |product|
+  puts "#{category1.name} has #{product.name}"
+end
+category2.products.each do |product|
+  puts "#{category2.name} has #{product.name}"
+end
+
+
+# puts "Added #{CategoriesProducts.count} categories products records"
+# puts "#{categories_failures.length} categories products failed to save"
