@@ -6,12 +6,14 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    puts @product.name
-    puts @product.valid?
+    @product[:merchant_id] = session[:merchant_id]
+    @product[:retired] = false
+    puts "products merchant = #{@product[:merchant_id]}"
+    puts "retired: #{@product[:retired]}"
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}, ID number #{@product.id}"
-      redirect_to product_path(@product)
+      redirect_to merchant_products_path(session[:merchant_id])
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@product.name}, ID number #{@product.id}"
@@ -60,7 +62,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:price, :stock, :retired, :description, :image_url, :merchant_id)
+    params.require(:product).permit(:name, :price, :stock, :description, :image_url)
   end
 end
 

@@ -149,3 +149,11 @@
   background-color: #ffd24d;
   font-weight: bold;
 }
+
+.merchant-show table th, .merchant-show table td:nth-last-child(-n+3) {
+  text-align: center;
+}
+
+.merchant-show table .button {
+  margin: 0;
+}

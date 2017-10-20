@@ -7,10 +7,10 @@
     <table>
       <thead>
         <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Quantity</th>
-          <th>Price</th>
+          <th width="80">Image</th>
+          <th width="200">Name</th>
+          <th width="70">Quantity</th>
+          <th width="70">Price</th>
           <th>Manage</th>
         </tr>
       </thead>
@@ -19,30 +19,15 @@
           <tr>
             <td><%= image_tag product.image_url %></td>
             <td><%= product.name %></td>
-            <td><%= product.quantity %></td>
-            <td><%= link_to "Edit", edit_product_path(product.id), class: "button" %></td>
-            <td><%= link_to "Retire", product_path(product.id), class: "button" %></td>
-            <td><%= link_to "Add quantity", product_path(product.id), class: "button" %></td>
+            <td><%= product.stock %></td>
+            <td><%= product.price %></td>
+            <td><%= link_to "Edit", edit_product_path(product.id), class: "button" %>
+            <%= link_to "Retire", product_path(product.id), class: "button" %>
+            <%= link_to "Add quantity", product_path(product.id), class: "button" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </section>
-
-
-
-  <!-- <h3>Products sold by <%#=@merchant.username%></h3> -->
-  <!-- <ul> -->
-  <%# @merchant.products.each do |product|%>
-    <!-- <li> -->
-      <!-- <fig> -->
-      <!-- <img src = "<%#= product.image_url %>"/> -->
-    <!-- <figcaption> -->
-    <%#= link_to product.name, product_path(product) %>
-      <!-- </figcaption> -->
-    <!-- </fig> -->
-    <!-- </li> -->
-    <%# end %>
-  <!-- </ul> -->
 
 </div>
