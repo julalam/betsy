@@ -1,24 +1,7 @@
 <div class="merchant-show row">
   <%= render partial: "nav_aside" %>
-  <section class="smaii-7 columns">
-    <h4>Revenue Summory</h4>
-    <p></p>
+  <section class="small-8 columns">
+    <h4>Revenue Summary</h4>
+    <p>bla bla bla</p>
   </section>
-
-
-
-  <h3>Products sold by <%=@merchant.username%></h3>
-  <ul>
-  <% @merchant.products.each do |product|%>
-    <li>
-      <fig>
-      <img src = "<%= product.image_url %>"/>
-    <figcaption>
-    <%= link_to product.name, product_path(product) %>
-      </figcaption>
-    </fig>
-    </li>
-    <% end %>
-  </ul>
-
 </div>

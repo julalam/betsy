@@ -144,3 +144,8 @@
 .merchant-show li {
   margin: .3rem;
 }
+
+.merchant-show .button {
+  background-color: #ffd24d;
+  font-weight: bold;
+}

@@ -1,0 +1,48 @@
+<div class="merchant-show row">
+  <%= render partial: "merchants/nav_aside" %>
+  <section class="small-8 columns">
+    <%= link_to "New Product", new_product_path, class: "button" %>
+    <%= link_to "New Category", new_category_path, class: "button" %>
+    <h4>Products</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @merchant.products.each do |product| %>
+          <tr>
+            <td><%= image_tag product.image_url %></td>
+            <td><%= product.name %></td>
+            <td><%= product.quantity %></td>
+            <td><%= link_to "Edit", edit_product_path(product.id), class: "button" %></td>
+            <td><%= link_to "Retire", product_path(product.id), class: "button" %></td>
+            <td><%= link_to "Add quantity", product_path(product.id), class: "button" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+
+
+
+  <!-- <h3>Products sold by <%#=@merchant.username%></h3> -->
+  <!-- <ul> -->
+  <%# @merchant.products.each do |product|%>
+    <!-- <li> -->
+      <!-- <fig> -->
+      <!-- <img src = "<%#= product.image_url %>"/> -->
+    <!-- <figcaption> -->
+    <%#= link_to product.name, product_path(product) %>
+      <!-- </figcaption> -->
+    <!-- </fig> -->
+    <!-- </li> -->
+    <%# end %>
+  <!-- </ul> -->
+
+</div>
