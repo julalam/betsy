@@ -88,9 +88,11 @@ describe Product do
       end
 
       it "The products selected are not the same every time" do
-        rand_products_1 = Product.three_random_products
-        rand_products_2 = Product.three_random_products
-        rand_products_1.wont_equal rand_products_2
+        3.times do
+          rand_products_1 = Product.three_random_products
+          rand_products_2 = Product.three_random_products
+          rand_products_1.wont_equal rand_products_2
+        end
       end
 
 
