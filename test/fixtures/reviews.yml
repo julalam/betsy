@@ -2,8 +2,8 @@
 
 one:
   product_id: 1
-  text: MyString
+  text: 'review text 1'
 
 two:
   product_id: 1
-  text: MyString
+  text: 'review text 2'
