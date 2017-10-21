@@ -46,7 +46,6 @@
    margin: .5rem .1rem;
    background-color: #ffd24d;
    font-weight: bold;
-   margin-top: 3.6rem;
  }
 
  .ads {
@@ -79,6 +78,10 @@
  .show-im {
    padding: 1rem 0;
    text-align: center;
+ }
+
+ .show-desc {
+   margin-top: 1.3rem;
  }
 
  .show-desc li {
@@ -156,4 +159,12 @@
 
 .merchant-show table .button {
   margin: 0;
+}
+
+#merchant {
+  line-height: 1px;
+}
+
+.show-desc form {
+  margin-top: 2rem;
 }
