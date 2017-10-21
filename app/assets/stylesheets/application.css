@@ -133,8 +133,8 @@
    margin-top: 1rem;
  }
 
-.merchant-show section:first-of-type{
- border-right: 1px solid #cccccc;;
+.merchant-show section:last-of-type{
+ border-left: 1px solid #cccccc;;
 }
 
 .merchant-show li:nth-child(-n+2) {

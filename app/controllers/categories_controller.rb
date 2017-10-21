@@ -3,22 +3,17 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  # def index
-  #   @categoty = Category.all
-  # end
-  #
-  # def show
-  #   @categories = Category.find(params[:id])
-  #   @category = @category.product
-  # end
-
+  def index
+    @categories = Category.all
+    @merchant = Merchant.find_by(id: params[:merchant_id])
+  end
 
   def create
     @category = Category.new(category_params)
     if @category.save
       flash[:status] = :success
       flash[:message] = "Successfully created category: #{@category.name}"
-      redirect_to root_path
+      redirect_to categories_path
     else
       flash[:status] = :failure
       flash[:message] = "Could not create category"
