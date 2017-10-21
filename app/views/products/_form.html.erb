@@ -19,6 +19,9 @@
       <%= f.label :image_url %>
       <%= f.text_field :image_url %>
 
+      <%#= f.label :category %>
+      <%#= f.collection_select(:category_id, Category.all, :id, :name, {}, {:multiple => true}) %>
+
       <%= f.submit class: "button"%>
 
   <% end %>

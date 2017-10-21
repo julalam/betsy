@@ -1,7 +1,10 @@
-<h1>Make a New Category</h1>
+<section class="row">
+  <h3>Create new category </h3>
 
   <%= form_for @category do |f| %>
     <%=f.label :name %>
     <%=f.text_field :name %>
+
     <%= f.submit %>
   <%end%>
+</section>  

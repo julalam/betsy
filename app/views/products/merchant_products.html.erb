@@ -4,8 +4,8 @@
     <%= link_to "New Product", new_product_path, class: "button" %>
     <%= link_to "New Category", new_category_path, class: "button" %>
 
-    <% products_by_status = @merchant.products.group_by{ |p| p.retired } %>
-    <% products_by_status.each do |status, products| %>
+    <% [false, true].each do |status| %>
+      <% products = @merchant.products.where(retired: status) %>
       <% if status %>
         <h4>Retired Products</h4>
       <% else %>
