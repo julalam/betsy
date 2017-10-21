@@ -64,5 +64,3 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :price, :stock, :retired, :description, :image_url)
   end
 end
-
-# name: params[:product][:name],price: params[:product][:price], stock: params[:product][:stock], retired: params[:product][:retired], description: params[:product][:description], image_url: params[:product][:image_url], merchant: params[:product][:merchant]

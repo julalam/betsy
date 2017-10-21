@@ -1,0 +1,30 @@
+<div class="merchant-show row">
+  <%= render partial: "merchants/nav_aside" %>
+  <section class="small-8 columns">
+    <%= link_to "New Product", new_product_path, class: "button" %>
+    <%= link_to "New Category", new_category_path, class: "button" %>
+
+    <h4>Available Categories</h4>
+    <table>
+      <thead>
+        <tr>
+          <th width="100">Category</th>
+          <th width="200">Products</th>
+          <th width="200">My Products</th>
+          <th width="100">Add Product</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= link_to category.name, category_products_path(category.id) %></td>
+            <td><%= link_to category.products.count, category_products_path(category.id) %></td>
+            <td><%#= link_to %>my products</td>
+            <td><%= link_to "New Product", new_product_path, class: "button" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+
+</div>

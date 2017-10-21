@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :index, :destroy, :update]
 
 
-  resources :categories, only: [:new, :create]
+  resources :categories, only: [:new, :create, :index]
 
   # nested routes
   resources :categories do

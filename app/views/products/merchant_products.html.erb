@@ -16,8 +16,9 @@
           <tr>
             <th width="80">Image</th>
             <th width="200">Name</th>
-            <th width="70">Quantity</th>
-            <th width="70">Price</th>
+            <th width="100">Rating</th>
+            <th width="100">Quantity</th>
+            <th width="100">Price</th>
             <th>Manage</th>
           </tr>
         </thead>
@@ -26,6 +27,7 @@
             <tr>
               <td><%= image_tag product.image_url %></td>
               <td><%= link_to product.name, product_path(product.id) %></td>
+              <td>rating</td>
               <td><%= product.stock %></td>
               <td><%= product.price %></td>
               <td><%= link_to "Edit", edit_product_path(product.id), class: "button" %>
@@ -34,7 +36,7 @@
               <% else %>
                 <%= link_to "Activate", product_path(product.id, :product => {:retired => false }), method: :patch, class: "button" %>
               <% end %>
-              <%= link_to "Add quantity", product_path(product.id), class: "button" %></td>
+              </td>
             </tr>
           <% end %>
         </tbody>
