@@ -19,10 +19,15 @@
       <%= f.label :image_url %>
       <%= f.text_field :image_url %>
 
-      <%#= f.label :category %>
-      <%#= f.collection_select(:category_id, Category.all, :id, :name, {}, {:multiple => true}) %>
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+        <%= b.check_box %>
+        <%= b.label %>
+      <% end %>
 
-      <%= f.submit class: "button"%>
+      <div class="submit">
+        <%= f.submit class: "button"%>
+      </div>
+
 
   <% end %>
 </section>
