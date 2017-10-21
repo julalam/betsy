@@ -46,7 +46,11 @@ class ProductsController < ApplicationController
 
 
   def index
-    if params[:category_id]
+    if params[:merchant_id] && params[:category_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @category = Category.find_by(id: params[:category_id])
+      @products = @category.products.where(merchant: @merchant)
+    elsif params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
     elsif params[:merchant_id]

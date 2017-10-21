@@ -21,7 +21,8 @@
  /*dark orange on hover #e65c00;*/
  /*yellow #ffd24d;*/
  /*green for text #009933;*/
- /*grey #cccccc;*/
+ /*grey border #cccccc;*/
+ /*grey category buttons #a6a6a6;*/
 
  /** {
    border: 1px solid red;
@@ -173,4 +174,15 @@
   width: 100px;
   margin: .5rem .1rem;
   height: 40.469px;
+}
+
+/*product#show*/
+.categories a {
+  margin-top: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.categories .button {
+  background-color: #a6a6a6;
 }
