@@ -3,9 +3,14 @@
   <section class="small-8 columns">
     <%= link_to "New Product", new_product_path, class: "button" %>
     <%= link_to "New Category", new_category_path, class: "button" %>
-    <%# @merchant.products.group_by{ ||}(retired:) %>
 
-      <h4>Products</h4>
+    <% products_by_status = @merchant.products.group_by{ |p| p.retired } %>
+    <% products_by_status.each do |status, products| %>
+      <% if status %>
+        <h4>Retired Products</h4>
+      <% else %>
+        <h4>Active Products</h4>
+      <% end %>
       <table>
         <thead>
           <tr>
@@ -17,19 +22,24 @@
           </tr>
         </thead>
         <tbody>
-          <% @merchant.products.each do |product| %>
+          <% products.each do |product| %>
             <tr>
               <td><%= image_tag product.image_url %></td>
               <td><%= link_to product.name, product_path(product.id) %></td>
               <td><%= product.stock %></td>
               <td><%= product.price %></td>
               <td><%= link_to "Edit", edit_product_path(product.id), class: "button" %>
-              <%= link_to "Retire", product_path(product.id), class: "button" %>
+              <% if !product.retired %>
+                <%= link_to "Retire", product_path(product.id, :product => {:retired => true }), method: :patch, class: "button" %>
+              <% else %>
+                <%= link_to "Activate", product_path(product.id, :product => {:retired => false }), method: :patch, class: "button" %>
+              <% end %>
               <%= link_to "Add quantity", product_path(product.id), class: "button" %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+    <% end %>
   </section>
 
 </div>
