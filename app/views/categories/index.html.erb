@@ -2,16 +2,15 @@
   <%= render partial: "merchants/nav_aside" %>
   <section class="small-8 columns">
     <%= link_to "New Product", new_product_path, class: "button" %>
-    <%= link_to "New Category", new_category_path, class: "button" %>
+    <%= link_to "New Category", new_merchant_category_path, class: "button" %>
 
     <h4>Available Categories</h4>
     <table>
       <thead>
         <tr>
-          <th width="100">Category</th>
+          <th width="200">Category</th>
           <th width="200">Products</th>
           <th width="200">My Products</th>
-          <th width="100">Add Product</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +19,6 @@
             <td><%= link_to category.name, category_products_path(category.id) %></td>
             <td><%= link_to category.products.count, category_products_path(category.id) %></td>
             <td><%= link_to category.products.where(merchant: @merchant).count, merchant_category_products_path(@merchant.id, category.id)%></td>
-            <td><%= link_to "New Product", new_product_path, class: "button" %></td>
           </tr>
         <% end %>
       </tbody>

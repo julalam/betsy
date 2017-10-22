@@ -21,7 +21,6 @@
       </div>
 
       <nav class="row nav">
-        <%= link_to "home", root_path, class: "button" %>
         <%= link_to "all products", products_path, class: "button" %>
         <%= link_to "shop by merchant", merchants_path, class: "button" %>
         <%= link_to "shop by category", root_path, class: "button" %>
@@ -36,6 +35,28 @@
     </header>
 
     <main>
+      <% if !flash.empty? %>
+        <section class="flash">
+          <% if flash[:notice].present? %>
+          <p><%= flash[:notice] %></p>
+          <% end %>
+          <% if flash[:details].present? %>
+            <ul>
+              <% flash[:details].each do |field, problems| %>
+                <% problems.each do |problem| %>
+                <li><strong>
+                  <%= field %>:
+                </strong>
+                <%= problem %>
+                </li>
+                <% end %>
+            <% end %>
+            </ul>
+          <% end %>
+        </section>
+      <% end %>
+
+
       <%= yield %>
     </main>
 
