@@ -22,8 +22,22 @@
 
       <nav class="row nav">
         <%= link_to "all products", products_path, class: "button" %>
-        <%= link_to "shop by merchant", merchants_path, class: "button" %>
-        <%= link_to "shop by category", root_path, class: "button" %>
+        <div class="dropdown">
+          <%= link_to "shop by merchant", merchants_path, class: "button" %>
+          <div class="dropdown-content">
+            <% Merchant.all.each do |merchant| %>
+              <%= link_to merchant.username, root_path, class: "button" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="dropdown">
+          <%= link_to "shop by category", merchants_path, class: "button" %>
+          <div class="dropdown-content">
+            <% Category.all.each do |category| %>
+              <%= link_to category.name, root_path, class: "button" %>
+            <% end %>
+          </div>
+        </div>
         <% if session[:merchant_id] &&  Merchant.find_by(id: session[:merchant_id]) %>
           <div class="float-right">
           <%= link_to "logged in as #{Merchant.find(session[:merchant_id]).username}",merchant_path(session[:merchant_id]),class:"button"  %>
@@ -36,7 +50,7 @@
 
     <main>
       <% if !flash.empty? %>
-        <section class="flash">
+        <section class="row flash">
           <% if flash[:notice].present? %>
           <p><%= flash[:notice] %></p>
           <% end %>
