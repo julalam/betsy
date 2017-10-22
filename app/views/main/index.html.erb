@@ -17,7 +17,6 @@
     </ul>
     <%end%>
 
-
     <h3 class="button">best seller</h3>
     <%if @products !=[] %>
     <ul>
@@ -29,7 +28,6 @@
     </ul>
     <%end%>
   </aside>
-
 
   <article class="small-9 columns">
     <section>
@@ -62,7 +60,7 @@
     <section>
       <%if @products !=[] %>
       <div class="small-12 columns">
-        <%= render partial: "random_products", locals: { products: @products.last(3) } %>
+        <%= render partial: "random_products", locals: { products: @products[3..-1] } %>
       </div>
       <%end%>
     </section>
