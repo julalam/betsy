@@ -17,7 +17,7 @@
  */
 
  /*green header&footer #66ad1f;*/
- /*orange buttons #ff8533;*/
+ /*orange nav buttons #ff8533;*/
  /*dark orange on hover #e65c00;*/
  /*yellow #ffd24d;*/
  /*green for text #009933;*/
@@ -49,6 +49,46 @@
    font-weight: bold;
  }
 
+ /*drop down menu*/
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 100%;
+    z-index: 100;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    text-decoration: none;
+    display: block;
+    color: #fff;
+    font-weight: bold;
+}
+
+.dropdown-content a:first-of-type {
+  margin-top: 0;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #e65c00;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/*main page*/
  .ads {
    height: 7rem;
    padding: 1rem;
@@ -76,6 +116,30 @@
    margin: 0;
  }
 
+ aside li img {
+   width: 60px;
+   margin-right: .5rem;
+ }
+
+ aside ul {
+   margin: 0 0 1rem 0;
+ }
+
+ aside li {
+   border-bottom: 1px solid #cccccc;
+ }
+
+ aside li:first-of-type {
+   border-top: 1px solid #cccccc;
+ }
+
+ .main-buttons {
+   width: 270px;
+   background-color: #ff8533;
+   font-weight: bold;
+ }
+
+/*product show page*/
  .show-im {
    padding: 1rem 0;
    text-align: center;
@@ -107,17 +171,10 @@
    margin-bottom: 1.5rem;
  }
 
-  aside li, .merchant-show li {
+ aside li, .merchant-show li {
    list-style-type: none;
  }
 
- aside li img {
-   width: 50px;
- }
-
- aside ul {
-   margin: 0;
- }
 
  footer {
    height: 5rem;
@@ -136,6 +193,17 @@
    margin-top: 1rem;
  }
 
+ .categories a {
+   margin-top: 1rem;
+   color: #fff;
+   font-weight: bold;
+ }
+
+ .categories .button {
+   background-color: #a6a6a6;
+ }
+
+/*merchant show page*/
 .merchant-show section:last-of-type{
  border-left: 1px solid #cccccc;;
 }
@@ -173,15 +241,4 @@
   width: 100px;
   margin: .5rem .1rem;
   height: 40.469px;
-}
-
-/*product#show*/
-.categories a {
-  margin-top: 1rem;
-  color: #fff;
-  font-weight: bold;
-}
-
-.categories .button {
-  background-color: #a6a6a6;
 }
