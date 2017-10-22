@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
 
     if Category.all.find_by(name: @category.name)
       flash[:status] = :failure
-      flash[:notice] = "Category with this name already exist"
+      flash[:notice] = "Category already exist"
       redirect_to new_merchant_category_path(@merchant.id)
     elsif @category.save
       flash[:status] = :success

@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-
+  skip_before_action :require_login, only: [:login, :logout]
 
   def new
     @merchant = Merchant.new
