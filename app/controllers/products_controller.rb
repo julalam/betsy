@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  skip_before_action :require_login, only: [:show, :index, :index_by_merchant]
+  skip_before_action :require_login, only: [:show, :index, :index_by_merchant, :index_by_category]
 
   def new
     @product = Product.new
@@ -66,6 +66,12 @@ class ProductsController < ApplicationController
   def index_by_merchant
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products
+    render :index
+  end
+
+  def index_by_category
+    @category = Category.find_by(id: params[:id])
+    @products = @category.products
     render :index
   end
 
