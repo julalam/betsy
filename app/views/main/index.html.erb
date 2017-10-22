@@ -4,14 +4,14 @@
 
 <div class="row">
   <aside class="small-3 columns">
-    <h3 class="button">new birds</h3>
+    <h3 class="main-buttons button">new birds</h3>
     <%if @products.present?%>
     <ul>
       <%= render partial: "new_products", locals: {products: @new_products} %>
     </ul>
     <%end%>
 
-    <h3 class="button">best seller</h3>
+    <h3 class="main-buttons button">best seller</h3>
     <%if @products.present? %>
     <ul>
       <li><%= @products.first.name %></li>
