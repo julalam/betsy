@@ -26,7 +26,7 @@
           <%= link_to "shop by merchant", merchants_path, class: "button" %>
           <div class="dropdown-content">
             <% Merchant.all.each do |merchant| %>
-              <%= link_to merchant.username, root_path, class: "button" %>
+              <%= link_to merchant.username, products_merchant_path(merchant.id), class: "button" %>
             <% end %>
           </div>
         </div>

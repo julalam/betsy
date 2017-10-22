@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/products/merchant/:id', to: 'products#index_by_merchant', as: 'products_merchant'
+
   get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
   get 'logout', to: 'merchants#logout', as: 'logout'
 
