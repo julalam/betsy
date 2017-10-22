@@ -7,13 +7,7 @@
     <h3 class="button">new birds</h3>
     <%if @products.present?%>
     <ul>
-      <li><%= image_tag(@products.first.image_url) %>
-          <%= @products.first.name %>
-          <%= @products.first.price %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
+      <%= render partial: "new_products", locals: {products: @new_products} %>
     </ul>
     <%end%>
 

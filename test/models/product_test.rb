@@ -97,5 +97,42 @@ describe Product do
         rand_products_1.wont_equal rand_products_2
       end
     end
+
+    describe "new_products" do
+      it "must return a list of product with asked length if there are more products than it was asked" do
+        new_products = Product.new_products(5)
+        new_products.must_be_kind_of Array
+        new_products.length.must_equal 5
+      end
+
+      it "must return empty array if there are no products" do
+        Product.destroy_all
+        new_products = Product.new_products(5)
+        new_products.must_be_kind_of Array
+        new_products.length.must_equal 0
+      end
+
+      it "must return all products if there are less products that it was asked in new method" do
+        Product.destroy_all
+        Product.create(name: "new_product", price: 10, merchant: merchants(:emma))
+        new_products = Product.new_products(5)
+        new_products.must_be_kind_of Array
+        new_products.length.must_equal 1
+      end
+
+      it "must return same products every time" do
+        new_products_1 = Product.new_products(5)
+        new_products_2 = Product.new_products(5)
+        new_products_1.must_equal new_products_2
+      end
+
+      it "must return products in the right order" do
+        Product.destroy_all
+        Product.create(name: "new_product", price: 10, merchant: merchants(:emma))
+        Product.create(name: "another_new_product", price: 15, merchant: merchants(:emma))
+        new_products = Product.new_products(2)
+        new_products.first.created_at.must_be :>, new_products.last.created_at
+      end
+    end
   end
 end

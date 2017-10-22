@@ -13,4 +13,8 @@ class Product < ApplicationRecord
     return Product.all.sample(number)
   end
 
+  def self.new_products(number)
+    return Product.all.order(:created_at).reverse.first(5)
+  end
+
 end
