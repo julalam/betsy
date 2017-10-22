@@ -5,8 +5,8 @@
     <li><%= @merchant.email %></li>
     <li><%= link_to "Dashboard", merchant_path(@merchant.id) %></li>
     <li><%= link_to "Manage Products", merchant_products_path(@merchant.id) %></li>
-    <li><%= link_to "Manage Categories", merchant_categories_path %></li>
-    <li><%= link_to "Manage Orders", merchant_path(@merchant.id) %></li>
+    <li><%# link_to "Manage Categories", merchant_categories_path %></li>
+    <li><%= link_to "Manage Orders", merchant_orders_path(@merchant.id) %></li>
   </ul>
   <% end %>
 </section>

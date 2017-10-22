@@ -1,7 +1,11 @@
 class OrdersController < ApplicationController
   def index
-
-    @orders = Order.all
+    if params[:merchant_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @orders = @merchant.orders
+    else
+      @orders = Order.all
+    end
   end
 
   def new
