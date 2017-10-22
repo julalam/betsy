@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login, only: [:show, :index]
 
   def new
     @product = Product.new
@@ -46,7 +47,11 @@ class ProductsController < ApplicationController
 
 
   def index
-    if params[:category_id]
+    if params[:merchant_id] && params[:category_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @category = Category.find_by(id: params[:category_id])
+      @products = @category.products.where(merchant: @merchant)
+    elsif params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
     elsif params[:merchant_id]
@@ -61,6 +66,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :stock, :retired, :description, :image_url)
+    params.require(:product).permit(:name, :price, :stock, :retired, :description, :image_url, category_ids: [])
   end
 end

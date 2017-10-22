@@ -2,9 +2,15 @@
 
   <div class="show-im small-5 columns">
     <%= image_tag(@product.image_url) %>
+    <div class="categories">
+      <% @product.categories.each do |category| %>
+      <%= link_to category.name, category_products_path(category.id), class: "button small" %>
+      <% end %>
+    </div>
   </div>
   <div class="show-desc small-7 columns">
     <ul>
+      <li id="merchant"><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></li>
       <li><h2><%= @product.name %></h2></li>
       <li class="rating">rating in stars, 10 customer reviews</li>
       <li>Price:  <%= @product.price %> </li>
@@ -14,19 +20,13 @@
         <li>Out of Stock</li>
       <% end %>
       <li><%= @product.description %> </li>
-      <li><p class="cart button">Add to Cart</p></li>
-      <section>
 
       <%= form_for @order_item do |f| %>
       <%= f.hidden_field :product_id, value: @product.id%>
       <%= f.label :Quantity %>
-      <%= f.select :quantity, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
-      <%= f.submit "Add to Cart", class: "button"%>
+      <%= f.select :quantity, (1..@product.stock).to_a %>
+      <%= f.submit "Add to Cart", class: "cart button"%>
       <% end %>
-
-
-
-      <%#= link_to "Add to Cart", order_items_path, method: :post %>
     </ul>
 
   </div>
