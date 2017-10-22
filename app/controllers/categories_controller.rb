@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+
   def new
     @category = Category.new
     @merchant = Merchant.find_by(id: params[:merchant_id])
