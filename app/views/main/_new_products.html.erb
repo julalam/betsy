@@ -1,0 +1,5 @@
+<% products.each do |product| %>
+  <li><%= image_tag(product.image_url) %>
+      <%= product.name %>
+      <%= product.price %></li>
+  <% end %>
