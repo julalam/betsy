@@ -20,11 +20,18 @@ class OrderItemsController < ApplicationController
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
     end
-    puts "after:"
+    puts "after:"``
     puts session[:order_id]
-    @order_item = OrderItem.new(product_id: params[:order_item][:product_id], quantity: params[:order_item][:quantity], order_id: session[:order_id])
-    @order_item.save!
-    redirect_to order_items_path
+    @product = Product.find(params[:order_item][:product_id])
+    if params[:order_item][:quantity] > @product.quantity
+      flash[:status] = :failure
+      flash[:result_text] = "There is not enough stock. Order a smaller amount"
+      redirect_to order_items_path
+    else
+      @order_item = OrderItem.new(product_id: params[:order_item][:product_id], quantity: params[:order_item][:quantity], order_id: session[:order_id])
+      @order_item.save!
+      redirect_to order_items_path
+    end
     # else
     #   #
     #   # render :new
@@ -42,6 +49,13 @@ class OrderItemsController < ApplicationController
     # else
     #   # render :edit
     # end
+    @product = Product.find(@order_item.product_id)
+
+    if params[:order_item][:quantity] > @product.quantity
+      flash[:status] = :failure
+      flash[:result_text] = "There is not enough stock. Order a smaller amount"
+      redirect_to order_items_path
+    end
 
     @order_item.update_attributes(order_item_params)
 
@@ -59,6 +73,10 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item = OrderItem.find(params[:id])
+    @product = Product.find(@order_item.product_id)
+    @product.quantity += @order_item.quantity
+    @product.save
+    
     if @order_item.destroy
       flash.now[:status] = :success
       flash.now[:message] = "Successfully removed #{@order_item.product.name} from your cart"
