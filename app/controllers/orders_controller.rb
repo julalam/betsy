@@ -50,9 +50,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    puts "**********************"
-    puts "I am in update"
-    binding pry
     @order = Order.find(params[:id])
 
     @order.customer_name = params[:order][:customer_name]
@@ -64,6 +61,7 @@ class OrdersController < ApplicationController
     @order.zip_code = params[:order][:zip_code]
 
     # result = @order.save
+      puts "**********************"
     puts "session before #{session[:order_id]}"
 
     if @order.save!
