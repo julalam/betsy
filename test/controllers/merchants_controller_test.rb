@@ -8,7 +8,7 @@ describe MerchantsController do
     login(@merchant)
   end
   describe "new" do
-    it "works" do
+    it "returns success" do
       get new_product_path
       must_respond_with :success
     end
@@ -39,7 +39,7 @@ describe MerchantsController do
       must_respond_with :success
     end
   end
-end  
+end
 
 
   describe "login" do
