@@ -13,7 +13,7 @@ describe ReviewsController do
     it "creates a review with valid data" do
       review_data = {
         review: {
-          product: products(:one),
+          product_id: products(:one).id,
           rating: 2,
           text: "review text"
         }
@@ -23,9 +23,9 @@ describe ReviewsController do
 
       post reviews_path, params: review_data
 
-      # must_respond_with :redirect
-      # must_redirect_to product_path(products(:one))
-      # Review.count.must_equal start_count + 1
+      must_respond_with :redirect
+      must_redirect_to product_path(products(:one))
+      Review.count.must_equal start_count + 1
     end
 
     it "renders bad_request and does not update the DB for bogus data" do
