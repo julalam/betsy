@@ -229,6 +229,13 @@
   margin: 0;
 }
 
+.merchant-show .total {
+  font-weight: bold;
+}
+
+.merchant-show .total td:first-child {
+  text-align: left;
+
 #merchant {
   line-height: 1px;
 }
