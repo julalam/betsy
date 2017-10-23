@@ -1,14 +1,52 @@
-<h1>Confirmation page for Order#: <%= @order.id %> </h1>
+<h1>Confirmation page for Order <%= @order.id %> </h1>
 
+<% total = 0%>
+<% @order_items.each do |order_item|%>
+<% total = order_item.quantity * order_item.product.price %>
+<% end %>
+
+
+<h3><strong>Billing information</strong></h3>
 <ul>
-  <li>Status:  <%= @order.status %> </li>
-  <li>Customer Name:  <%= @order.customer_name %> </li>
-  <li>Customer Email Address:  <%= @order.customer_email %> </li>
-  <li>Credit Card Number:  <%= @order.cc_number %> </li>
-  <li>Credit Card Expiration Date:  <%= @order.cc_expiration %> </li>
-  <li>Credit Card CCV:  <%= @order.cc_ccv %> </li>
-  <li>Billing Zipcode:  <%= @order.zip_code %> </li>
+  <li>
+    <strong>Customer Name:</strong>  <%= @order.customer_name %>
+  </li>
+  <li>
+    <strong>Customer Email Address:</strong>  <%= @order.customer_email %> </li>
+  <li>
+    <strong>Credit Card Number:</strong>  <%= @order.cc_number %>
+  </li>
+  <li>
+    <strong>Credit Card Expiration Date:</strong>  <%= @order.cc_expiration %>
+  </li>
+  <li>
+    <strong>Credit Card CCV:</strong>  <%= @order.cc_ccv %>
+  </li>
+  <li>
+    <strong>Billing Zipcode:</strong>  <%= @order.zip_code %>
+  </li>
+  <li>
+    <strong>Date and Time Order Placed:</strong>  <%=@order.created_at %>
+    </li>
+  <li>
+    <strong>Order Status:</strong>  <%= @order.status%>
+    </li>
+    <li>
+      <strong>Total Cost:</strong>  <%=total %>
+    </li>
+
 </ul>
 
+
+
+
+<%= render partial: "orderitem_summary" %>
+
+
+
+
+
+
+
 <%#= link_to 'All Orders', orders_path %>
-<%= link_to 'Edit Order', edit_order_path %>
+<%#= link_to 'Edit Order', edit_order_path %>

@@ -1,7 +1,19 @@
 class OrdersController < ApplicationController
-  def index
 
-    @orders = Order.all
+  skip_before_action :require_login
+
+  def index
+    if params[:merchant_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      # @orders = []
+      # @merchant.order_items.each do | order_item |
+      #   @orders << Order.find_by(id: order_item.order_id)
+      # end
+      @order_items = @merchant.order_items
+      render :merchant_orders
+    else
+      @orders = Order.all
+    end
   end
 
   def new
@@ -9,6 +21,8 @@ class OrdersController < ApplicationController
   end
 
   def create
+    puts "**********************"
+    puts "I am in create"
     if params[:order][:status] == " "
       flash[:failure] = 'Please enter the required fields.'
       redirect_to new_order_path
@@ -36,6 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+
     @order = Order.find(params[:id])
 
     @order.customer_name = params[:order][:customer_name]
@@ -46,9 +61,6 @@ class OrdersController < ApplicationController
     @order.cc_ccv = params[:order][:cc_ccv]
     @order.zip_code = params[:order][:zip_code]
 
-    # result = @order.save
-    puts "session before #{session[:order_id]}"
-
     if @order.save!
       flash[:notification] = 'Order was successfully updated'
       @order.status = "paid"
@@ -57,7 +69,6 @@ class OrdersController < ApplicationController
     else
       flash[:failure] = 'Order was not updated'
     end
-    puts "session after #{session[:order_id]}"
     redirect_to order_path(@order.id)
   end
 
@@ -67,6 +78,13 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_items = OrderItem.where(order_id: params[:id])
   end
+
+  # def cancel
+  #   @order = Order.find(params[:id])
+  #    @order[:status] = "Canceled"
+  #    redirect_to order_path(@order.id)
+  # end
 
 end
