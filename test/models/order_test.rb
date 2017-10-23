@@ -20,4 +20,10 @@ describe Order do
     result = order.valid?
     result.must_equal true
   end
+
+  it 'must be invalid' do
+    order = Order.new
+    result = order.valid?
+    result.must_equal false
+  end
 end

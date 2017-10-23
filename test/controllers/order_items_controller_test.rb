@@ -7,37 +7,51 @@ describe OrderItemsController do
   describe "index" do
     it "succeeds when there are order items" do
       OrderItem.count.must_be :>, 0, "No order items in the test fixtures"
-      get orderitems_path
-      must_respond_with :success
+      get order_items_path
+      must_respond_with :redirect
     end
 
     it "succeeds when there are no order items" do
       OrderItem.destroy_all
-      get orderitems_path
-      must_respond_with :success
+      get order_items_path
+      must_respond_with :redirect
     end
   end
 
   describe "destroy" do
-    it "succeeds for an extant order item ID" do
+    it "fails for the wrong merchant" do
       order_item_id = OrderItem.first.id
 
       delete order_item_path(order_item_id)
       must_redirect_to root_path
 
-      OrderItem.find_by(id: order_item_id).must_be_nil
+      OrderItem.find_by(id: order_item_id).wont_be_nil
     end
+  end
 
-    # it "renders 404 not_found and does not update the DB for a bogus order_item ID" do
-    #   start_count = OrderItem.count
-    #
-    #   bogus_order_item_id = OrderItem.last.id + 1
-    #   delete order_item_path(bogus_order_item_id)
-    #   must_respond_with :not_found
-    #
-    #   order_item.count.must_equal start_count
-    # end
+  describe "create" do
+    it 'makes a new order item' do
 
+
+    end
+  end
+
+  describe "update" do
+    it "updates an order item" do
+      order = OrderItem.first
+
+      order_params = {
+        orderitem: {
+          order_id: order.order_id,
+          product_id: order.product_id,
+          quantity: 73
+        }
+      }
+      before = OrderItem.count
+      order.update_attributes(order_params[:orderitem])
+      patch order_item_path(order), params: order_params
+      must_redirect_to order_item_path(order)
+    end
   end
 
 

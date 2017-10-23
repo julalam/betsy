@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   def index
-
     @orders = Order.all
   end
 
@@ -9,23 +8,13 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @order = Order.new(order_params)
     if params[:order][:status] == " "
       flash[:failure] = 'Please enter the required fields.'
       redirect_to new_order_path
     else
-      @order = Order.new(
-        status: 'pending',
-        customer_name: params[:order][:customer_name],
-        customer_email: params[:order][:customer_email],
-        customer_address: params[:order][:customer_address],
-        cc_number: params[:order][:cc_number],
-        cc_expiration: params[:order][:cc_expiration],
-        cc_ccv: params[:order][:cc_ccv],
-        zip_code: params[:order][:zip_code],
-      )
-      result = @order.save
-
-      if result
+      @order = Order.new(order_params)
+      if @order.save
         flash[:success] = 'Your order has been placed'
         redirect_to orders_path
       else
@@ -67,6 +56,13 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:customer_email, :customer_name,
+      :zip_code, :cc_expiration, :status, :cc_ccv, :cc_number, :customer_address)
   end
 
 end

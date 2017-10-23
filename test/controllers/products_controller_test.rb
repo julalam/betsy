@@ -157,5 +157,7 @@ describe ProductsController do
       get merchant_category_products_path(merchant.id, category.id)
       must_respond_with :success
     end
+
   end
+
 end
