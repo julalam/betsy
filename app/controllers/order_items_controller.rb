@@ -1,7 +1,6 @@
 class OrderItemsController < ApplicationController
 
   def index
-    #maybe just for that merchant
     @order_items = OrderItem.where(order_id: session[:order_id])
   end
 
@@ -10,8 +9,6 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    #if there is already an open order, set the order_item order_id to that order.
-    #otherwise make a new order
     if session[:order_id] == nil
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
@@ -20,13 +17,6 @@ class OrderItemsController < ApplicationController
 
     @order_item.save!
     redirect_to order_items_path
-    # else
-    #   #
-    #   # render :new
-    #   flash[:status] = :failure
-    #   flash[:result_text] = "Could not create order item"
-    #   flash[:details] = @order_item.errors.messages
-    # end
   end
 
   def update
@@ -35,7 +25,7 @@ class OrderItemsController < ApplicationController
     if @order_item.save
       redirect_to root_path
     else
-      # render :edit
+
     end
 
     @order_item.update_attributes(order_item_params)

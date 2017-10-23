@@ -26,19 +26,6 @@ describe CategoriesController do
     end
   end
 
-  # describe "show" do
-  #   it "succeeds for an valid product ID" do
-  #     get product_path(Category.first)
-  #     must_respond_with :success
-  #   end
-  #
-  #   it "renders 404 not_found for a bogus product ID" do
-  #     bogus_product_id = Category.last.id + 1
-  #     get product_path(bogus_product_id)
-  #     must_respond_with :not_found
-  #   end
-  # end
-
   describe "create" do
     it "redirects to merchant categories page when the category data is valid" do
       category_data = {

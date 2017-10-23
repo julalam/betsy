@@ -1,10 +1,12 @@
 require "test_helper"
 
 describe ReviewsController do
+
+
   describe "new" do
     it "works" do
       get new_review_path
-      must_respond_with :success
+      must_respond_with :redirect
     end
   end
 
