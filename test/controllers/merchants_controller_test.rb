@@ -71,20 +71,19 @@ end
 
     end
 
-    # it "tells the merchant that they're already logged in if that is true" do
-    #   start_count = Merchant.count
-    #
-    #   merchant = merchants(:eva)
-    #
-    #   login(merchant)
-    #   login(merchant)
-    #
-    #   must_respond_with :bad_request
-    #   must_redirect_to root_path
-    #   session[:merchant_id].must_equal merchant.id
-    #   Merchant.count.must_equal start_count
-    #
-    # end
+    it "tells the merchant that they're already logged in if that is true" do
+      start_count = Merchant.count
+
+      merchant = merchants(:eva)
+
+      login(merchant)
+      login(merchant)
+
+      must_respond_with :redirect
+      must_redirect_to root_path
+      Merchant.count.must_equal start_count
+
+    end
 
     it "redirects to the root path if given invalid user data" do
       start_count = Merchant.count
