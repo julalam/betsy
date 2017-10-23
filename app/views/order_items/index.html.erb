@@ -1,29 +1,13 @@
-<h1> All Order Items </h1>
+<h1> Shopping Cart </h1>
 
 <% if @order_items %>
-<% @order_items.each do |order_item| %>
-  <ul>
-    <img src="<%=order_item.product.image_url%>"/>
-    <li><%= link_to order_item.product.name, order_items_path(order_item) %> </li>
-    <li>Quantity:  <%= order_item.quantity %> </li>
-    <li>Product ID:  <%= order_item.product_id %> </li>
-    <%@order_id = order_item.order_id %>
-    <li>Order ID:  <%= order_item.order_id %> </li>
-    <li>
+<%= render partial: "item_summary" %>
 
-      <%=link_to "Delete",  order_item_path(order_item), method: :delete, data: { confirm: 'Are you certain you want to delete this item?' }%>
-    </li>
-  </ul>
-<% end %>
-
-<%=link_to "Submit order", edit_order_path(@order_id), class: "button"%>
+<%=link_to "Submit order", edit_order_path(@order_items.first.order_id), class: "button"%>
 
 <% else  %>
 <p>
-shopping cart is empty
+The shopping cart is empty
 </p>
 
 <%end%>
-
-
-<!-- Need to get the right params in edit order path -->

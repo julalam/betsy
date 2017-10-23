@@ -21,8 +21,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    puts "**********************"
-    puts "I am in create"
     if params[:order][:status] == " "
       flash[:failure] = 'Please enter the required fields.'
       redirect_to new_order_path

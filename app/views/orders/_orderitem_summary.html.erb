@@ -1,4 +1,4 @@
-<section class="row small-up-2 medium-up-3 large-up-4">
+<!-- <section class="row small-up-2 medium-up-3 large-up-4">
 <h3><strong>Order Summary</strong></h3>
 <%@order_items.each do |order_item|%>
 <article class="column">
@@ -9,7 +9,7 @@
       <%=link_to order_item.product.name, product_path(order_item.product) %>
     </li>
     <li> Cost:
-      <%= order_item.quantity * order_item.product.price %>
+      <%= OrderItem.total_cost(order_item) %>
     </li>
     <li>
       Number ordered: <%=order_item.quantity %>
@@ -29,4 +29,4 @@
 </article>
 <%end%>
 
-</section>
+</section> -->
