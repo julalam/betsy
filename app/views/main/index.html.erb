@@ -7,18 +7,14 @@
     <h3 class="main-buttons button">new birds</h3>
     <%if @products.present?%>
     <ul>
-      <%= render partial: "new_products", locals: {products: @new_products} %>
+      <%= render partial: "aside_products", locals: {products: @new_products} %>
     </ul>
     <%end%>
 
     <h3 class="main-buttons button">best seller</h3>
     <%if @products.present? %>
     <ul>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
+      <%= render partial: "aside_products", locals: {products: @best_sellers} %>
     </ul>
     <%end%>
   </aside>
