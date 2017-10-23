@@ -49,9 +49,12 @@ class OrderItemsController < ApplicationController
 
 
   def destroy
-    current_merchant = Merchant.find_by(id: session[:logged_in_merchant])
+    current_merchant = Merchant.find_by(id: session[:merchant_id])
     @order = OrderItem.find_by(id: params[:id])
-    if current_merchant == order.product.merchant
+    puts "Current Merchant #{current_merchant}"
+    puts "session #{session[:merchant_id]}"
+    puts "Merchant from order item#{@order.product.merchant}"
+    if current_merchant == @order.product.merchant
       @order.destroy
       flash[:status] = :success
       flash[:result_text] = "Successfully destroyed order item."

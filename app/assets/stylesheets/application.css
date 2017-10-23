@@ -157,3 +157,11 @@
 .merchant-show table .button {
   margin: 0;
 }
+
+.merchant-show .total {
+  font-weight: bold;
+}
+
+.merchant-show .total td:first-child {
+  text-align: left;
+}
