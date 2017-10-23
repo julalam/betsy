@@ -1,9 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  product_id: 1
+  product: one
+  rating: 3
   text: 'review text 1'
 
 two:
-  product_id: 1
+  product: one
+  rating: 4
   text: 'review text 2'
+
+three:
+  product: one
+  rating: 3
+  text: 'review text 3'

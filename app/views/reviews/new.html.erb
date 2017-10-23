@@ -1,0 +1,16 @@
+<div class="row">
+    <h3>Create new review </h3>
+
+    <%= form_for @review do |f| %>
+    
+    <%= f.label :rating %>
+    <%= f.select :rating, (1..5).to_a %>
+
+    <%= f.hidden_field :product_id %>
+
+    <%= f.label :text, "Comment" %>
+    <%= f.text_area :text %>
+
+    <%= f.submit %>
+    <%end%>
+</div>

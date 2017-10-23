@@ -24,6 +24,13 @@ describe Product do
         category.must_be_kind_of Category
       end
     end
+
+    it "has many reviews" do
+      @product.must_respond_to :reviews
+      @product.reviews.each do |review|
+        review.must_be_kind_of Review
+      end
+    end
   end
 
   describe "validations" do
@@ -132,6 +139,19 @@ describe Product do
         Product.create(name: "another_new_product", price: 15, merchant: merchants(:emma))
         new_products = Product.new_products(2)
         new_products.first.created_at.must_be :>, new_products.last.created_at
+      end
+    end
+  end
+
+  describe "custom methods" do
+    describe "average_rating" do
+      it "must return correct average rating for list of reviews" do
+        product = products(:one)
+        ratings = []
+        product.reviews.each do |review|
+          ratings << review.rating
+        end
+        product.average_rating.must_equal ratings.inject{ |sum, el| sum + el } / ratings.length
       end
     end
   end
