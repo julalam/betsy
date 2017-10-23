@@ -27,17 +27,12 @@
       <td><%=order_item.quantity%></td>
       <td><%=order_item.product.price * order_item.quantity%></td>
       <td>
-        <%#form_for%>
-        <%# link_to "Edit", edit_product_path(product.id), class: "button" %>
-        <% if order_item.order.status != "Shipped" %>
-          <%= link_to "Ship", order_path(order_item.order_id, :order => {:status => "Shipped" }), method: :patch, class: "button" %>
+        <% if order_item.order.status == "paid" && order_item.status == nil %>
+          <%= link_to "Ship", order_item_path(order_item.id, :order_item => {:status => "Shipped" }), method: :patch, class: "button" %>
+          <%= link_to "Cancel", order_item_path(order_item.id, :order_item => {:status => "Cancelled" }), method: :patch, class: "button" %>
         <% else %>
-          <%="Shipped"%>
+          <%=order_item.status%>
         <% end %>
-        <%=link_to "cancel", order_item_path(order_item.id), method: :delete, class: "button"%>
-
-        <%#link_to "Submit order", edit_order_path(@order_id), class: "button"%>
-
       </td>
       <td><%=order_item.order.status%></td>
       <% @quantity_sum += order_item.quantity %>

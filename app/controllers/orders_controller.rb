@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+
+  skip_before_action :require_login
+
   def index
     if params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
