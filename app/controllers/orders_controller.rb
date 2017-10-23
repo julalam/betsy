@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
 skip_before_action :require_login
 
   def index
-
     @orders = Order.all
   end
 
@@ -11,6 +10,8 @@ skip_before_action :require_login
   end
 
   def create
+    puts "**********************"
+    puts "I am in create"
     if params[:order][:status] == " "
       flash[:failure] = 'Please enter the required fields.'
       redirect_to new_order_path
@@ -38,6 +39,9 @@ skip_before_action :require_login
   end
 
   def update
+    puts "**********************"
+    puts "I am in update"
+    binding pry
     @order = Order.find(params[:id])
 
     @order.customer_name = params[:order][:customer_name]
