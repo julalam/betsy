@@ -4,22 +4,15 @@
 
 <div class="row">
   <aside class="small-3 columns">
-    <h3 class="button">new birds</h3>
-    <%if @products !=[] %>
+    <h3 class="main-buttons button">new birds</h3>
+    <%if @products.present?%>
     <ul>
-      <li><%= image_tag(@products.first.image_url) %>
-          <%= @products.first.name %>
-          <%= @products.first.price %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
-      <li><%= @products.first.name %></li>
+      <%= render partial: "new_products", locals: {products: @new_products} %>
     </ul>
     <%end%>
 
-
-    <h3 class="button">best seller</h3>
-    <%if @products !=[] %>
+    <h3 class="main-buttons button">best seller</h3>
+    <%if @products.present? %>
     <ul>
       <li><%= @products.first.name %></li>
       <li><%= @products.first.name %></li>
@@ -30,10 +23,9 @@
     <%end%>
   </aside>
 
-
   <article class="small-9 columns">
     <section>
-      <%if @products !=[] %>
+      <%if @products.present? %>
       <div class="small-12 columns">
         <%= render partial: "random_products", locals: { products: @products.first(3) } %>
       </div>
@@ -60,9 +52,9 @@
       </div>
     </section>
     <section>
-      <%if @products !=[] %>
+      <%if @products.present? %>
       <div class="small-12 columns">
-        <%= render partial: "random_products", locals: { products: @products.last(3) } %>
+        <%= render partial: "random_products", locals: { products: @products[3..-1] } %>
       </div>
       <%end%>
     </section>
