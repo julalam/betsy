@@ -205,7 +205,7 @@
 
 /*merchant show page*/
 .merchant-show section:last-of-type{
- border-left: 1px solid #cccccc;;
+ border-left: 1px solid #cccccc;
 }
 
 .merchant-show li:nth-child(-n+2) {
@@ -235,6 +235,7 @@
 
 .merchant-show .total td:first-child {
   text-align: left;
+}
 
 #merchant {
   line-height: 1px;
