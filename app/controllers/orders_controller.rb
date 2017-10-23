@@ -50,9 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    puts "**********************"
-    puts "I am in update"
-    binding pry
+
     @order = Order.find(params[:id])
 
     @order.customer_name = params[:order][:customer_name]
@@ -63,9 +61,6 @@ class OrdersController < ApplicationController
     @order.cc_ccv = params[:order][:cc_ccv]
     @order.zip_code = params[:order][:zip_code]
 
-    # result = @order.save
-    puts "session before #{session[:order_id]}"
-
     if @order.save!
       flash[:notification] = 'Order was successfully updated'
       @order.status = "paid"
@@ -74,7 +69,6 @@ class OrdersController < ApplicationController
     else
       flash[:failure] = 'Order was not updated'
     end
-    puts "session after #{session[:order_id]}"
     redirect_to order_path(@order.id)
   end
 
@@ -84,6 +78,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_items = OrderItem.where(order_id: params[:id])
   end
 
   # def cancel
