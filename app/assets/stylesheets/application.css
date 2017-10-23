@@ -145,6 +145,10 @@
    text-align: center;
  }
 
+ .show-im img {
+   margin-top: 2rem;
+ }
+
  .show-desc {
    margin-top: 1.3rem;
  }

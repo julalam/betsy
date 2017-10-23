@@ -19,7 +19,7 @@ class Product < ApplicationRecord
   end
 
   def average_rating
-    return reviews.average(:rating)
+    return reviews.average(:rating).to_i
   end
 
 end

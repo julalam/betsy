@@ -142,4 +142,17 @@ describe Product do
       end
     end
   end
+
+  describe "custom methods" do
+    describe "average_rating" do
+      it "must return correct average rating for list of reviews" do
+        product = products(:one)
+        ratings = []
+        product.reviews.each do |review|
+          ratings << review.rating
+        end
+        product.average_rating.must_equal ratings.inject{ |sum, el| sum + el } / ratings.length
+      end
+    end
+  end
 end

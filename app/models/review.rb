@@ -5,7 +5,4 @@ class Review < ApplicationRecord
   validates :rating, presence: true
   validates :rating, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5, message: "Please enter a rating from 1 to 5" }
 
-  # def average_rating(product)
-  #   return product.reviews.average(:rating)
-  # end
 end
