@@ -36,17 +36,21 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = OrderItem.find(params[:id])
+    # @order_item.update_attributes(order_item_params)
+    # if @order_item.save
+    #   redirect_to root_path
+    # else
+    #   # render :edit
+    # end
+
     @order_item.update_attributes(order_item_params)
+
+    # if save_and_flash(@order_item, "update")
     if @order_item.save
-      redirect_to root_path
-    else
-      # render :edit
-    end
-
-    @order_item.update_attributes(order_item_params)
-
-    if save_and_flash(@order_item, "update")
-      redirect_to order_item_path(@order_item.id)
+      flash[:status] = :success
+      flash[:result_text] = "Successfully updated order item."
+      redirect_back fallback_location: { action: "index"}
+      # redirect_to order_item_path(@order_item.id)
     else
       render :edit, status: :bad_request
     end
@@ -67,7 +71,7 @@ class OrderItemsController < ApplicationController
 
   private
 
-  # def order_item_params
-  #   return params.require(:orderitem).permit(:product_id, :quantity, :order_id)
-  # end
+  def order_item_params
+    return params.require(:order_item).permit(:product_id, :quantity, :order_id, :status)
+  end
 end
