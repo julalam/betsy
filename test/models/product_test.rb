@@ -24,6 +24,13 @@ describe Product do
         category.must_be_kind_of Category
       end
     end
+
+    it "has many reviews" do
+      @product.must_respond_to :reviews
+      @product.reviews.each do |review|
+        review.must_be_kind_of Review
+      end
+    end
   end
 
   describe "validations" do
