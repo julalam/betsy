@@ -1,7 +1,19 @@
 class OrdersController < ApplicationController
-  def index
 
-    @orders = Order.all
+  skip_before_action :require_login
+
+  def index
+    if params[:merchant_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      # @orders = []
+      # @merchant.order_items.each do | order_item |
+      #   @orders << Order.find_by(id: order_item.order_id)
+      # end
+      @order_items = @merchant.order_items
+      render :merchant_orders
+    else
+      @orders = Order.all
+    end
   end
 
   def new

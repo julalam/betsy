@@ -48,9 +48,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :merchants do
+    resources :orders, only: [:index]
+  end
+
   get '/products/merchant/:id', to: 'products#index_by_merchant', as: 'products_merchant'
 
-  get '/products/category/:id', to: 'products#index_by_category', as: 'products_category' 
+  get '/products/category/:id', to: 'products#index_by_category', as: 'products_category'
 
   get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
