@@ -23,19 +23,24 @@ class MerchantsController < ApplicationController
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
         if merchant.save
           flash[:status] = :success
-          flash[:notice] = "Logged in successfully as new merchant #{merchant.username}"
+          flash[:message] = "Logged in successfully as new merchant #{merchant.username}"
         else
           flash[:status] = :failure
-          flash[:notice] = "Could not log in"
+          flash[:message] = "Could not log in"
         end
       else
-        flash[:status] = :success
-        flash[:notice] = "Logged in successfully as existing merchant as #{merchant.username}"
+        if session[:merchant_id] == merchant.id
+          flash[:status] = :failure
+          flash[:message] = "You're already logged in"
+        else
+          flash[:status] = :success
+          flash[:message] = "Logged in successfully as existing merchant as #{merchant.username}"
+        end
       end
       session[:merchant_id] = merchant.id
     else
       flash[:status] = :failure
-      flash[:notice] = "Could not log in"
+      flash[:message] = "Could not log in"
     end
     redirect_to root_path
   end
@@ -43,7 +48,7 @@ class MerchantsController < ApplicationController
   def logout
     session[:merchant_id] = nil
     flash[:status] = :success
-    flash[:notice] = "Successfully logged out"
+    flash[:message] = "Successfully logged out"
     redirect_to root_path
   end
 end
