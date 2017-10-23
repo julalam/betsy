@@ -50,10 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-<<<<<<< HEAD
 
-=======
->>>>>>> ES1019
     @order = Order.find(params[:id])
 
     @order.customer_name = params[:order][:customer_name]
