@@ -1,5 +1,6 @@
 <h2>Please enter billing and shipping information</h2>
 
+<form class= "row">
 <%= form_for @order do |f| %>
     <%= f.label :customer_name %>
     <%= f.text_field :customer_name %>
@@ -25,3 +26,4 @@
     <%= f.submit "Checkout"%>
 
 <% end %>
+</form>

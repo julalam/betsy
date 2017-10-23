@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
 
+
   def index
     #maybe just for that merchant
     @order_items = OrderItem.where(order_id: session[:order_id])
@@ -13,12 +14,15 @@ class OrderItemsController < ApplicationController
   def create
     #if there is already an open order, set the order_item order_id to that order.
     #otherwise make a new order
+    puts "before"
+    puts session[:order_id]
     if session[:order_id] == nil
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
     end
+    puts "after:"
+    puts session[:order_id]
     @order_item = OrderItem.new(product_id: params[:order_item][:product_id], quantity: params[:order_item][:quantity], order_id: session[:order_id])
-
     @order_item.save!
     redirect_to order_items_path
     # else
@@ -54,21 +58,14 @@ class OrderItemsController < ApplicationController
 
 
   def destroy
-    current_merchant = Merchant.find_by(id: session[:merchant_id])
-    @order = OrderItem.find_by(id: params[:id])
-    puts "Current Merchant #{current_merchant}"
-    puts "session #{session[:merchant_id]}"
-    puts "Merchant from order item#{@order.product.merchant}"
-    if current_merchant == @order.product.merchant
-      @order.destroy
-      flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed order item."
-      redirect_to root_path
+    @order_item = OrderItem.find(params[:id])
+    if @order_item.destroy
+      flash.now[:status] = :success
+      flash.now[:message] = "Successfully removed #{@order_item.product.name} from your cart"
+      render :index
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be the merchant for that item to do that!"
-      redirect_to root_path
-      return
+      flash.now[:status] = :failure
+      flash.now[:message] = "Problem encountered when attempting to remove #{@order_item.product.name} from your cart"
     end
   end
 

@@ -21,6 +21,8 @@ class OrdersController < ApplicationController
   end
 
   def create
+    puts "**********************"
+    puts "I am in create"
     if params[:order][:status] == " "
       flash[:failure] = 'Please enter the required fields.'
       redirect_to new_order_path
@@ -48,6 +50,9 @@ class OrdersController < ApplicationController
   end
 
   def update
+    puts "**********************"
+    puts "I am in update"
+    binding pry
     @order = Order.find(params[:id])
 
     @order.customer_name = params[:order][:customer_name]
@@ -80,5 +85,11 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
+
+  # def cancel
+  #   @order = Order.find(params[:id])
+  #    @order[:status] = "Canceled"
+  #    redirect_to order_path(@order.id)
+  # end
 
 end
