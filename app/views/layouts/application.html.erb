@@ -21,13 +21,26 @@
       </div>
 
       <nav class="row nav">
-        <%= link_to "home", root_path, class: "button" %>
         <%= link_to "all products", products_path, class: "button" %>
-        <%= link_to "shop by merchant", merchants_path, class: "button" %>
-        <%= link_to "shop by category", root_path, class: "button" %>
-        <% if session[:merchant_id] %>
+        <div class="dropdown">
+          <%= link_to "shop by merchant", merchants_path, class: "button" %>
+          <div class="dropdown-content">
+            <% Merchant.all.each do |merchant| %>
+              <%= link_to merchant.username, products_merchant_path(merchant.id), class: "button" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="dropdown">
+          <%= link_to "shop by category", merchants_path, class: "button" %>
+          <div class="dropdown-content">
+            <% Category.all.each do |category| %>
+              <%= link_to category.name, products_category_path(category.id), class: "button" %>
+            <% end %>
+          </div>
+        </div>
+        <% if session[:merchant_id] &&  Merchant.find_by(id: session[:merchant_id]) %>
           <div class="float-right">
-          <p class="button">loggen in as <%= Merchant.find(session[:merchant_id]).username %></p>
+          <%= link_to "logged in as #{Merchant.find(session[:merchant_id]).username}",merchant_path(session[:merchant_id]),class:"button"  %>
           <%= link_to "log out", logout_path, class: "button" %></div>
         <% else %>
           <%= link_to "login", '/auth/github', class: "button float-right" %>
@@ -36,6 +49,28 @@
     </header>
 
     <main>
+      <% if !flash.empty? %>
+        <section class="row flash">
+          <% if flash[:notice].present? %>
+          <p><%= flash[:notice] %></p>
+          <% end %>
+          <% if flash[:details].present? %>
+            <ul>
+              <% flash[:details].each do |field, problems| %>
+                <% problems.each do |problem| %>
+                <li><strong>
+                  <%= field %>:
+                </strong>
+                <%= problem %>
+                </li>
+                <% end %>
+            <% end %>
+            </ul>
+          <% end %>
+        </section>
+      <% end %>
+
+
       <%= yield %>
     </main>
 

@@ -1,0 +1,12 @@
+<section class="small-4 columns">
+  <% if @merchant %>
+  <ul>
+    <li><%= @merchant.username %></li>
+    <li><%= @merchant.email %></li>
+    <li><%= link_to "Dashboard", merchant_path(@merchant.id) %></li>
+    <li><%= link_to "Manage Products", merchant_products_path(@merchant.id) %></li>
+    <li><%= link_to "Manage Categories", merchant_categories_path(@merchant.id) %></li>
+    <li><%= link_to "Manage Orders", merchant_path(@merchant.id) %></li>
+  </ul>
+  <% end %>
+</section>

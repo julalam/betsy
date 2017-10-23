@@ -1,8 +1,14 @@
 require "test_helper"
 
 describe MerchantsController do
+
+ describe "CRUD methods" do
+  before do
+    @merchant = merchants(:eva)
+    login(@merchant)
+  end
   describe "new" do
-    it "works" do
+    it "returns success" do
       get new_product_path
       must_respond_with :success
     end
@@ -33,6 +39,7 @@ describe MerchantsController do
       must_respond_with :success
     end
   end
+end
 
 
   describe "login" do

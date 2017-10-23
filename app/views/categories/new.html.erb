@@ -1,7 +1,14 @@
-<h1>Make a New Category</h1>
+<div class="merchant-show row">
+  <%= render partial: "merchants/nav_aside" %>
+  <!-- <section class="row"> -->
+  <section class="small-8 columns">
+    <h3>Create new category </h3>
 
-  <%= form_for @category do |f| %>
+    <%= form_for @category do |f| %>
     <%=f.label :name %>
     <%=f.text_field :name %>
+
     <%= f.submit %>
-  <%end%>
+    <%end%>
+  </section>
+</div>

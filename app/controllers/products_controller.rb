@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login, only: [:show, :index, :index_by_merchant, :index_by_category]
 
   def new
     @product = Product.new
@@ -6,13 +7,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save
-    puts @product.name
-    puts @product.valid?
+    @product[:merchant_id] = session[:merchant_id]
+    @product[:retired] = false
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}, ID number #{@product.id}"
-      redirect_to products_path(@product)
+      redirect_to merchant_products_path(session[:merchant_id])
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@product.name}, ID number #{@product.id}"
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully updated #{@product.name}, ID number #{@product.id}"
-      redirect_to product_path(@product)
+      redirect_to merchant_products_path(session[:merchant_id])
     else
       flash[:status] = :failure
       flash[:result_text] = "Could not updated #{@product.name}, ID number #{@product.id}"
@@ -47,19 +47,37 @@ class ProductsController < ApplicationController
 
 
   def index
-    if params[:category_id]
+    if params[:merchant_id] && params[:category_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @category = Category.find_by(id: params[:category_id])
+      @products = @category.products.where(merchant: @merchant)
+    elsif params[:category_id]
       category = Category.find_by(id: params[:category_id])
       @products = category.products
+    elsif params[:merchant_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @products = @merchant.products
+      render :merchant_products
     else
       @products = Product.all
     end
   end
 
+  def index_by_merchant
+    @merchant = Merchant.find_by(id: params[:id])
+    @products = @merchant.products
+    render :index
+  end
+
+  def index_by_category
+    @category = Category.find_by(id: params[:id])
+    @products = @category.products
+    render :index
+  end
+
   private
 
   def product_params
-    params.require(:product).permit(:price, :stock, :retired, :description, :image_url, :merchant_id)
+    params.require(:product).permit(:name, :price, :stock, :retired, :description, :image_url, category_ids: [])
   end
 end
-
-# name: params[:product][:name],price: params[:product][:price], stock: params[:product][:stock], retired: params[:product][:retired], description: params[:product][:description], image_url: params[:product][:image_url], merchant: params[:product][:merchant]

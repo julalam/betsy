@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-
+  skip_before_action :require_login, only: [:login, :logout]
 
   def new
     @merchant = Merchant.new
@@ -11,7 +11,7 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:id])
-    @products = @merchant.product
+    @products = @merchant.products
   end
 
   def login

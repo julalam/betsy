@@ -1,0 +1,33 @@
+<section class="row">
+  <h3>Create new product </h3>
+  <%= form_for @product do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :price %>
+      <%= f.text_field :price %>
+
+      <%= f.label :stock %>
+      <%= f.text_field :stock %>
+
+      <%= f.hidden_field :retired %>
+      <%= f.hidden_field :retired %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+
+      <%= f.label :image_url %>
+      <%= f.text_field :image_url %>
+
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |b| %>
+        <%= b.check_box %>
+        <%= b.label %>
+      <% end %>
+
+      <div class="submit">
+        <%= f.submit class: "button"%>
+      </div>
+
+
+  <% end %>
+</section>
