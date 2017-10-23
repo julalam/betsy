@@ -1,29 +1,20 @@
 class ReviewsController < ApplicationController
-  def index
-    @reviews = Review.all()
-  end
 
-  def show
-    @review = Review.find(params[:id])
-  end
-
-  def edit
-    @review = Review.find(params[:id])
-  end
+  skip_before_action :require_login
 
   def new
-    @review = Review.new()
+    @review = Review.new(product_id: params[:id])
   end
 
   def create
     @review = Review.new(review_params)
     if @review.save
       flash[:status] = :success
-      flash[:result_text] = "Successfully created #{@review.id}"
-      redirect_to review_path(@review)
+      flash[:message] = "Successfully created new review"
+      redirect_to product_path(@review.product)
     else
       flash[:status] = :failure
-      flash[:result_text] = "Could not create review ID number #{@review.id}"
+      flash[:message] = "Could not create new review"
       flash[:messages] = @review.errors.messages
       render :new, status: :bad_request
     end
@@ -32,6 +23,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:product_id).permit(:text)
+    params.require(:review).permit(:rating, :text, :product_id)
   end
 end

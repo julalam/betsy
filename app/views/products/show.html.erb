@@ -27,21 +27,24 @@
       <%= f.select :quantity, (1..@product.stock).to_a %>
       <%= f.submit "Add to Cart", class: "cart button"%>
       <% end %>
+
     </ul>
 
   </div>
 
 </div>
 
-<!-- <div class="review row"> -->
-  <!-- <h3>Customer reviews</h3> -->
-  <!-- <p>rating in stars, 10 customer reviews</p> -->
-  <!-- <article> -->
-    <!-- <p>list all review</p> -->
-    <%# @product.reviews.each do |review| %>
-      <!-- <%#= review.rating %><p>in start</p> -->
-      <!-- <p><%#= review.text %></p> -->
-    <%# end %>
-  <!-- </article> -->
+<div class="review row">
+
+  <%= link_to "Write a Review", new_product_review_path, class: "cart button" %>
+  <h3>Customer reviews</h3>
+  <p>rating in stars, 10 customer reviews</p>
+  <article>
+    <p>list all review</p>
+    <% @product.reviews.each do |review| %>
+      <%= review.rating %><p>in stars</p>
+      <p>bla bla bla<%= review.text %></p>
+    <% end %>
+  </article>
 
 </div>
