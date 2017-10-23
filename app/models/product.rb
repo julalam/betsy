@@ -18,4 +18,8 @@ class Product < ApplicationRecord
     return Product.all.order(:created_at).reverse.first(5)
   end
 
+  def average_rating
+    return reviews.average(:rating)
+  end
+
 end
