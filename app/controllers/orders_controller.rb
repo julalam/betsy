@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+skip_before_action :require_login
+
   def index
 
     @orders = Order.all
@@ -68,5 +70,11 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
+
+  # def cancel
+  #   @order = Order.find(params[:id])
+  #    @order[:status] = "Canceled"
+  #    redirect_to order_path(@order.id)
+  # end
 
 end

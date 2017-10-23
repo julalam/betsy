@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+
   resources :products
   resources :merchants
 
@@ -18,10 +19,6 @@ Rails.application.routes.draw do
   # post '/reviews', to: 'reviews#create'
   # get '/reviews/:id', to: 'review#show', as: 'review'
   # get '/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
-
-  get '/auth/:provider'
-  get '/auth/:provider/callback'
-
 
   resources :orders
   resources :reviews
@@ -53,7 +50,7 @@ Rails.application.routes.draw do
 
   get '/products/merchant/:id', to: 'products#index_by_merchant', as: 'products_merchant'
 
-  get '/products/category/:id', to: 'products#index_by_category', as: 'products_category' 
+  get '/products/category/:id', to: 'products#index_by_category', as: 'products_category'
 
   get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'
 
