@@ -10,7 +10,7 @@
   </div>
   <div class="show-desc small-7 columns">
     <ul>
-      <li id="merchant"><%= link_to @product.merchant.username, merchant_path(@product.merchant) %></li>
+      <li id="merchant"><%= link_to @product.merchant.username, products_merchant_path(@product.merchant) %></li>
       <li><h2><%= @product.name %></h2></li>
       <li class="rating">rating in stars, 10 customer reviews</li>
       <li>Price:  <%= @product.price %> </li>
