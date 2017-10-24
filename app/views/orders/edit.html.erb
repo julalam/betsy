@@ -1,27 +1,29 @@
-<h2>Please enter billing and shipping information</h2>
+<section class="row">
+  <h3>Please enter billing and shipping information</h3>
 
-<%= form_for @order do |f| %>
-    <%= f.label :customer_name %>
-    <%= f.text_field :customer_name %>
+  <%= form_for @order do |f| %>
+  <%= f.label :customer_name %>
+  <%= f.text_field :customer_name %>
 
-    <%= f.label :customer_email %>
-    <%= f.text_field :customer_email %>
+  <%= f.label :customer_email %>
+  <%= f.text_field :customer_email %>
 
-    <%= f.label :customer_address %>
-    <%= f.text_field :customer_address %>
+  <%= f.label :customer_address %>
+  <%= f.text_field :customer_address %>
 
-    <%= f.label :cc_number %>
-    <%= f.text_area :cc_number %>
+  <%= f.label :cc_number %>
+  <%= f.text_field :cc_number %>
 
-    <%= f.label :cc_expiration %>
-    <%= f.text_area :cc_expiration %>
+  <%= f.label :cc_expiration %>
+  <%= f.text_field :cc_expiration %>
 
-    <%= f.label :cc_ccv %>
-    <%= f.text_area :cc_ccv %>
+  <%= f.label :cc_ccv %>
+  <%= f.text_field :cc_ccv %>
 
-    <%= f.label :zip_code %>
-    <%= f.text_area :zip_code %>
+  <%= f.label :zip_code %>
+  <%= f.text_field :zip_code %>
 
-    <%= f.submit "Checkout"%>
+  <%= f.submit "Checkout", class: "cart button"%>
 
-<% end %>
+  <% end %>
+</section>
