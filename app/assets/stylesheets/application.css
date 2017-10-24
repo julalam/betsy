@@ -284,3 +284,25 @@
 .reviews section {
   border-bottom: 1px solid #cccccc;
 }
+
+/*shopping cart*/
+.shopping-cart select {
+  width: 80px;
+  height: 42px;
+}
+
+.shopping-cart li {
+  list-style-type: none;
+}
+
+.shopping-cart tr {
+  background-color: #fff;
+}
+
+.shopping-cart td, .shopping-cart th {
+  border-bottom: 1px solid #cccccc;
+}
+
+.shopping-cart h5 {
+  display: inline-block;
+}

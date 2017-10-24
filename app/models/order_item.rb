@@ -17,6 +17,9 @@ class OrderItem < ApplicationRecord
 
   def self.total_cost(order_item)
     result = order_item.quantity * order_item.product.price
+    if result < 50
+      result += 10
+    end
     return result
   end
 
