@@ -9,6 +9,12 @@ oi1:
   product: one
   order: two
 
+one:
+  id: 1
+  product_id: 1
+  order_id: 1
+  quantity: 3
+
 # column: value
 #
 oi2:

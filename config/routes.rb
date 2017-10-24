@@ -5,23 +5,8 @@ Rails.application.routes.draw do
   resources :products
   resources :merchants
 
-
-  # get '/orders', to: 'orders#index', as: 'orders'
-  # get '/orders/new', to: 'orders#new', as: 'new_order'
-  # post '/orders', to: 'orders#create'
-  # get '/orders/:id', to: 'orders#show', as: 'order'
-  # get '/orders/:id/edit', to: 'orders#edit'
-  # #, as: 'edit_order'
-  # patch '/orders/:id', to: 'orders#update'
-
-  # get '/reviews', to: 'reviews#index', as: 'reviews'
-  # get '/reviews/new', to: 'reviews#new', as: 'new_review'
-  # post '/reviews', to: 'reviews#create'
-  # get '/reviews/:id', to: 'review#show', as: 'review'
-  # get '/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
-
   resources :orders
-  resources :reviews
+  resources :reviews, except: [:new]
   root 'main#index'
 
   resources :order_items, only: [:create, :index, :destroy, :update]
@@ -48,12 +33,15 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/products/:id/reviews/new', to: 'reviews#new', as: 'new_product_review'
+
   resources :merchants do
     resources :orders, only: [:index]
   end
 
-  get '/products/merchant/:id', to: 'products#index_by_merchant', as: 'products_merchant'
 
+  get '/products/merchant/:id', to: 'products#index_by_merchant', as: 'products_merchant'
+  
   get '/products/category/:id', to: 'products#index_by_category', as: 'products_category'
 
   get '/auth/:provider/callback', to: 'merchants#login', as: 'auth_callback'

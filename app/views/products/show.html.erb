@@ -12,7 +12,7 @@
     <ul>
       <li id="merchant"><%= link_to @product.merchant.username, products_merchant_path(@product.merchant) %></li>
       <li><h2><%= @product.name %></h2></li>
-      <li class="rating">rating in stars, 10 customer reviews</li>
+      <li><span><%= render partial: "layouts/stars", locals: { rating: @product.average_rating } %></span>, <%= @product.reviews.count %> customer reviews</li>
       <li>Price:  <%= @product.price %> </li>
       <% if @product.stock != nil %>
         <li><span class="green">In Stock</span> (only <%= @product.stock %> left) </li>
@@ -28,20 +28,22 @@
       <%= f.submit "Add to Cart", class: "cart button"%>
       <% end %>
     </ul>
-
   </div>
-
 </div>
 
-<!-- <div class="review row"> -->
-  <!-- <h3>Customer reviews</h3> -->
-  <!-- <p>rating in stars, 10 customer reviews</p> -->
-  <!-- <article> -->
-    <!-- <p>list all review</p> -->
-    <%# @product.reviews.each do |review| %>
-      <!-- <%#= review.rating %><p>in start</p> -->
-      <!-- <p><%#= review.text %></p> -->
-    <%# end %>
-  <!-- </article> -->
+<div class="review row">
+
+  <h3>Customer reviews</h3>
+  <p><span><%= render partial: "layouts/stars", locals: { rating: @product.average_rating } %></span>, <%= @product.reviews.count %> customer reviews</p>
+  <%= link_to "Write a Review", new_product_review_path, class: "cart button" %>
+  <article class="reviews">
+    <% @product.reviews.each do |review| %>
+    <section>
+      <span><%= render partial: "layouts/stars", locals: { rating: review.rating } %></span>
+      <p>left on <%= review.created_at.localtime.strftime("%d %b %Y") %></p>
+      <p><%= review.text %></p>
+    </section>
+    <% end %>
+  </article>
 
 </div>

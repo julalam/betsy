@@ -145,6 +145,10 @@
    text-align: center;
  }
 
+ .show-im img {
+   margin-top: 2rem;
+ }
+
  .show-desc {
    margin-top: 1.3rem;
  }
@@ -205,7 +209,7 @@
 
 /*merchant show page*/
 .merchant-show section:last-of-type{
- border-left: 1px solid #cccccc;;
+ border-left: 1px solid #cccccc;
 }
 
 .merchant-show li:nth-child(-n+2) {
@@ -235,6 +239,7 @@
 
 .merchant-show .total td:first-child {
   text-align: left;
+}
 
 #merchant {
   line-height: 1px;
@@ -248,4 +253,34 @@
   width: 100px;
   margin: .5rem .1rem;
   height: 40.469px;
+}
+
+/*reviews*/
+/*stars*/
+.zero-stars, .zero-stars a{
+  color: lightgrey;
+}
+
+.one-star, .one-star a{
+  color: #cc0000;
+}
+
+.two-stars, .two-stars a{
+  color: #ff8533;
+}
+
+.three-stars, .three-stars a{
+  color: #ffcc00;
+}
+
+.four-stars, .four-stars a{
+  color: #99db70;
+}
+
+.five-stars, .five-stars a{
+  color: #33AC33;
+}
+
+.reviews section {
+  border-bottom: 1px solid #cccccc;
 }
