@@ -17,4 +17,20 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+private
+  def allowed_user(merchant_id)
+    merchant_id = merchant_id.to_i
+
+    if  session[:merchant_id] != merchant_id
+      flash[:status] = :failure
+      flash[:message] = "Failure: You do can not access account pages for other users"
+      redirect_to root_path
+      return false
+    else
+      return true
+    end
+  end
+
+
 end

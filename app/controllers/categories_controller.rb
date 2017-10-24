@@ -6,6 +6,11 @@ class CategoriesController < ApplicationController
   end
 
   def index
+    if params[:merchant_id]
+      unless allowed_user(params[:merchant_id])
+        return
+      end
+    end
     @categories = Category.all
     @merchant = Merchant.find_by(id: params[:merchant_id])
   end

@@ -18,19 +18,25 @@
       <li><h2><%= @product.name %></h2></li>
       <li><span><%= render partial: "layouts/stars", locals: { rating: @product.average_rating } %></span>, <%= @product.reviews.count %> customer reviews</li>
       <li>Price:  <%= @product.price %> </li>
-      <% if @product.stock != nil %>
-        <li><span class="green">In Stock</span> (only <%= @product.stock %> left) </li>
-      <% else %>
-        <li>Out of Stock</li>
+      <%if @product.retired %>
+       <li> <span class="green">No stock for retired products </span></li>
+       <% else %>
+        <% if @product.stock != nil %>
+          <li><span class="green">In Stock</span> (only <%= @product.stock %> left) </li>
+        <% else %>
+          <li>Out of Stock</li>
+        <% end %>
       <% end %>
       <li><%= @product.description %> </li>
 
-      <%= form_for @order_item do |f| %>
-      <%= f.hidden_field :product_id, value: @product.id%>
-      <%= f.label :Quantity %>
-      <%= f.select :quantity, (1..@product.stock).to_a %>
-      <%= f.submit "Add to Cart", class: "cart button"%>
-      <% end %>
+      <% if !@product.retired %>
+        <%= form_for @order_item do |f| %>
+        <%= f.hidden_field :product_id, value: @product.id%>
+        <%= f.label :Quantity %>
+        <%= f.select :quantity, (1..@product.stock).to_a %>
+        <%= f.submit "Add to Cart", class: "cart button"%>
+        <% end %>
+      <%end%>
     </ul>
   </div>
 </div>

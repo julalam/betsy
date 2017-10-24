@@ -4,7 +4,9 @@
 
   <section class="small-4 columns">
     <p>Total Cost: <%= OrderItem.total_cost(@order_items) %></p>
-    <p>Order Placed: <%= @order.created_at.strftime('%d %b %Y') %></p>
+    <p>
+      Order Placed: <%=readable_date(@order.created_at) %>
+    </p>
     <p>Status: <%= @order.status %></p>
     <%= link_to "Continue Shopping", products_path, class: "cart button" %>
   </section>
