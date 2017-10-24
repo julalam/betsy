@@ -67,19 +67,23 @@ describe OrderItem do
     end
   end
 
-  describe "custom methods" do
-    describe "subtotal and total_cost" do
-      before do
-        @order_item = OrderItem.new(quantity: 3, order: orders(:one), product: products(:one))
-        @other_order_item = OrderItem.new(quantity: 2, order: orders(:one), product: products(:two))
-      end
+  # custom methods
+  describe "subtotal and total_cost" do
+    before do
+      @order_item = OrderItem.new(quantity: 3, order: orders(:one), product: products(:one))
+      @other_order_item = OrderItem.new(quantity: 2, order: orders(:one), product: products(:two))
+    end
 
-      it "returns the right subtotal" do
-        OrderItem.subtotal(@order_item).must_equal @order_item.quantity * @order_item.product.price
-      end
+    it "returns the right subtotal" do
+      OrderItem.subtotal(@order_item).must_equal @order_item.quantity * @order_item.product.price
+    end
 
-      it "returns the right total cost" do
-        OrderItem.total_cost([@order_item, @other_order_item]).must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price
+    it "returns the right total cost" do
+      total = OrderItem.total_cost([@order_item, @other_order_item])
+      if total < 50
+        total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price + 10
+      else
+        total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price
       end
     end
   end
