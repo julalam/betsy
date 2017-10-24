@@ -24,66 +24,9 @@
             <%= f.submit "Update quantity", class: "cart button"%>
             <% end %></td>
         </tr>
+        <% end %>
     </tbody>
   </table>
 
+
 <h1>END OF ITEMS IN CART</h1>
-
-
-  <ul>
-    <li>
-      <%= link_to (image_tag(order_item.product.image_url)), product_path(order_item.product) %>
-      <%= link_to order_item.product.name,   order_items_path(order_item) %>
-      <p>rating</p>
-    </li>
-
-  <% if order_item.order.status == "pending"%>
-  <li>
-    Quantity:
-  </li>
-  <li>
-    <%= form_for order_item do |f|%>
-    <%= f.select :quantity, (1..order_item.product.stock).to_a   %>
-    <%= f.submit "Update quantity", class: "cart button"%>
-    <% end %>
-  </li>
-  <% else %>
-  <li>
-    Quantity:  <%=order_item.quantity %>
-  </li>
-  <% end %>
-
-
-  <% if order_item.quantity > 1 %>
-    <li>
-      Price of <%=order_item.quantity%> birds:  <%=OrderItem.total_cost(order_item)%>
-    </li>
-    <% else %>
-    <li>
-      Price: $<%=order_item.product.price%>
-    </li>
-  <% end %>
-
-
-<% if order_item.order.status == "pending"%>
-    <li>
-      <%=link_to "Delete",  order_item_path(order_item),   method: :delete, data: { confirm: 'Are you certain you want to delete this item?' }%>
-    </li>
-
-
-  <% else %>
-  <li>
-    <%if order_item.status == "Shipped"%>
-      Item is on it's way!
-    <% elsif order_item.status == "Cancelled"%>
-      The merchant, <%=order_item.product.merchant.username%>, has canceled this order.
-    <%else %>
-     The order is being processed.
-     <%end%>
-  </li>
-  <%end%>
-    </ul>
-<% end %>
-
-
-<!-- order_item.product.price * order_item.quantity -->
