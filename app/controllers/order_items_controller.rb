@@ -7,8 +7,6 @@ class OrderItemsController < ApplicationController
     @order_items = OrderItem.where(order_id: session[:order_id])
   end
 
-
-
   def create
     #if there is already an open order, set the order_item order_id to that order.
     #otherwise make a new order

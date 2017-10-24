@@ -2,7 +2,7 @@
 
   <h3> Shopping Cart </h3>
 
-  <% if @order_items %>
+  <% if @order_items.present? %>
     <%= render partial: "item_summary" %>
 
     <%=link_to "Submit order", edit_order_path(@order_items.first.order_id), class: "cart button"%>
