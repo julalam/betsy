@@ -49,14 +49,34 @@
         1,
         null
       ],
-      "/Users/iuliiachikulaeva/Documents/Ada/cohort_8/Week_11/betsy/app/models/order.rb": [
+      "/Users/iuliiachikulaeva/Documents/Ada/cohort_8/Week_11/betsy/app/models/product.rb": [
         1,
         null,
         1,
+        1,
+        1,
+        1,
+        1,
         null,
+        1,
+        1,
         1,
         null,
         null,
+        1,
+        5,
+        null,
+        null,
+        1,
+        6,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        0,
         null,
         null,
         null
@@ -106,34 +126,14 @@
         null,
         null
       ],
-      "/Users/iuliiachikulaeva/Documents/Ada/cohort_8/Week_11/betsy/app/models/product.rb": [
+      "/Users/iuliiachikulaeva/Documents/Ada/cohort_8/Week_11/betsy/app/models/order.rb": [
         1,
         null,
         1,
-        1,
-        1,
-        1,
-        1,
         null,
-        1,
-        1,
         1,
         null,
         null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
         null,
         null,
         null
@@ -604,6 +604,6 @@
         0
       ]
     },
-    "timestamp": 1508818810
+    "timestamp": 1508861733
   }
 }

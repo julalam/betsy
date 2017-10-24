@@ -31,6 +31,13 @@ describe Product do
         review.must_be_kind_of Review
       end
     end
+
+    it "has many orders" do
+      @product.must_respond_to :orders
+      @product.orders.each do |order|
+        order.must_be_kind_of Order
+      end
+    end
   end
 
   describe "validations" do

@@ -14,18 +14,18 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-10-23T21:20:10-07:00">2017-10-23T21:20:10-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-10-24T09:15:33-07:00">2017-10-24T09:15:33-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">10.4%</span></span>
+    (<span class="covered_percent"><span class="red">11.14%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.1
+         0.13
        </span>
     </span> hits/line)
   </h2>
@@ -33,8 +33,8 @@
   <div>
     <b>27</b> files in total.
     <b>404</b> relevant lines. 
-    <span class="green"><b>42</b> lines covered</span> and
-    <span class="red"><b>362</b> lines missed </span>
+    <span class="green"><b>45</b> lines covered</span> and
+    <span class="red"><b>359</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -302,12 +302,12 @@
       
       <tr>
         <td class="strong"><a href="#771dc42d1dd05c2273a5183f45fb63df8a3220b5" class="src_link" title="app/models/product.rb">app/models/product.rb</a></td>
-        <td class="red strong">76.47 %</td>
+        <td class="green strong">94.12 %</td>
         <td>30</td>
         <td>17</td>
-        <td>13</td>
-        <td>4</td>
-        <td>0.8</td>
+        <td>16</td>
+        <td>1</td>
+        <td>1.5</td>
       </tr>
       
       <tr>
@@ -503,11 +503,11 @@
           <div class="file_list_container" id="Models">
   <h2>
     <span class="group_name">Models</span>
-    (<span class="covered_percent"><span class="red">76.74%</span></span>
+    (<span class="covered_percent"><span class="yellow">83.72%</span></span>
      covered at
      <span class="covered_strength">
-       <span class="red">
-         0.78
+       <span class="green">
+         1.06
        </span>
     </span> hits/line)
   </h2>
@@ -515,8 +515,8 @@
   <div>
     <b>7</b> files in total.
     <b>43</b> relevant lines. 
-    <span class="green"><b>33</b> lines covered</span> and
-    <span class="red"><b>10</b> lines missed </span>
+    <span class="green"><b>36</b> lines covered</span> and
+    <span class="red"><b>7</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -584,12 +584,12 @@
       
       <tr>
         <td class="strong"><a href="#771dc42d1dd05c2273a5183f45fb63df8a3220b5" class="src_link" title="app/models/product.rb">app/models/product.rb</a></td>
-        <td class="red strong">76.47 %</td>
+        <td class="green strong">94.12 %</td>
         <td>30</td>
         <td>17</td>
-        <td>13</td>
-        <td>4</td>
-        <td>0.8</td>
+        <td>16</td>
+        <td>1</td>
+        <td>1.5</td>
       </tr>
       
       <tr>
@@ -4403,11 +4403,11 @@
         <div class="source_table" id="771dc42d1dd05c2273a5183f45fb63df8a3220b5">
   <div class="header">
     <h3>app/models/product.rb</h3>
-    <h4><span class="red">76.47 %</span> covered</h4>
+    <h4><span class="green">94.12 %</span> covered</h4>
     <div>
       <b>17</b> relevant lines. 
-      <span class="green"><b>13</b> lines covered</span> and
-      <span class="red"><b>4</b> lines missed.</span>
+      <span class="green"><b>16</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
   
@@ -4498,8 +4498,8 @@
           <code class="ruby">  def self.random_products(number)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="15">
-          
+        <li class="covered" data-hits="5" data-linenumber="15">
+          <span class="hits">5</span>
           
           <code class="ruby">    return Product.all.sample(number)</code>
         </li>
@@ -4522,8 +4522,8 @@
           <code class="ruby">  def self.new_products(number)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="19">
-          
+        <li class="covered" data-hits="6" data-linenumber="19">
+          <span class="hits">6</span>
           
           <code class="ruby">    return Product.all.order(:created_at).reverse.first(5)</code>
         </li>
@@ -4546,8 +4546,8 @@
           <code class="ruby">  def average_rating</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="23">
-          
+        <li class="covered" data-hits="2" data-linenumber="23">
+          <span class="hits">2</span>
           
           <code class="ruby">    return reviews.average(:rating).to_i</code>
         </li>
