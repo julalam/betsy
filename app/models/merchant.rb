@@ -31,5 +31,15 @@ class Merchant < ApplicationRecord
     return sum
   end
 
+  def order_items_by_status(status)
+    order_items = self.order_items.find_all { |order_item| order_item.order.status == status }
+    return order_items
+  end
+
+  def self.number_of_items_sold(collection)
+    sum = 0
+    result = collection.each { |order_item| sum += order_item.quantity }
+    return sum
+  end
 
 end
