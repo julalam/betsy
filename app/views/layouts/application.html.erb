@@ -40,7 +40,7 @@
         </div>
         <% if session[:merchant_id] &&  Merchant.find_by(id: session[:merchant_id]) %>
           <div class="float-right">
-          <%= link_to " #{Merchant.find(session[:merchant_id]).username}'s Account",merchant_path(session[:merchant_id]),class:"button"  %>
+          <%= link_to " #{Merchant.find(session[:merchant_id]).username}'s account",merchant_path(session[:merchant_id]),class:"button"  %>
           <%= link_to "log out", logout_path, class: "button" %></div>
         <% else %>
           <%= link_to "login", '/auth/github', class: "button float-right" %>
