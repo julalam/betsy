@@ -5,12 +5,16 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1
+  # id: 1
   product_id: 1
   order_id: 1
   quantity: 3
-  
+
 # column: value
 #
-two: {}
+two:
+  # id: 2
+  product_id: 2
+  order_id: 1
+  quantity: 3
 # column: value

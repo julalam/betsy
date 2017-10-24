@@ -2,9 +2,19 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
-  # Make a method for this and put it in _orderitem_summary
-  def self.total_cost(order_item)
-    result = order_item.quantity * order_item.product.price
-    return result
+
+
+  def self.total_cost(collection)
+    total = 0
+    if collection[0].nil?
+      total += collection.quantity * collection.product.price
+    else
+      collection.each do |order_item|
+        total += order_item.quantity * order_item.product.price
+      end
+    end
+    return total
   end
+
+
 end
