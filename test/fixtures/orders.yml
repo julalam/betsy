@@ -25,5 +25,5 @@ two:
   cc_expiration: '2222-22-22'
   cc_ccv: '222'
   zip_code: '22222'
-  
+
 # column: value
