@@ -6,15 +6,11 @@ class Order < ApplicationRecord
 
   def self.total_cost_order
     total = 0
-    orders_items = OrderItems.where(order_id: @order.id)
+    order_items = OrderItems.where(order_id: @order.id)
     order_items.each do |order_item|
     total += order_item.quantity * order_item.product.price
   end
     return total
   end
-
-
-
-
 
 end
