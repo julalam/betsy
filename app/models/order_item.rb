@@ -12,23 +12,18 @@ class OrderItem < ApplicationRecord
     return sum
   end
 
-  def self.total_cost(order_item)
+  def self.subtotal(order_item)
     result = order_item.quantity * order_item.product.price
-    if result < 50
-      result += 10
-    end
     return result
   end
 
-
   def self.total_cost(collection)
     total = 0
-    if collection[0].nil?
-      total += collection.quantity * collection.product.price
-    else
-      collection.each do |order_item|
-        total += order_item.quantity * order_item.product.price
-      end
+    collection.each do |order_item|
+      total += subtotal(order_item)
+    end
+    if total < 50
+      total += 10
     end
     return total
   end

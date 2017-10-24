@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-      @product = Product.find(params[:id])
+    @product = Product.find(params[:id])
   end
 
   def show
@@ -47,13 +47,19 @@ class ProductsController < ApplicationController
 
 
   def index
+    if params[:merchant_id]
+      unless allowed_user(params[:merchant_id])
+        return
+      end
+    end
+
     if params[:merchant_id] && params[:category_id]
-      @merchant = Merchant.find_by(id: params[:merchant_id])
-      @category = Category.find_by(id: params[:category_id])
-      @products = @category.products.where(merchant: @merchant)
+        @merchant = Merchant.find_by(id: params[:merchant_id])
+        @category = Category.find_by(id: params[:category_id])
+        @products = @category.products.where(merchant: @merchant)
     elsif params[:category_id]
-      category = Category.find_by(id: params[:category_id])
-      @products = category.products
+        category = Category.find_by(id: params[:category_id])
+        @products = category.products
     elsif params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @products = @merchant.products

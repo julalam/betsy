@@ -15,4 +15,9 @@ module ApplicationHelper
        "five-stars"
     end
   end
+
+  def readable_date(date)
+    ("<span class='date'>" + date.strftime("%b. %d, %Y") + "</span>").html_safe
+  end
+
 end
