@@ -17,3 +17,9 @@ emma:
   email: emma@email.com
   provider: github
   uid: 234
+
+no_orders:
+    username: test
+    email: test@email.com
+    provider: github
+    uid: 345
