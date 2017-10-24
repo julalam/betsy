@@ -1,5 +1,25 @@
 require "test_helper"
 
+describe "relations" do
+  before do
+    @order = orders(:one)
+    # @order = Order.first
+  end
+  it "has many products" do
+    @order.must_respond_to :products
+    @order.products.each do |product|
+      product.must_be_kind_of Product
+    end
+  end
+
+  it "has many order_items" do
+    @order.must_respond_to :order_items
+    @order.order_items.each do |order_item|
+      order_item.must_be_kind_of OrderItem
+    end
+  end
+end
+
 describe Order do
   it "must be invalid" do
     order = Order.new

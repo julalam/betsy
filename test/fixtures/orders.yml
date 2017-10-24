@@ -13,9 +13,8 @@ one:
   cc_expiration: '2020-01-01'
   cc_ccv: '908'
   zip_code: '98101'
+  status: paid
 
-# column: value
-#
 two:
   id: 2,
   customer_name: 'suzie'
@@ -25,5 +24,4 @@ two:
   cc_expiration: '2222-22-22'
   cc_ccv: '222'
   zip_code: '22222'
-  
-# column: value
+  status: paid

@@ -13,8 +13,6 @@ one:
   image_url: http://www.fillmurray.com/
   merchant: eva
 
-# column: value
-#
 two:
     name: product2
     price: 3.0
@@ -95,4 +93,3 @@ ten:
     description: testing2
     image_url: http://www.fillmurray.com/
     merchant: emma
-# column: value

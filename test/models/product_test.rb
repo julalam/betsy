@@ -141,18 +141,55 @@ describe Product do
         new_products.first.created_at.must_be :>, new_products.last.created_at
       end
     end
-  end
 
-  describe "custom methods" do
     describe "average_rating" do
-      it "must return correct average rating for list of reviews" do
-        product = products(:one)
-        ratings = []
-        product.reviews.each do |review|
-          ratings << review.rating
+      before do
+        @product = products(:one)
+        @ratings = []
+        @product.reviews.each do |review|
+          @ratings << review.rating
         end
-        product.average_rating.must_equal ratings.inject{ |sum, el| sum + el } / ratings.length
+      end
+
+      it "must return an integer" do
+        @product.average_rating.must_be_kind_of Integer
+      end
+
+      it "must return correct average rating for list of reviews" do
+        @product.average_rating.must_equal @ratings.inject{ |sum, el| sum + el } / @ratings.length
       end
     end
+
+    # describe "bestseller" do
+    #   before do
+    #     Order.destroy_all
+    #     @product_1 = products(:one)
+    #     @product_2 = products(:two)
+    #     @product_3 = products(:three)
+    #
+    #     customer_data = {
+    #       customer_name: "customer",
+    #       customer_email: "customer@email.com",
+    #       customer_address: "address",
+    #       cc_number: 1234,
+    #       cc_expiration: Date.today,
+    #       cc_ccv: 123,
+    #       zip_code: 12345
+    #     }
+    #
+    #     order_data = {
+    #
+    #     }
+    #   end
+    #
+    #   it "must return an array" do
+    #     @product_1.orders.length = 1
+    #     @product_2.orders.length = 2
+    #     @product_3.orders.length = 3
+    #
+    #     Order.bestseller.must_be_kind_of Array
+    #     Order.bestseller.first.must_be_kind_of Products
+    #   end
+    # end
   end
 end
