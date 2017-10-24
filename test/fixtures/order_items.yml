@@ -4,6 +4,11 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+oi1:
+  quantity: 2
+  product: one
+  order: two
+
 one:
   # id: 1
   product_id: 1
@@ -12,6 +17,11 @@ one:
 
 # column: value
 #
+oi2:
+  quantity: 2
+  product: two
+  order: one
+
 two:
   # id: 2
   product_id: 2

@@ -15,5 +15,21 @@ class Merchant < ApplicationRecord
     return merchant
   end
 
+  def order_items_quantity
+    sum = 0
+    order_items.each do | order_item |
+      sum += order_item.quantity
+    end
+    return sum
+  end
+
+  def order_items_total
+    sum = 0
+    order_items.each do | order_item |
+      sum += order_item.total
+    end
+    return sum
+  end
+
 
 end
