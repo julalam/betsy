@@ -1,5 +1,9 @@
 <div class="product row">
-
+  <% if @product.retired %>
+  <div class="banner">
+    <h5>This product is currently unavailable</h5>
+  </div>
+  <% end %>
   <div class="show-im small-5 columns">
     <%= image_tag(@product.image_url) %>
     <div class="categories">

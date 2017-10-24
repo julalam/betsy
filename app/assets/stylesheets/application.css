@@ -23,6 +23,7 @@
  /*green for text #009933;*/
  /*grey border #cccccc;*/
  /*grey category buttons #a6a6a6;*/
+ /*dark grey for text #666666;*/
 
  /** {
    border: 1px solid red;
@@ -205,6 +206,16 @@
 
  .categories .button {
    background-color: #a6a6a6;
+ }
+
+ .banner {
+   background-color: #ccc;
+ }
+
+ .banner h5 {
+   padding: 1rem;
+   text-align: center;
+   color: #666666;
  }
 
 /*merchant show page*/
