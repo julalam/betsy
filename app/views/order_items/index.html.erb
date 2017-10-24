@@ -1,13 +1,17 @@
-<h1> Shopping Cart </h1>
+<section class="row small-8 columns">
 
-<% if @order_items %>
-<%= render partial: "item_summary" %>
+  <h3> Shopping Cart </h3>
 
-<%=link_to "Submit order", edit_order_path(@order_items.first.order_id), class: "button"%>
+  <% if @order_items %>
+    <%= render partial: "item_summary" %>
 
-<% else  %>
-<p>
-The shopping cart is empty
-</p>
+    <%=link_to "Submit order", edit_order_path(@order_items.first.order_id), class: "button"%>
 
-<%end%>
+  <% else  %>
+    <p>
+    The shopping cart is empty
+    </p>
+
+  <%end%>
+
+</section>
