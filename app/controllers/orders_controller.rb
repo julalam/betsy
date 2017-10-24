@@ -71,8 +71,26 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @order_items = OrderItem.where(order_id: params[:id])
+    if params[:merchant_id]
+      @order = Order.find(params[:id])
+      @order_items = []
+      @order.order_items.each do |order_item|
+        if order_item.merchant == Merchant.find_by(id: params[:merchant_id])
+          @order_items << order_item
+        end
+      end
+      puts "count #{@order_items.count}is empty? #{@order_items.empty?} "
+      if @order_items.empty?
+        puts "is empty true "
+        redirect_to merchant_path(params[:merchant_id]), status: :bad_request
+      else
+        puts "is empty false"
+        render :merchant_order, status: :ok
+      end
+    else
+      @order = Order.find(params[:id])
+      @order_items = OrderItem.where(order_id: params[:id])
+    end
   end
 
   # def cancel

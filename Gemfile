@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-rails'
+
 gem 'foundation-rails', '~> 6.3.1'
 
 gem 'omniauth'
