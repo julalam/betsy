@@ -139,12 +139,6 @@ describe ProductsController do
       must_respond_with :success
     end
 
-<<<<<<< Updated upstream
-    it "returns success and products sorted by category when passed category_id" do
-      category = Category.first
-      get category_products_path(category.id)
-      must_respond_with :success
-=======
 ##I give up for right now
   describe "create" do
     it "creates a product with valid data" do
@@ -207,7 +201,6 @@ describe ProductsController do
 
       must_redirect_to product_path(product)
       Product.find(product.id).name.must_equal product_data[:product][:name]
->>>>>>> Stashed changes
     end
 
     it "returns success and products sorted by merchant when passed merchant_id" do
@@ -223,4 +216,5 @@ describe ProductsController do
       must_respond_with :success
     end
   end
+end
 end
