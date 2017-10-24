@@ -13,17 +13,19 @@ class OrderItemsController < ApplicationController
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
     end
-    #stock logic
+
     @product = Product.find(params[:order_item][:product_id])
+    if retired?
+      return
+    end
+  #stock logic
     if params[:order_item][:quantity].to_i > @product.stock.to_i
       flash[:status] = :failure
       flash[:result_text] = "There is not enough stock. Order a smaller amount"
       #redirect_to order_items_path
     else
-      
+
       if consoldate_order_items(session[:order_id],params[:order_item][:product_id], params[:order_item][:quantity])
-        flash[:status] = :success
-        flash[:message] = "Successfully added products to your cart"
         redirect_to order_items_path
         return
       end
@@ -55,13 +57,10 @@ class OrderItemsController < ApplicationController
     end
 
     @order_item.update_attributes(order_item_params)
-
-    # if save_and_flash(@order_item, "update")
     if @order_item.save
       flash[:status] = :success
       flash[:result_text] = "Successfully updated order item."
       redirect_to order_items_path
-      # redirect_to order_item_path(@order_item.id)
     else
       render :edit, status: :bad_request
     end
@@ -95,6 +94,8 @@ class OrderItemsController < ApplicationController
       if order_item.product_id == product_id
         order_item.quantity += quantity
         order_item.save
+        flash[:status] = :success
+        flash[:message] = "Successfully added products to your cart"
         #eva's guess at what stock logic might be like:
         #if order_item.quantity > order_item.product.stock
         #flash[:status] = :failure
@@ -105,6 +106,14 @@ class OrderItemsController < ApplicationController
       end
     end
     return false # there was not repeat order
+  end
+
+  def retired?
+    if @product.retired == true
+      flash[:status] = :failure
+      flash[:message] = "You can not order a retired item"
+      redirect_to product_path(@product)
+    end
   end
 
   def order_item_params

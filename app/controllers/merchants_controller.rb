@@ -11,7 +11,9 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:id])
-    @products = @merchant.products
+    if allowed_user(@merchant.id)
+      @products = @merchant.products
+    end
   end
 
   def login
@@ -51,4 +53,7 @@ class MerchantsController < ApplicationController
     flash[:message] = "Successfully logged out"
     redirect_to root_path
   end
+
+
+
 end
