@@ -197,6 +197,6 @@ describe Product do
     #     Order.bestseller.must_be_kind_of Array
     #     Order.bestseller.first.must_be_kind_of Products
     #   end
-    # end
+    end
   end
 end
