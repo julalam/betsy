@@ -15,13 +15,14 @@
           <td width="350">
             <ul>
               <li><h5><%= link_to order_item.product.name,   order_items_path(order_item) %></h5><span><%= link_to " by #{order_item.product.merchant.username}" %></span></li>
-              <li><%=link_to "Delete",  order_item_path(order_item),   method: :delete, data: { confirm: 'Are you certain you want to delete this item?' }, class: "cart button"%></li>
+              <li><%=link_to "Delete",  order_item_path(order_item),   method: :delete, data: { confirm: 'Are you certain you want to delete this item?' }, class: "cart button"%>
+              <%= link_to "Continue Shopping", products_path, class: "cart button" %></li>
             </ul></td>
           <td width="200"><%=order_item.product.price%></td>
           <td>
             <%= form_for order_item do |f|%>
             <%= f.select :quantity, (1..order_item.product.stock).to_a   %>
-            <%= f.submit "Update quantity", class: "cart button"%>
+            <%= f.submit "Update quantity", class: "small cart button"%>
             <% end %></td>
         </tr>
         <% end %>
