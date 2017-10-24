@@ -40,7 +40,7 @@
         </div>
         <% if session[:merchant_id] &&  Merchant.find_by(id: session[:merchant_id]) %>
           <div class="float-right">
-          <%= link_to "logged in as #{Merchant.find(session[:merchant_id]).username}",merchant_path(session[:merchant_id]),class:"button"  %>
+          <%= link_to " #{Merchant.find(session[:merchant_id]).username}'s Account",merchant_path(session[:merchant_id]),class:"button"  %>
           <%= link_to "log out", logout_path, class: "button" %></div>
         <% else %>
           <%= link_to "login", '/auth/github', class: "button float-right" %>
@@ -51,12 +51,12 @@
     <main>
       <% if !flash.empty? %>
         <section class="row flash">
-          <% if flash[:notice].present? %>
-          <p><%= flash[:notice] %></p>
+          <% if flash[:message].present? %>
+          <p><%= flash[:message] %></p>
           <% end %>
-          <% if flash[:details].present? %>
+          <% if flash[:messages].present? %>
             <ul>
-              <% flash[:details].each do |field, problems| %>
+              <% flash[:messages].each do |field, problems| %>
                 <% problems.each do |problem| %>
                 <li><strong>
                   <%= field %>:
