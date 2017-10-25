@@ -1,18 +1,24 @@
 <div class="merchant-show row">
 
 <%= render partial: "merchants/nav_aside" %>
-<section class="small-8 columns">
+<section class="small-9 columns">
 <table>
   <thead>
     <tr>
-      <th width="80">Order</th>
-      <th width="200">Date</th>
-      <th width="100">Product</th>
-      <th width="100">Price</th>
-      <th width="100">Quantity</th>
+      <th width="60">Order</th>
+      <th width="130">Date</th>
+      <th width="170">Product</th>
+      <th width="80">Price</th>
+      <th width="50">Quantity</th>
       <th width="100">Subtotal</th>
-      <th width="100">Item Status</th>
-      <th width="100">Order Status</th>
+      <th width="190">Item Status</th>
+      <th width="80" class="dropdown">Order Status
+      <div class="dropdown-content button-group">
+        <% ["all", "paid", "pending"].each do |status| %>
+          <%= link_to status, merchant_orders_path(@merchant.id, status), class: "button", id: "status" %>
+        <% end %>
+      </div>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -26,10 +32,14 @@
       <td><%=format_money(order_item.total)%></td>
       <td>
         <% if order_item.order.status == "paid" && order_item.status == nil %>
-          <%= link_to "Ship", order_item_path(order_item.id, :order_item => {:status => "Shipped" }), method: :patch, class: "button" %>
-          <%= link_to "Cancel", order_item_path(order_item.id, :order_item => {:status => "Cancelled" }), method: :patch, class: "button" %>
+          <%= link_to "Ship", order_item_path(order_item.id, :order_item => {:status => "shipped" }), method: :patch, class: "button" %>
+          <%= link_to "Cancel", order_item_path(order_item.id, :order_item => {:status => "cancelled" }), method: :patch, class: "button" %>
         <% else %>
-          <%=order_item.status%>
+          <% if order_item.status == nil %>
+            <%= "-" %>
+          <% else %>
+            <%=order_item.status%>
+          <% end %>
         <% end %>
       </td>
       <td><%=order_item.order.status%></td>
@@ -39,8 +49,9 @@
     <tr class="total">
       <td colspan="4">total</td>
       <td><%=@merchant.order_items_quantity %></td>
-
       <td><%=format_money(@merchant.order_items_total)%></td>
+      <td></td>
+      <td></td>
     </tr>
   </tbody>
 </table>

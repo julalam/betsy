@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  get 'merchants/:merchant_id/orders/status/:status_id', to: 'orders#index', as: 'merchant_orders'
 
   resources :products
   resources :merchants
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
   root 'main#index'
 
   resources :order_items, only: [:create, :index, :destroy, :update]
-
 
   resources :categories, only: [:create, :index]
 
@@ -36,9 +36,8 @@ Rails.application.routes.draw do
   get '/products/:id/reviews/new', to: 'reviews#new', as: 'new_product_review'
 
   resources :merchants do
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:show]
   end
-
 
   get '/products/merchant/:id', to: 'products#index_by_merchant', as: 'products_merchant'
 
