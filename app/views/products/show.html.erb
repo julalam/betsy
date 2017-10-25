@@ -21,7 +21,7 @@
       <%if @product.retired %>
        <li> <span class="green">No stock for retired products </span></li>
        <% else %>
-        <% if @product.stock != nil %>
+        <% if @product.stock != nil || @product.stock != 0 %>
           <li><span class="green">In Stock</span> (only <%= @product.stock %> left) </li>
         <% else %>
           <li>Out of Stock</li>
