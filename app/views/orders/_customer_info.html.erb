@@ -27,7 +27,7 @@
     <li>
       <strong>Total Cost:</strong>
 <%order_items = @order_items %>
-       <%=OrderItem.total_cost(order_items) %>
+       <%=format_money(OrderItem.total_cost(order_items)) %>
     </li>
 
 </ul>

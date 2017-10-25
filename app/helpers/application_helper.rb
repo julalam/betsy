@@ -20,5 +20,9 @@ module ApplicationHelper
     ("<span class='date'>" + date.strftime("%b. %d, %Y") + "</span>").html_safe
   end
 
+  def format_money(amount)
+    Money.new(amount, "USD").format
+  end
+
   module_function :set_class
 end
