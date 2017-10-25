@@ -37,7 +37,6 @@ class OrderItemsController < ApplicationController
         flash.now[:message] = "Successfully added #{@order_item.product.name} to your cart"
         redirect_to order_items_path
       else
-        raise
         flash[:status] = :failure
         flash.now[:message] = "Could not add #{@order_item.product.name} to your cart"
         redirect_to root_path

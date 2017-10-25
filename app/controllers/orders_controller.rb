@@ -59,7 +59,15 @@ class OrdersController < ApplicationController
       flash[:notification] = 'Order was successfully updated'
       @order.status = "paid"
       @order.save
+      @order_items = OrderItem.where("order_id = #{session[:order_id]}")
+      @order_items.each do |item|
+        @product = Product.find(item.product_id)
+        @product.stock -= item.quantity
+        @product.save
+      end
+      #hawk = 3 cockatoo = 2 flamingo = 1
       session[:order_id] = nil
+
     else
       flash[:failure] = 'Order was not updated'
     end
