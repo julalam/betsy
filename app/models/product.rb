@@ -12,11 +12,13 @@ class Product < ApplicationRecord
 
 
   def self.random_products(number)
-    return Product.all.sample(number)
+    products = Product.where(retired: false)
+    return products.sample(number)
   end
 
   def self.new_products(number)
-    return Product.all.order(:created_at).reverse.first(5)
+    products = Product.where(retired: false)
+    return products.order(:created_at).reverse.first(5)
   end
 
   def average_rating
