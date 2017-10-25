@@ -5,6 +5,7 @@ describe OrderItemsController do
     before do
       @merchant = merchants(:eva)
       login(@merchant)
+      request.env['omniauth.auth'] = OmniAuth.config.mock_auth
     end
 
     describe "new" do
@@ -39,10 +40,10 @@ describe OrderItemsController do
           }
         }
 
-        order.update_attributes(product_data[:order_item])
-        order.must_be :valid?
+        #order.update_attributes(product_data[:order_item])
+        #order.must_be :valid?
 
-        patch order_path(order), params: order_data
+        patch order_item_path(order), params: order_data
         must_redirect_to redirect_back
 
       end
@@ -62,7 +63,27 @@ describe OrderItemsController do
         must_redirect_to order_items_path
       end
 
+      it "creates a new order with the same product" do
+        new_order = OrderItem.new
+        new_order.product_id = 1
+        new_order.order_id = 1
+        new_order.quantity = 1
+        new_order.save
 
+        session[1] = 1
+
+        order_data = {
+          order_item: {
+            order_id: 1,
+            product_id: 1,
+            quantity: 5
+          }
+        }
+
+        post order_items_path, params: order_data
+        result = OrderItem.find(new_order.id)
+        result.quantity.must_equal 5
+      end
     end
 
     describe "destroy" do
@@ -70,6 +91,15 @@ describe OrderItemsController do
         order_item_id = OrderItem.first
 
         delete order_item_path(order_item_id)
+        OrderItem.find(order_item_id.id).must_be_nil
+        must_redirect_to root_path
+      end
+
+      it "fails for a non extant order item ID" do
+        order_item = OrderItem.new()
+
+
+        delete order_item_path(order_item.id)
         OrderItem.find(order_item_id.id).must_be_nil
         must_redirect_to root_path
       end
