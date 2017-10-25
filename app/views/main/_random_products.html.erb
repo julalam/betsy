@@ -3,7 +3,7 @@
     <div class="small-4 columns">
       <%= link_to image_tag(product.image_url), product_path(product) %>
       <%= link_to product.name, product_path(product) %>
-      <%= product.price %>
+      <%= format_money(product.price) %>
     </div>
   <% end %>
-<% end %>  
+<% end %>

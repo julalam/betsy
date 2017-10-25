@@ -20,4 +20,7 @@ module ApplicationHelper
     ("<span class='date'>" + date.strftime("%b. %d, %Y") + "</span>").html_safe
   end
 
+  def format_money(amount)
+    Money.new(amount, "USD").format
+  end
 end

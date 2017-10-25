@@ -7,6 +7,11 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    #if price is entered, change to cents
+    # if params[:product][:price] != ""
+    #   @product.price = (params[:product][:price].to_i * 100)
+    # end
+
     @product[:merchant_id] = session[:merchant_id]
     @product[:retired] = false
     if @product.save
@@ -33,6 +38,11 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     @product.update_attributes(product_params)
+    #if price is entered, change to cents
+    # if params[:product][:price].to_i != @product.price
+    #   @product.price = (params[:product][:price].to_i * 100)
+    # end
+
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully updated #{@product.name}, ID number #{@product.id}"
@@ -84,6 +94,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :stock, :retired, :description, :image_url, category_ids: [])
+    params.require(:product).permit(:name, :stock, :price, :retired, :description, :image_url, category_ids: [])
   end
 end
