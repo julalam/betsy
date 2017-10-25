@@ -1,0 +1,11 @@
+<h1>Order Details: Order <%= @order.id %> </h1>
+
+
+<section>
+<%= render partial: "customer_info" %>
+</section>
+
+<section>
+<h3><strong>Order Summary</strong></h3>
+<%= render partial: "order_items/item_summary" %>
+</section>

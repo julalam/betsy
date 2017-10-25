@@ -23,9 +23,10 @@
     <tbody>
       <% @order_items.each do |order_item| %>
         <tr>
-          <td><h5><%= link_to order_item.product.name,   product_path(order_item.product) %></h5><span><%= link_to " by #{order_item.product.merchant.username}", products_merchant_path(order_item.product.merchant) %></span></td>
+          <td><h5><%= link_to order_item.product.name, product_path(order_item.product) %></h5><span><%= link_to " by #{order_item.product.merchant.username}", products_merchant_path(order_item.product.merchant) %></span></td>
           <td><%= order_item.quantity %></td>
           <td><%= OrderItem.subtotal(order_item) %></td>
+
         </tr>
         <% end %>
     </tbody>
