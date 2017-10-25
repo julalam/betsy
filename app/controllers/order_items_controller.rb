@@ -15,33 +15,35 @@ class OrderItemsController < ApplicationController
     end
 
     @product = Product.find(params[:order_item][:product_id])
-    if retired?
+
+    #This should never happen since all retired
+    #products aren't shown on the products page.
+    #Moreover, if you manually go to a retired product page there's
+    #no option to add stock since the UI is different.
+
+    #if retired?
+    #  return
+    #end
+  #stock logic
+
+
+    if consoldate_order_items(session[:order_id],params[:order_item][:product_id], params[:order_item][:quantity])
+      redirect_to order_items_path
       return
     end
-  #stock logic
-    if params[:order_item][:quantity].to_i > @product.stock.to_i
-      flash[:status] = :failure
-      flash[:result_text] = "There is not enough stock. Order a smaller amount"
-      #redirect_to order_items_path
+
+    @order_item = OrderItem.new(order_item_params)
+    @order_item.order_id = session[:order_id]
+    if @order_item.save
+      flash[:status] = :success
+      flash.now[:message] = "Successfully added #{@order_item.product.name} to your cart"
+      redirect_to order_items_path
     else
-
-      if consoldate_order_items(session[:order_id],params[:order_item][:product_id], params[:order_item][:quantity])
-        redirect_to order_items_path
-        return
-      end
-
-      @order_item = OrderItem.new(order_item_params)
-      @order_item.order_id = session[:order_id]
-      if @order_item.save
-        flash[:status] = :success
-        flash.now[:message] = "Successfully added #{@order_item.product.name} to your cart"
-        redirect_to order_items_path
-      else
-        flash[:status] = :failure
-        flash.now[:message] = "Could not add #{@order_item.product.name} to your cart"
-        redirect_to root_path
-      end
+      flash[:status] = :failure
+      flash.now[:message] = "Could not add #{@order_item.product.name} to your cart"
+      redirect_to root_path
     end
+
   end
 
   def update
@@ -94,7 +96,7 @@ class OrderItemsController < ApplicationController
     quantity = quantity.to_i
     @order_items.each do |order_item|
       if order_item.product_id == product_id
-        order_item.quantity += quantity
+        order_item.quantity = quantity
         order_item.save
         flash[:status] = :success
         flash[:message] = "Successfully added products to your cart"
@@ -110,14 +112,16 @@ class OrderItemsController < ApplicationController
     return false # there was not repeat order
   end
 
+=begin
   def retired?
     if @product.retired == true
+      raise
       flash[:status] = :failure
       flash[:message] = "You can not order a retired item"
       redirect_to product_path(@product)
     end
   end
-
+=end
   def order_item_params
     return params.require(:order_item).permit(:product_id, :quantity, :order_id, :status)
   end

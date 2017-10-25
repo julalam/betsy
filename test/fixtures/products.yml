@@ -93,3 +93,13 @@ ten:
     description: testing2
     image_url: http://www.fillmurray.com/
     merchant: emma
+
+ninty:
+    id: 90
+    name: product90
+    price: 18.0
+    stock: 19
+    retired: true
+    description: testing2
+    image_url: http://www.fillmurray.com/
+    merchant: emma

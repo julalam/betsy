@@ -57,10 +57,12 @@ describe OrderItemsController do
             quantity: 3
           }
         }
-      new_order_item = OrderItem.new(order_data[:order_item])
-      post order_items_path, params: order_data
-      must_redirect_to order_items_path
+        new_order_item = OrderItem.new(order_data[:order_item])
+        post order_items_path, params: order_data
+        must_redirect_to order_items_path
       end
+
+
     end
 
     describe "destroy" do
