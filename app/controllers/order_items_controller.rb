@@ -20,8 +20,8 @@ class OrderItemsController < ApplicationController
     end
     #stock logic
     if params[:order_item][:quantity].to_i > @product.stock.to_i
-      flash[:status] = :failure
-      flash[:result_text] = "There is not enough stock. Order a smaller amount"
+      flash.now[:status] = :failure
+      flash.now[:message] = "There is not enough stock. Order a smaller amount"
       #redirect_to order_items_path
     else
 
@@ -37,7 +37,7 @@ class OrderItemsController < ApplicationController
         flash.now[:message] = "Successfully added #{@order_item.product.name} to your cart"
         redirect_to order_items_path
       else
-        flash[:status] = :failure
+        flash.now[:status] = :failure
         flash.now[:message] = "Could not add #{@order_item.product.name} to your cart"
         redirect_to root_path
       end
@@ -50,15 +50,15 @@ class OrderItemsController < ApplicationController
     @product = Product.find(@order_item.product_id)
 
     if params[:order_item][:quantity].to_i > @product.stock.to_i
-      flash[:status] = :failure
-      flash[:result_text] = "There is not enough stock. Order a smaller amount"
+      flash.now[:status] = :failure
+      flash.now[:message] = "There is not enough stock. Order a smaller amount"
       redirect_to order_items_path
     end
 
     @order_item.update_attributes(order_item_params)
     if @order_item.save
       flash[:status] = :success
-      flash[:result_text] = "Successfully updated order item."
+      flash[:message] = "Successfully updated order item."
       redirect_to order_items_path
     else
       render :edit, status: :bad_request
@@ -97,8 +97,8 @@ class OrderItemsController < ApplicationController
         flash[:message] = "Successfully added products to your cart"
         #if the user requests more items than we have in stock
         if order_item.quantity > order_item.product.stock
-          flash[:status] = :failure
-          flash[:message] = "There are only #{order_item.product.stock} of that items in stock.  The quanitity of #{order_item.product.name}s has been set to the max value."
+          flash.now[:status] = :failure
+          flash.now[:message] = "There are only #{order_item.product.stock} of that items in stock.  The quanitity of #{order_item.product.name}s has been set to the max value."
           order_item.quantity = order_item.product.stock
           order_item.save
           puts order_item.quantity
@@ -111,8 +111,8 @@ class OrderItemsController < ApplicationController
 
   def retired?
     if @product.retired == true
-      flash[:status] = :failure
-      flash[:message] = "You can not order a retired item"
+      flash.now[:status] = :failure
+      flash.now[:message] = "You can not order a retired item"
       redirect_to product_path(@product)
     end
   end

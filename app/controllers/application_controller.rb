@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     @merchant = Merchant.find_by(id: session[:merchant_id])
     unless @merchant
       flash[:status] = :failure
-      flash[:notice] = "You must be logged in to do that"
+      flash[:message] = "You must be logged in to do that"
       redirect_to root_path
     end
   end

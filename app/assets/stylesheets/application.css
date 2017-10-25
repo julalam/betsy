@@ -24,7 +24,7 @@
  /*grey border #cccccc;*/
  /*grey category buttons #a6a6a6;*/
  /*dark grey for text #666666;*/
- /*very light grey status button #f2f2f2;*/
+ /*very light grey status button, flash #f2f2f2;*/
 
  /** {
    border: 1px solid red;
@@ -49,6 +49,14 @@
    margin: .5rem .1rem;
    background-color: #ffd24d;
    font-weight: bold;
+ }
+
+ .flash {
+   background-color: #f2f2f2;
+ }
+
+ .flash p {
+   margin: 1rem;
  }
 
  /*drop down menu*/
