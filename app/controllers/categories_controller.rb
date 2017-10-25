@@ -21,16 +21,16 @@ class CategoriesController < ApplicationController
 
     if Category.all.find_by(name: @category.name)
       flash[:status] = :failure
-      flash[:notice] = "Category already exist"
+      flash[:message] = "Category already exist"
       redirect_to new_merchant_category_path(@merchant.id)
     elsif @category.save
       flash[:status] = :success
-      flash[:notice] = "Successfully created category: #{@category.name}"
+      flash[:message] = "Successfully created category: #{@category.name}"
       redirect_to merchant_categories_path(@merchant.id)
     else
       flash[:status] = :failure
-      flash[:notice] = "Could not create category"
-      flash[:details] = @category.errors.messages
+      flash[:message] = "Could not create category"
+      flash[:messages] = @category.errors.messages
       redirect_to new_merchant_category_path(@merchant.id)
     end
   end

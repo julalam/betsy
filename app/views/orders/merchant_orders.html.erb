@@ -46,12 +46,18 @@
     </tr>
 
     <% end %>
-    <tr class="total">
-      <td colspan="4">total</td>
-      <td><%=@merchant.order_items_quantity %></td>
-      <td><%=format_money(@merchant.order_items_total)%></td>
-      <td colspan="2"></td>
-    </tr>
+    <% if @order_items.present? %>
+        <tr class="total">
+          <td colspan="4">total</td>
+          <td><%=@merchant.order_items_quantity %></td>
+          <td><%=format_money(@merchant.order_items_total)%></td>
+          <td colspan="2"></td>
+        </tr>
+    <% else %>
+        <tr>
+          <td colspan="8">no orders in this category</td>
+        </tr>
+    <% end %>
   </tbody>
 </table>
 </section>

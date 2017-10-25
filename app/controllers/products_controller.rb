@@ -16,12 +16,12 @@ class ProductsController < ApplicationController
     @product[:retired] = false
     if @product.save
       flash[:status] = :success
-      flash[:result_text] = "Successfully created #{@product.name}, ID number #{@product.id}"
+      flash[:message] = "Successfully created new product #{@product.name}, ID number #{@product.id}"
       redirect_to merchant_products_path(session[:merchant_id])
     else
-      flash[:status] = :failure
-      flash[:result_text] = "Could not create #{@product.name}, ID number #{@product.id}"
-      flash[:messages] = @product.errors.messages
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not create new product #{@product.name}"
+      flash.now[:messages] = @product.errors.messages
       render :new, status: :bad_request
     end
   end
@@ -45,12 +45,12 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:status] = :success
-      flash[:result_text] = "Successfully updated #{@product.name}, ID number #{@product.id}"
+      flash[:message] = "Successfully updated #{@product.name}, ID number #{@product.id}"
       redirect_to merchant_products_path(session[:merchant_id])
     else
-      flash[:status] = :failure
-      flash[:result_text] = "Could not updated #{@product.name}, ID number #{@product.id}"
-      flash[:messages] = @product.errors.messages
+      flash.now[:status] = :failure
+      flash.now[:message] = "Could not updated #{@product.name}, ID number #{@product.id}"
+      flash.now[:messages] = @product.errors.messages
       render :new, status: :bad_request
     end
   end
