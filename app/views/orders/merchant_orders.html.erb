@@ -12,10 +12,10 @@
       <th width="50">Quantity</th>
       <th width="100">Subtotal</th>
       <th width="190">Item Status</th>
-      <th class="dropdown">Order Status
-      <div class="dropdown-content">
+      <th width="80" class="dropdown">Order Status
+      <div class="dropdown-content button-group">
         <% ["all", "paid", "pending"].each do |status| %>
-          <%= link_to status, merchant_orders_path(@merchant.id, status), class:"button" %>
+          <%= link_to status, merchant_orders_path(@merchant.id, status), class: "button", id: "status" %>
         <% end %>
       </div>
       </th>

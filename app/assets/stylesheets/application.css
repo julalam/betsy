@@ -24,6 +24,7 @@
  /*grey border #cccccc;*/
  /*grey category buttons #a6a6a6;*/
  /*dark grey for text #666666;*/
+ /*very light grey status button #f2f2f2;*/
 
  /** {
    border: 1px solid red;
@@ -266,29 +267,35 @@
   height: 40.469px;
 }
 
+ #status {
+  background-color: #f2f2f2;
+  color: #000;
+  width: 80px;
+}
+
 /*reviews*/
 /*stars*/
-.zero-stars, .zero-stars a{
+.zero-stars, .zero-stars a {
   color: lightgrey;
 }
 
-.one-star, .one-star a{
+.one-star, .one-star a {
   color: #cc0000;
 }
 
-.two-stars, .two-stars a{
+.two-stars, .two-stars a {
   color: #ff8533;
 }
 
-.three-stars, .three-stars a{
+.three-stars, .three-stars a {
   color: #ffcc00;
 }
 
-.four-stars, .four-stars a{
+.four-stars, .four-stars a {
   color: #99db70;
 }
 
-.five-stars, .five-stars a{
+.five-stars, .five-stars a {
   color: #33AC33;
 }
 
