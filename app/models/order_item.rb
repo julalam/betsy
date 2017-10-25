@@ -26,8 +26,8 @@ class OrderItem < ApplicationRecord
     collection.each do |order_item|
       total += subtotal(order_item)
     end
-    if total < 50
-      total += 10
+    if total < 5000
+      total += 1000
     end
     return total
   end
