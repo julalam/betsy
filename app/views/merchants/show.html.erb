@@ -1,7 +1,32 @@
 <div class="merchant-show row">
   <%= render partial: "nav_aside" %>
   <section class="small-8 columns">
-    <h4>Revenue Summary</h4>
-    <p>bla bla bla</p>
+    <h3>Revenue Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Order Count</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ["paid", "pending"].each do |type| %>
+          <% order_items = @merchant.order_items_by_status(type) %>
+          <% if order_items.present? %>
+            <tr>
+              <td><%= "#{type}" %></td>
+              <td><%= @merchant.orders.where(status: type).uniq.count %></td>
+              <td><%= Merchant.revenue_by_status(order_items) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <tr>
+          <th>Total</th>
+          <th><%= @merchant.orders.uniq.count %></th>
+          <th><%= @merchant.order_items_total %></th>
+        </tr>
+      </tbody>
+    </table>
   </section>
 </div>
