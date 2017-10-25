@@ -31,9 +31,7 @@ describe OrderItemsController do
         must_redirect_to order_items_path
       end
     end
-  end
-end
-=begin
+
     describe "index" do
       it "succeeds when there are order items" do
         get order_items_path
@@ -86,4 +84,7 @@ end
         must_redirect_to root_path
       end
     end
-=end
+
+
+  end
+end
