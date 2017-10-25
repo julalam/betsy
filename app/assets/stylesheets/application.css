@@ -181,6 +181,9 @@
    list-style-type: none;
  }
 
+.product {
+  margin-top: 1rem;
+}
 
  footer {
    height: 5rem;
@@ -193,10 +196,6 @@
 
  footer p {
    padding: 2rem;
- }
-
- main {
-   margin-top: 1rem;
  }
 
  .categories a {
@@ -251,6 +250,10 @@
 
 .merchant-show .total td:first-child {
   text-align: left;
+}
+
+.merchant-show {
+  margin-top: 1rem;
 }
 
 #merchant {
@@ -323,4 +326,8 @@
 
 .shopping-cart h5 {
   display: inline-block;
+}
+
+.products {
+  margin-top: 1rem;
 }
