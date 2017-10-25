@@ -6,6 +6,8 @@ class Merchant < ApplicationRecord
 
   validates :provider, presence: true
   validates :uid, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
 
   def self.from_auth_hash(provider, auth_hash)
