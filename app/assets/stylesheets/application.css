@@ -316,10 +316,6 @@
   list-style-type: none;
 }
 
-/*.shopping-cart tr {
-  background-color: #fff;
-}*/
-
 .shopping-cart td, .shopping-cart th {
   border-bottom: 1px solid #cccccc;
 }

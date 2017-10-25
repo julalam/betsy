@@ -28,6 +28,10 @@
           <td><%= format_money(OrderItem.subtotal(order_item)) %></td>
         </tr>
         <% end %>
+        <tr>
+          <td colspan="2"></td>
+          <th><%= format_money(OrderItem.total_cost(@order_items)) %></td>
+        </tr>
     </tbody>
   </table>
 
