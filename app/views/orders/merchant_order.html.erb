@@ -1,11 +1,13 @@
-<h1>Order Details: Order <%= @order.id %> </h1>
+<section class="row">
+  <h3>Order Details: Order <%= @order.id %> </h3>
 
+  <section class="small-4 columns">
+    <%= render partial: "customer_info" %>
+  </section>
 
-<section>
-<%= render partial: "customer_info" %>
-</section>
+  <section class="small-8 columns">
+    <h4>Order Summary</h4>
+    <%= render partial: "order_summary.html.erb" %>
+  </section>
 
-<section>
-<h3><strong>Order Summary</strong></h3>
-<%= render partial: "order_items/item_summary" %>
 </section>
