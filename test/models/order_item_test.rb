@@ -27,11 +27,9 @@ describe OrderItem do
       order_items(:oi1).merchant.must_equal merchants(:eva)
     end
 
-end
+  end
 
   describe "validations" do
-
-
     it "can be created with all required fields (including a positive integer for quantity)" do
       o = OrderItem.new(quantity: 3, order: orders(:one), product: products(:one))
       o.must_be :valid?
@@ -67,43 +65,33 @@ end
     end
   end
 
-  # custom methods
-  describe "subtotal and total_cost" do
+  describe "custom methods" do
     before do
       @order_item = OrderItem.new(quantity: 3, order: orders(:one), product: products(:one))
       @other_order_item = OrderItem.new(quantity: 2, order: orders(:one), product: products(:two))
     end
 
-    it "returns the right subtotal" do
-      OrderItem.subtotal(@order_item).must_equal @order_item.quantity * @order_item.product.price
-    end
-
-    it "returns the right total cost" do
-      total = OrderItem.total_cost([@order_item, @other_order_item])
-      if total < 50
-        total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price + 10
-      else
-        total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price
+    describe "subtotal" do
+      it "returns the right subtotal" do
+        OrderItem.subtotal(@order_item).must_equal @order_item.quantity * @order_item.product.price
       end
     end
 
     describe "total cost" do
-      let(:order_item_1){ OrderItem.create!(product_id: products(:one).id, order_id: orders(:one).id, quantity: 3)}
-
-      let(:order_item_2){ OrderItem.create!(product_id: products(:two).id, order_id: orders(:one).id, quantity: 3)}
-
-      it "given one order_item, returns the cost of that order_item" do
-        OrderItem.total_cost(order_item_1).must_equal 6
+      it "returns the right total cost" do
+        total = OrderItem.total_cost([@order_item, @other_order_item])
+        if total < 50
+          total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price + 10
+        else
+          total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price
+        end
       end
+    end
 
-      it "given a collection of order_items, returns the cost of those items" do
-        OrderItem.destroy_all
-        order_item_1
-        order_item_2
-        order_items = OrderItem.all
-        OrderItem.total_cost(order_items).must_equal 15
+    describe "total" do
+      it "returns the cost of an order_item" do
+        @order_item.total.must_equal @order_item.quantity * @order_item.product.price
       end
     end
   end
-
 end
