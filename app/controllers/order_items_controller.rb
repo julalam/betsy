@@ -60,7 +60,10 @@ class OrderItemsController < ApplicationController
     if @order_item.save
       flash[:status] = :success
       flash[:result_text] = "Successfully updated order item."
-      redirect_to order_items_path
+      # redirect_to order_items_path
+      # redirect_to order_item_path(@order_item.id)
+      redirect_back fallback_location: { action: "index"}
+
     else
       render :edit, status: :bad_request
     end

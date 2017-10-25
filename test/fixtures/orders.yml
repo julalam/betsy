@@ -5,7 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  id: 1,
   customer_name: 'sue'
   customer_email: 'sue@gmail.com'
   customer_address: '420 blaze ave'
@@ -16,7 +15,6 @@ one:
   status: paid
 
 two:
-  id: 2,
   customer_name: 'suzie'
   customer_email: 'suzie@gmail.com'
   customer_address: '123 internet ave'
