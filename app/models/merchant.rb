@@ -37,9 +37,11 @@ class Merchant < ApplicationRecord
   end
 
   def self.number_of_items_sold(collection)
-    sum = 0
-    result = collection.each { |order_item| sum += order_item.quantity }
-    return sum
+    return collection.inject(0) { |sum, order_item| sum + order_item.quantity }
+  end
+
+  def self.revenue_by_status(collection)
+    return collection.inject(0) { |sum, order_item| sum + order_item.total }
   end
 
 end
