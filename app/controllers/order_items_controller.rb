@@ -59,7 +59,8 @@ class OrderItemsController < ApplicationController
     if @order_item.save
       flash[:status] = :success
       flash[:message] = "Successfully updated order item"
-      redirect_to order_items_path
+      redirect_back(fallback_location: order_items_path)
+
     else
       flash[:status] = :failure
       flash[:message] = "Failed to update order item"
