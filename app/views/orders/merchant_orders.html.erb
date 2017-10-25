@@ -35,7 +35,11 @@
           <%= link_to "Ship", order_item_path(order_item.id, :order_item => {:status => "shipped" }), method: :patch, class: "button" %>
           <%= link_to "Cancel", order_item_path(order_item.id, :order_item => {:status => "cancelled" }), method: :patch, class: "button" %>
         <% else %>
-          <%=order_item.status%>
+          <% if order_item.status == nil %>
+            <%= "-" %>
+          <% else %>
+            <%=order_item.status%>
+          <% end %>  
         <% end %>
       </td>
       <td><%=order_item.order.status%></td>
@@ -45,8 +49,9 @@
     <tr class="total">
       <td colspan="4">total</td>
       <td><%=@merchant.order_items_quantity %></td>
-
       <td><%=@merchant.order_items_total%></td>
+      <td></td>
+      <td></td>
     </tr>
   </tbody>
 </table>
