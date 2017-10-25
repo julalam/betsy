@@ -27,9 +27,9 @@
       <td><%=link_to order_item.order_id, merchant_order_path(@merchant.id, order_item.order_id)%></td>
       <td><%=readable_date(order_item.created_at)%></td>
       <td><%=link_to order_item.product.name, product_path(order_item.product_id)%></td>
-      <td><%=order_item.product.price%></td>
+      <td><%=format_money(order_item.product.price)%></td>
       <td><%=order_item.quantity%></td>
-      <td><%=order_item.total%></td>
+      <td><%=format_money(order_item.total)%></td>
       <td>
         <% if order_item.order.status == "paid" && order_item.status == nil %>
           <%= link_to "Ship", order_item_path(order_item.id, :order_item => {:status => "shipped" }), method: :patch, class: "button" %>
@@ -39,7 +39,7 @@
             <%= "-" %>
           <% else %>
             <%=order_item.status%>
-          <% end %>  
+          <% end %>
         <% end %>
       </td>
       <td><%=order_item.order.status%></td>
@@ -49,7 +49,7 @@
     <tr class="total">
       <td colspan="4">total</td>
       <td><%=@merchant.order_items_quantity %></td>
-      <td><%=@merchant.order_items_total%></td>
+      <td><%=format_money(@merchant.order_items_total)%></td>
       <td></td>
       <td></td>
     </tr>

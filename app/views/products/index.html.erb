@@ -5,7 +5,7 @@
     <article class="column">
       <%= link_to (image_tag(product.image_url)), product_path(product) %>
       <p><%= link_to product.name, product_path(product) %>
-      <%= product.price %></p>
+      <%= format_money(product.price) %></p>
     </article>
     <% end %>
 </section>

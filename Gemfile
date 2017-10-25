@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-rails'
 
+gem 'money'
+
+
 gem 'foundation-rails', '~> 6.3.1'
 
 gem 'omniauth'

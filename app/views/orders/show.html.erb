@@ -3,7 +3,7 @@
   <p>Congratulations on submitting your order!</p>
 
   <section class="small-4 columns">
-    <p>Total Cost: <%= OrderItem.total_cost(@order_items) %></p>
+    <p>Total Cost: <%= format_money(OrderItem.total_cost(@order_items)) %></p>
     <p>
       Order Placed: <%=readable_date(@order.created_at) %>
     </p>
@@ -25,8 +25,7 @@
         <tr>
           <td><h5><%= link_to order_item.product.name, product_path(order_item.product) %></h5><span><%= link_to " by #{order_item.product.merchant.username}", products_merchant_path(order_item.product.merchant) %></span></td>
           <td><%= order_item.quantity %></td>
-          <td><%= OrderItem.subtotal(order_item) %></td>
-
+          <td><%= format_money(OrderItem.subtotal(order_item)) %></td>
         </tr>
         <% end %>
     </tbody>

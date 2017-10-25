@@ -17,7 +17,11 @@ module ApplicationHelper
   end
 
   def readable_date(date)
-    ("<span class='date'>" + date.strftime("%b. %d, %Y") + "</span>").html_safe
+    ("<span class='date'>" + date.strftime("%b. %d, %Y %I:%M %p (%Z)") + "</span>").html_safe
+  end
+
+  def format_money(amount)
+    Money.new(amount, "USD").format
   end
 
   module_function :set_class
