@@ -16,9 +16,8 @@
           <% if order_items.present? %>
             <tr>
               <td><%= "#{type}" %></td>
-              <!-- <td><%= Merchant.number_of_items_sold(order_items) %></td> -->
-              <td><%= order_items.count %></td>
-              <td><%= Merchant.revenue_by_status(order_items) %></td>
+              <td><%#= Merchant.number_of_items_sold(order_items) %></td>
+              <td><%#= Merchant.revenue_by_status(order_items) %></td>
             </tr>
           <% end %>
         <% end %>
