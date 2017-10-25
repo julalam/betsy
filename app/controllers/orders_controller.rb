@@ -38,13 +38,14 @@ class OrdersController < ApplicationController
         cc_ccv: params[:order][:cc_ccv],
         zip_code: params[:order][:zip_code],
       )
-      result = @order.save
 
-      if result
-        flash[:success] = 'Your order has been placed'
+      if @order.save
+        flash[:status] = :success
+        flash[:message] = "Your order has been placed"
         redirect_to orders_path
       else
-        flash[:failure] = 'Something went wrong. Please place your order again'
+        flash[:status] = :failure
+        flash[:message] = "Something went wrong. Please place your order again"
         redirect_to orders_path
       end
     end
@@ -63,7 +64,8 @@ class OrdersController < ApplicationController
     @order.zip_code = params[:order][:zip_code]
 
     if @order.save!
-      flash[:notification] = 'Order was successfully updated'
+      flash[:status] = :success
+      flash[:message] = "Your order has been placed"
       @order.status = "paid"
       @order.save
       @order_items = OrderItem.where("order_id = #{session[:order_id]}")
@@ -76,7 +78,9 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
 
     else
-      flash[:failure] = 'Order was not updated'
+      flash[:status] = :failure
+      # flash[:message] = "Order was not updated"
+      flash[:message] = "Something went wrong. Please place your order again"
     end
     redirect_to order_path(@order.id)
   end

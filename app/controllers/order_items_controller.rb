@@ -34,11 +34,11 @@ class OrderItemsController < ApplicationController
       @order_item.order_id = session[:order_id]
       if @order_item.save
         flash[:status] = :success
-        flash.now[:message] = "Successfully added #{@order_item.product.name} to your cart"
+        flash[:message] = "Successfully added #{@order_item.product.name} to your cart"
         redirect_to order_items_path
       else
-        flash.now[:status] = :failure
-        flash.now[:message] = "Could not add #{@order_item.product.name} to your cart"
+        flash[:status] = :failure
+        flash[:message] = "Could not add #{@order_item.product.name} to your cart"
         redirect_to root_path
       end
     end
@@ -50,35 +50,35 @@ class OrderItemsController < ApplicationController
     @product = Product.find(@order_item.product_id)
 
     if params[:order_item][:quantity].to_i > @product.stock.to_i
-      flash.now[:status] = :failure
-      flash.now[:message] = "There is not enough stock. Order a smaller amount"
+      flash[:status] = :failure
+      flash[:message] = "There is not enough stock. Order a smaller amount"
       redirect_to order_items_path
     end
 
     @order_item.update_attributes(order_item_params)
     if @order_item.save
       flash[:status] = :success
-      flash[:message] = "Successfully updated order item."
+      flash[:message] = "Successfully updated order item"
       redirect_to order_items_path
     else
+      flash[:status] = :failure
+      flash[:message] = "Failed to update order item"
       render :edit, status: :bad_request
     end
   end
-
 
   def destroy
     @order_item = OrderItem.find(params[:id])
     @product = Product.find(@order_item.product_id)
     @product.stock += @order_item.quantity
     @product.save
-    # result = @order_item.destroy
     if @order_item.destroy
-      flash.now[:status] = :success
-      flash.now[:message] = "Successfully removed #{@order_item.product.name} from your cart"
+      flash[:status] = :success
+      flash[:message] = "Successfully removed #{@order_item.product.name} from your cart"
       redirect_to order_items_path
     else
-      flash.now[:status] = :failure
-      flash.now[:message] = "Problem encountered when attempting to remove #{@order_item.product.name} from your cart"
+      flash[:status] = :failure
+      flash[:message] = "Problem encountered when attempting to remove #{@order_item.product.name} from your cart"
       redirect_to order_items_path
     end
   end
@@ -97,8 +97,8 @@ class OrderItemsController < ApplicationController
         flash[:message] = "Successfully added products to your cart"
         #if the user requests more items than we have in stock
         if order_item.quantity > order_item.product.stock
-          flash.now[:status] = :failure
-          flash.now[:message] = "There are only #{order_item.product.stock} of that items in stock.  The quanitity of #{order_item.product.name}s has been set to the max value."
+          flash[:status] = :failure
+          flash[:message] = "There are only #{order_item.product.stock} of that items in stock.  The quanitity of #{order_item.product.name}s has been set to the max value."
           order_item.quantity = order_item.product.stock
           order_item.save
           puts order_item.quantity
@@ -111,8 +111,8 @@ class OrderItemsController < ApplicationController
 
   def retired?
     if @product.retired == true
-      flash.now[:status] = :failure
-      flash.now[:message] = "You can not order a retired item"
+      flash[:status] = :failure
+      flash[:message] = "You can not order a retired item"
       redirect_to product_path(@product)
     end
   end
