@@ -12,12 +12,13 @@
       </thead>
       <tbody>
         <% ["paid", "pending"].each do |type| %>
-          <% order_items = Merchant.find_by(params[:merchant_id]).order_items_by_status(type) %>
+          <% merchant = Merchant.find_by(id: session[:merchant_id]) %>
+          <% order_items = merchant.order_items_by_status(type) %>
           <% if order_items.present? %>
             <tr>
               <td><%= "#{type}" %></td>
-              <td><%#= Merchant.number_of_items_sold(order_items) %></td>
-              <td><%#= Merchant.revenue_by_status(order_items) %></td>
+              <td><%= merchant.orders.where(status: type).uniq.count %></td>
+              <td><%= Merchant.revenue_by_status(order_items) %></td>
             </tr>
           <% end %>
         <% end %>
