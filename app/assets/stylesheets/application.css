@@ -61,7 +61,9 @@
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
+    /*display: block;*/
     position: absolute;
+    right: 0;
     min-width: 100%;
     z-index: 100;
 }

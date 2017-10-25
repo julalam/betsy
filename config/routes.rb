@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   resources :order_items, only: [:create, :index, :destroy, :update]
 
-
   resources :categories, only: [:create, :index]
 
   # nested routes
