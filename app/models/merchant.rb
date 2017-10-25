@@ -4,6 +4,9 @@ class Merchant < ApplicationRecord
   has_many :orders, through: :products
   # has_many :orders, :through => :products
 
+  validates :provider, presence: true
+  validates :uid, presence: true, uniqueness: true
+
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
@@ -31,5 +34,13 @@ class Merchant < ApplicationRecord
     return sum
   end
 
+  def order_items_by_status(status)
+    order_items = self.order_items.find_all { |order_item| order_item.order.status == status }
+    return order_items
+  end
+
+  def self.revenue_by_status(collection)
+    return collection.inject(0) { |sum, order_item| sum + order_item.total }
+  end
 
 end

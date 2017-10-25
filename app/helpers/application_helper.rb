@@ -23,4 +23,6 @@ module ApplicationHelper
   def format_money(amount)
     Money.new(amount, "USD").format
   end
+
+  module_function :set_class
 end
