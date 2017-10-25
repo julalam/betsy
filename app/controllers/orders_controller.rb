@@ -3,9 +3,24 @@ class OrdersController < ApplicationController
   skip_before_action :require_login
 
   def index
+    # if params[:merchant_id]
+    #   @merchant = Merchant.find_by(id: params[:merchant_id])
+    #   @order_items = @merchant.order_items
+    #   render :merchant_orders
+    # else
+    #   @orders = Order.all
+    # end
+
     if params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
-      @order_items = @merchant.order_items
+      if params[:status_id] == "paid"
+        @order_items = @merchant.order_items_by_status("paid")
+      elsif params[:status_id] == "pending"
+        @order_items = @merchant.order_items_by_status("pending")
+      else
+        params[:status_id] == "all"
+        @order_items = @merchant.order_items
+      end
       render :merchant_orders
     else
       @orders = Order.all
