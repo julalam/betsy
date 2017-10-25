@@ -18,7 +18,7 @@ class OrderItemsController < ApplicationController
     if retired?
       return
     end
-  #stock logic
+    #stock logic
     if params[:order_item][:quantity].to_i > @product.stock.to_i
       flash[:status] = :failure
       flash[:result_text] = "There is not enough stock. Order a smaller amount"
@@ -96,12 +96,14 @@ class OrderItemsController < ApplicationController
         order_item.save
         flash[:status] = :success
         flash[:message] = "Successfully added products to your cart"
-        #eva's guess at what stock logic might be like:
-        #if order_item.quantity > order_item.product.stock
-        #flash[:status] = :failure
-        #flash.now[:message] = "There are only #{order_item.product.stock} of that items in stock.  The quanitity cart has been set to the max value."
-        #order_item.quantity = order_item.product.stock
-        #end
+        #if the user requests more items than we have in stock
+        if order_item.quantity > order_item.product.stock
+          flash[:status] = :failure
+          flash[:message] = "There are only #{order_item.product.stock} of that items in stock.  The quanitity of #{order_item.product.name}s has been set to the max value."
+          order_item.quantity = order_item.product.stock
+          order_item.save
+          puts order_item.quantity
+        end
         return true #if there was a repeat order
       end
     end
