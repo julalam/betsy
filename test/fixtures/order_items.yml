@@ -4,32 +4,29 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-oi1:
-  quantity: 2
-  product: one
-  order: two
-
-one:
-  # id: 1
+zero:
+  quantity: 3
   product_id: 1
   order_id: 1
+
+one:
   quantity: 3
-
-# column: value
-#
-oi2:
-  quantity: 2
-  product: two
-  order: one
-
-two:
-  # id: 2
   product_id: 2
   order_id: 1
-  quantity: 3
-# column: value
 
-oi3:
-  quantity: 1
-  product: six
-  order: two
+two:
+  quantity: 3
+  product_id: 1
+  order_id: 1
+
+
+three:
+  quantity: 3
+  product_id: 1
+  order_id: 1
+
+
+four:
+  quantity: 3
+  product_id: 1
+  order_id: 1

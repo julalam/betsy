@@ -20,4 +20,5 @@ module ApplicationHelper
     ("<span class='date'>" + date.strftime("%b. %d, %Y") + "</span>").html_safe
   end
 
+  module_function :set_class
 end

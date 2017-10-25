@@ -12,6 +12,8 @@ class OrderItemsController < ApplicationController
     if session[:order_id] == nil
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
+    else
+      puts "worked"
     end
 
     @product = Product.find(params[:order_item][:product_id])
