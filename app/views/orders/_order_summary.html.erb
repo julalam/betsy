@@ -1,0 +1,22 @@
+<table class="shopping-cart">
+  <thead>
+    <tr>
+      <th width="150">Product</th>
+      <th width="100">Quantity</th>
+      <th width="100">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order_items.each do |order_item| %>
+      <tr>
+        <td><h5><%= link_to order_item.product.name, product_path(order_item.product) %></h5><span><%= link_to " by #{order_item.product.merchant.username}", products_merchant_path(order_item.product.merchant) %></span></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= format_money(OrderItem.subtotal(order_item)) %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td colspan="2"></td>
+        <th><%= format_money(OrderItem.total_cost(@order_items)) %></td>
+      </tr>
+    </tbody>
+  </table>
