@@ -4,6 +4,9 @@ class Merchant < ApplicationRecord
   has_many :orders, through: :products
   # has_many :orders, :through => :products
 
+  validates :provider, presence: true
+  validates :uid, presence: true, uniqueness: true
+
 
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
