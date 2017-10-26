@@ -63,6 +63,7 @@ class ProductsController < ApplicationController
       end
     end
 
+#The below is nessesary for the merchant user stories.
     if params[:merchant_id] && params[:category_id]
         @merchant = Merchant.find_by(id: params[:merchant_id])
         @category = Category.find_by(id: params[:category_id])
