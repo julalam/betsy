@@ -2,6 +2,9 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    unless allowed_user(params[:merchant_id])
+      return
+    end
     @merchant = Merchant.find_by(id: params[:merchant_id])
   end
 
