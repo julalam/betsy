@@ -2,10 +2,24 @@ require "test_helper"
 
 describe ReviewsController do
   describe "new" do
-    it "works" do
-      product = products(:one)
-      get new_product_review_path(product)
+    before do
+      @owner = merchants(:eva)
+      @user = merchants(:emma)
+      @product = @owner.products.first
+      @right_review = Review.new(product_id: @product.id, rating: 5)
+      @wrong_review = Review.new(product_id: @product.id, rating: 3)
+    end
+
+    it "works for not owners of the product" do
+      get new_product_review_path(@product.id)
       must_respond_with :success
+    end
+
+    it "not works for the owner of the product" do
+      login(@owner)
+      get new_product_review_path(@product.id)
+      must_respond_with :redirect
+      must_redirect_to product_path(@product)
     end
   end
 
@@ -31,7 +45,8 @@ describe ReviewsController do
     it "renders bad_request and does not update the DB for bogus data" do
       review_data = {
         review: {
-          product_id: nil
+          product_id: products(:one).id,
+          rating: nil
         }
       }
       start_count = Review.count
@@ -42,5 +57,4 @@ describe ReviewsController do
       Review.count.must_equal start_count
     end
   end
-
 end
