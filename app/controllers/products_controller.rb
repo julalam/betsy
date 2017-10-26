@@ -58,11 +58,13 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.where("stock > 0")
-  end
-=begin
-  Nothing in here is called in any part of the app.
-  I think this use to do something, but new functionality
-  takes care of all of these functions.
+    # =begin
+    # Lindsey: Nothing in here is called in any part of the app.
+    # I think this use to do something, but new functionality
+    #   takes care of all of these functions.
+    #
+    #   Eva: The below is used when we have a logged in user looking at their merchant information.
+    #   =end
 
     if params[:merchant_id]
       unless allowed_user(params[:merchant_id])
@@ -72,28 +74,23 @@ class ProductsController < ApplicationController
     end
 
     if params[:merchant_id] && params[:category_id]
-      raise
+      # raise
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @category = Category.find_by(id: params[:category_id])
       @products = @category.products.where(merchant: @merchant)
     elsif params[:category_id]
-      raise
+      # raise
       category = Category.find_by(id: params[:category_id])
       @products = category.products
     elsif params[:merchant_id]
-      raise
+      # raise
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @products = @merchant.products
       render :merchant_products
     else
-
     end
+  end
 
-
-
-
-
-=end
 
   def index_by_merchant
     @merchant = Merchant.find_by(id: params[:id])
@@ -106,7 +103,7 @@ class ProductsController < ApplicationController
     @products = @category.products
     render :index
   end
-  
+
   private
 
   def product_params

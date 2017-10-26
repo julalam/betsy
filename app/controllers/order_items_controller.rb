@@ -64,11 +64,8 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    #Normal case: if there is an order and a product, delete the order item and update the stock
+    #Normal case: if there is an order delete the order item
     if @order_item = OrderItem.find_by(id: params[:id])
-      # if @product = Product.find(@order_item.product_id)
-      #   @product.stock += @order_item.quantity
-      #   @product.save
         if @order_item.destroy
           flash[:status] = :success
           flash[:message] = "Successfully removed #{@order_item.product.name} from your cart"
@@ -76,12 +73,11 @@ class OrderItemsController < ApplicationController
           return
         end
       end
-    end
-#if either the orderitem or the associated product does not exists do not delete the item
+
+    #if either the orderitem does not exists do not delete the item
     flash[:status] = :failure
     flash[:message] = "Problem encountered when attempting to remove this product from your cart"
     redirect_to order_items_path
-#This might have bug if someone puts a order in their cart, then the product is destroyed, then if they try to destory the order_item they will not be able to.
   end
 
 
