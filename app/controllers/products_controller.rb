@@ -60,10 +60,10 @@ class ProductsController < ApplicationController
     @products = Product.all.where("stock > 0")
   end
 =begin
-  None of these should ever be hit because the index
-  page doesn't take parameters.
-  Plus the logic of showing products of a specific
-  category or merchant is handled elsewhere.
+  Nothing in here is called in any part of the app.
+  I think this use to do something, but new functionality
+  takes care of all of these functions.
+
     if params[:merchant_id]
       unless allowed_user(params[:merchant_id])
         raise
@@ -89,7 +89,7 @@ class ProductsController < ApplicationController
 
     end
 
-=end
+
   def index_by_merchant
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products
@@ -101,6 +101,7 @@ class ProductsController < ApplicationController
     @products = @category.products
     render :index
   end
+=end
 
   private
 
