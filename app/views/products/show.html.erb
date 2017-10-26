@@ -17,7 +17,7 @@
       <li id="merchant"><%= link_to @product.merchant.username, products_merchant_path(@product.merchant) %></li>
       <li><h2><%= @product.name %></h2></li>
       <li><span><%= render partial: "layouts/stars", locals: { rating: @product.average_rating } %></span>, <%= @product.reviews.count %> customer reviews</li>
-      <li>Price:  <%= @product.price %> </li>
+      <li>Price:  <%= format_money(@product.price) %> </li>
       <%if @product.retired %>
        <li> <span class="green">No stock for retired products </span></li>
        <% else %>
