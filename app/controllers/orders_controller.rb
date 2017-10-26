@@ -68,7 +68,8 @@ class OrdersController < ApplicationController
       flash[:message] = "Your order has been placed"
       @order.status = "paid"
       @order.save
-      @order_items = OrderItem.where("order_id = #{session[:order_id]}")
+      # @order_items = OrderItem.where("order_id = #{session[:order_id]}")
+      @order_items = OrderItem.where(order_id: "#{session[:order_id]}")
       @order_items.each do |item|
         @product = Product.find(item.product_id)
         @product.stock -= item.quantity

@@ -38,7 +38,6 @@ describe OrdersController do
         end
       end
 
-
       it 'must get edit page' do
         get edit_order_path(orders(:two).id)
         assert_response :success
@@ -99,11 +98,8 @@ describe OrdersController do
 
         patch order_path(order), params: order_params
         order = Order.first
-        order.customer_name.must_equal 'john@gmail.com'
+        order.customer_email.must_equal 'john@gmail.com'
       end
-
-
     end
   end
-
 end
