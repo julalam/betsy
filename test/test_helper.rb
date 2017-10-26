@@ -39,7 +39,9 @@ class ActiveSupport::TestCase
   }
 
   OmniAuth.config.add_mock(:github, omniauth_hash)
-  
+
+
+
   # Add more helper methods to be used by all tests here...
   def setup
     OmniAuth.config.test_mode = true
