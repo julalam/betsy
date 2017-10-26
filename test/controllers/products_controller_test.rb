@@ -1,6 +1,18 @@
 require "test_helper"
 
 describe ProductsController do
+  describe "controller functions" do
+    it "tests index by merchant method" do
+      get products_merchant_path(Merchant.first.id)
+      must_respond_with :success
+    end
+
+    it "tests index by category method " do
+      get products_category_path(Category.first.id)
+      must_respond_with :success
+    end
+  end
+
   describe "require login methods" do
     before do
       @merchant = merchants(:eva)
@@ -133,6 +145,27 @@ describe ProductsController do
       must_respond_with :success
     end
 
+    it "checking if auth works this way" do
+      OmniAuth.config.test_mode = true
+      merchant = merchants(:eva)
+      auth_hash = {
+        provider: merchant.provider,
+        uid: merchant.uid,
+        info: {
+          nickname: merchant.username,
+          email: merchant.email
+        }
+      }
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+      get auth_callback_path(:github)
+
+      Merchant.find_by(uid: merchant.uid).uid.must_equal merchant.uid
+      test_merchant = Merchant.find_by(uid: merchant.uid)
+
+      get products_path
+      must_respond_with :success
+    end
+
     it "returns success for no products" do
       Product.destroy_all
       get products_path
@@ -171,11 +204,8 @@ describe ProductsController do
 
 
         it "renders bad_request and does not update the DB for bogus data" do
-          product_data = {
-            product: {
-              name: ""
-            }
-          }
+
+
           start_count = Product.count
 
           post products_path, params: product_data
@@ -185,6 +215,19 @@ describe ProductsController do
         end
       end
 
+      describe "product by merchant id" do
+        it "finds products for a given merchant" do
+          get products_merchant_path, params: {id: Merchant.first.id}
+          must_respond_with :success
+        end
+      end
+
+      describe "product by category id" do
+        it "finds products for a given category" do
+          get products_category_path, params: {id: Category.first.id}
+          must_respond_with :success
+        end
+      end
 
       describe "update" do
         it "succeeds for valid data and an valid product ID" do
@@ -224,4 +267,5 @@ describe ProductsController do
       end
     end
   end
+
 end

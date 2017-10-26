@@ -9,13 +9,20 @@ describe MerchantsController do
   end
   describe "new" do
     it "returns success" do
-      get new_product_path
+      get new_merchant_path
       must_respond_with :success
     end
   end
 
   describe "show" do
     it "succeeds for an valid merchant ID" do
+      get merchant_path(Merchant.first)
+      must_respond_with :success
+    end
+
+    it "fails when this merchant ID isn't in session" do
+
+
       get merchant_path(Merchant.first)
       must_respond_with :success
     end
@@ -111,4 +118,6 @@ end
       session[:merchant_id].must_equal nil
     end
   end
+
+  
 end
