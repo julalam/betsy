@@ -1,6 +1,18 @@
 require "test_helper"
 
 describe ProductsController do
+  describe "controller functions" do
+    it "tests index by merchant method" do
+      get products_merchant_path(Merchant.first.id)
+      must_respond_with :success
+    end
+
+    it "tests index by category method " do
+      get products_category_path(Category.first.id)
+      must_respond_with :success
+    end
+  end
+
   describe "require login methods" do
     before do
       @merchant = merchants(:eva)
@@ -255,4 +267,5 @@ describe ProductsController do
       end
     end
   end
+
 end
