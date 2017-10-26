@@ -9,7 +9,7 @@ describe MerchantsController do
   end
   describe "new" do
     it "returns success" do
-      get new_product_path
+      get new_merchant_path
       must_respond_with :success
     end
   end
