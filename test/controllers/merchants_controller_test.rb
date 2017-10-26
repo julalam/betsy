@@ -118,4 +118,6 @@ end
       session[:merchant_id].must_equal nil
     end
   end
+
+  
 end

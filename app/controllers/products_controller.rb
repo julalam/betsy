@@ -91,7 +91,10 @@ class ProductsController < ApplicationController
 
 
 
+
+
 =end
+
   def index_by_merchant
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products

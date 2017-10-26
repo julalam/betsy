@@ -203,6 +203,19 @@ describe ProductsController do
         end
       end
 
+      describe "product by merchant id" do
+        it "finds products for a given merchant" do
+          get products_merchant_path, params: {id: Merchant.first.id}
+          must_respond_with :success
+        end
+      end
+
+      describe "product by category id" do
+        it "finds products for a given category" do
+          get products_category_path, params: {id: Category.first.id}
+          must_respond_with :success
+        end
+      end
 
       describe "update" do
         it "succeeds for valid data and an valid product ID" do
