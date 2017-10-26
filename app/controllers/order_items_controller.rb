@@ -7,18 +7,14 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    #if there is already an open order, set the order_item order_id to that order.
-    #otherwise make a new order
+    #if there is already an open order, set the order_item order_id to that order. Otherwise make a new order
+    # if params[:order_id]
+    #   session[:order_id] = params[:order_id]
+    # end
+
     if session[:order_id] == nil
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
-    end
-
-    #if the order is retired then it is not for sale
-    @product = Product.find(params[:order_item][:product_id])
-    puts "Product is retired? #{retired?}"
-    if retired?
-      return
     end
 
     #if an order_item for the same product already exists in the order, update that order_item by adding the new quantity to that order item.
@@ -36,7 +32,7 @@ class OrderItemsController < ApplicationController
       redirect_to order_items_path
     else
       flash[:status] = :failure
-      flash[:message] = "Could not add #{@order_item.product.name} to your cart"
+      flash[:message] = "Could not add that product to your cart"
       redirect_to root_path
     end
   end
@@ -44,22 +40,16 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = OrderItem.find(params[:id])
-    # @product = Product.find(@order_item.product_id)
-    # if params[:order_item][:quantity].to_i > @product.stock.to_i
-    #   flash[:status] = :failure
-    #   flash[:message] = "There is not enough stock. Order a smaller amount"
-    #   redirect_to order_items_path
-    # end
     @order_item.update_attributes(order_item_params)
     if @order_item.save
       flash[:status] = :success
       flash[:message] = "Successfully updated order item"
       redirect_back(fallback_location: order_items_path)
-
     else
+      puts "update failed"
       flash[:status] = :failure
       flash[:message] = "Failed to update order item"
-      render :edit, status: :bad_request
+      redirect_back(fallback_location: order_items_path)
     end
   end
 
@@ -107,15 +97,17 @@ class OrderItemsController < ApplicationController
     return false # there was not repeat order
   end
 
-  def retired?
-    if @product.retired == true
-      flash[:status] = :failure
-      flash[:message] = "You can not order a retired item"
-      redirect_to product_path(@product)
-    end
+  def order_item_params
+    return params.require(:order_item).permit(:product_id, :quantity, :status)
   end
 
-  def order_item_params
-    return params.require(:order_item).permit(:product_id, :quantity, :order_id, :status)
-  end
+  #this is no longer nessesary but used to be useful:
+  # def retired?
+  #   if @product.retired == true
+  #     flash[:status] = :failure
+  #     flash[:message] = "You can not order a retired item"
+  #     redirect_to product_path(@product)
+  #   end
+  # end
+
 end

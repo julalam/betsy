@@ -95,9 +95,6 @@ describe Merchant do
 
 
   describe "custom methods" do
-
-
-
     describe 'from_auth_hash' do
       it "returns a merchant when given valid data." do
         provider = "github"
