@@ -21,7 +21,9 @@ module ApplicationHelper
   end
 
   def format_money(amount)
-    Money.new(amount, "USD").format
+    #This breaks the app so I'm going to comment it out for now.
+    
+    #Money.new(amount, "USD").format
   end
 
   module_function :set_class

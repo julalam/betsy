@@ -90,6 +90,8 @@ class ProductsController < ApplicationController
     end
 
 
+
+=end
   def index_by_merchant
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products
@@ -101,8 +103,7 @@ class ProductsController < ApplicationController
     @products = @category.products
     render :index
   end
-=end
-
+  
   private
 
   def product_params
