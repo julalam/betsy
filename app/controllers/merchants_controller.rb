@@ -1,18 +1,14 @@
 class MerchantsController < ApplicationController
   skip_before_action :require_login, only: [:login, :logout]
 
-  def new
-    @merchant = Merchant.new
-  end
-
-  def index
-    @merchants = Merchant.all
-  end
-
   def show
-    @merchant = Merchant.find(params[:id])
-    if allowed_user(@merchant.id)
-      @products = @merchant.products
+    @merchant = Merchant.find_by(id: params[:id])
+    if @merchant == nil
+      render_404
+    else
+      if allowed_user(@merchant.id)
+        @products = @merchant.products
+      end
     end
   end
 
@@ -36,7 +32,7 @@ class MerchantsController < ApplicationController
           flash[:message] = "You're already logged in"
         else
           flash[:status] = :success
-          flash[:message] = "Logged in successfully as existing merchant as #{merchant.username}"
+          flash[:message] = "Logged in successfully as existing merchant #{merchant.username}"
         end
       end
       session[:merchant_id] = merchant.id
@@ -53,7 +49,5 @@ class MerchantsController < ApplicationController
     flash[:message] = "Successfully logged out"
     redirect_to root_path
   end
-
-
 
 end
