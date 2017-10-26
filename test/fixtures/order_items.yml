@@ -39,3 +39,8 @@ oi2:
   quantity: 1
   product: one
   order: one
+
+oi3:
+  quantity: 1
+  product: two
+  order: one

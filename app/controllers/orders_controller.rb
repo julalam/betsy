@@ -40,6 +40,7 @@ class OrdersController < ApplicationController
       )
 
       if @order.save
+        #I think these flash messages are wrong, they belong in update.
         flash[:status] = :success
         flash[:message] = "Your order has been placed"
         redirect_to orders_path
