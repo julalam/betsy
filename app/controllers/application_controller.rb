@@ -24,7 +24,7 @@ private
 
     if  session[:merchant_id] != merchant_id
       flash[:status] = :failure
-      flash[:message] = "Failure: You do cannot access account pages for other users"
+      flash[:message] = "Failure: You cannot access account pages for other users"
       redirect_to root_path
       return false
     else
