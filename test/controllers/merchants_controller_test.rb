@@ -20,6 +20,13 @@ describe MerchantsController do
       must_respond_with :success
     end
 
+    it "fails when this merchant ID isn't in session" do
+
+
+      get merchant_path(Merchant.first)
+      must_respond_with :success
+    end
+
     it "renders 404 not_found for a bogus product ID" do
       bogus_merchant_id = Merchant.last.id + 1
       get merchant_path(bogus_merchant_id)
