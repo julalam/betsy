@@ -8,7 +8,7 @@ describe OrdersController do
     end
 
     describe 'primary pages' do
-      it "must be get index page" do
+      it "must get index page" do
         get orders_path
         assert_response :success
       end
@@ -26,7 +26,7 @@ describe OrdersController do
 
         describe 'nested show page' do
           it 'gets show page for merchant order' do
-            get merchant_order_path(merchants(:eva).id, orders(:two).id)
+            get merchant_order_path(@merchant.id, orders(:one).id)
             must_respond_with :success
           end
 
@@ -80,7 +80,7 @@ describe OrdersController do
         must_respond_with :redirect
       end
 
-      it "Updates an existing order" do
+      it "updates an existing order" do
         order = Order.first
         order_params = {
           id: order.id,

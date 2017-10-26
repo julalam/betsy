@@ -7,11 +7,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    #if price is entered, change to cents
-    # if params[:product][:price] != ""
-    #   @product.price = (params[:product][:price].to_i * 100)
-    # end
-
     @product[:merchant_id] = session[:merchant_id]
     @product[:retired] = false
     if @product.save

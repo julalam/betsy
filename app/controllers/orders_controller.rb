@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
 
-  skip_before_action :require_login
+  skip_before_action :require_login, except: [:index]
 
   def index
-    if params[:merchant_id]
+    if params[:merchant_id] == session[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
       if params[:status_id] == "paid"
         @order_items = @merchant.order_items_by_status("paid")
@@ -15,7 +15,9 @@ class OrdersController < ApplicationController
       end
       render :merchant_orders
     else
-      @orders = Order.all
+      flash[:status] = :failure
+      flash[:message] = "You are allowed to see only your own orders"
+      redirect_to root_path
     end
   end
 
