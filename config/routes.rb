@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :products
   resources :merchants
 
-  resources :orders
+  resources :orders, except: [:show]
   resources :reviews, except: [:new]
   root 'main#index'
 
