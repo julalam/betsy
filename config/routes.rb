@@ -47,4 +47,6 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'merchants#logout', as: 'logout'
 
+  get '*path' => redirect('/404')
+
 end
