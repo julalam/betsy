@@ -24,7 +24,7 @@
         <tr>
           <th>Total</th>
           <th><%= @merchant.orders.uniq.count %></th>
-          <th><%= @merchant.order_items_total %></th>
+          <th><%= format_money(@merchant.order_items_total) %></th>
         </tr>
       </tbody>
     </table>
