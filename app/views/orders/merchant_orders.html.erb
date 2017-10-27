@@ -24,7 +24,12 @@
   <tbody>
     <% @order_items.each do |order_item| %>
     <tr>
-      <td><%=link_to order_item.order_id, merchant_order_path(@merchant.id, order_item.order_id)%></td>
+      <td>
+        <% if order_item.order.status == "paid" %>
+          <%=link_to order_item.order_id, merchant_order_path(@merchant.id, order_item.order_id)%>
+        <% else %>
+        <%= order_item.order_id %>
+        <% end %></td>
       <td><%=readable_date(order_item.created_at)%></td>
       <td><%=link_to order_item.product.name, product_path(order_item.product_id)%></td>
       <td><%=format_money(order_item.product.price)%></td>
