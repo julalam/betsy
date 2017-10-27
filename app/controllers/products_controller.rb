@@ -63,39 +63,39 @@ class ProductsController < ApplicationController
 
 
   def index
-    puts "I am in regular index"
+    #puts "I am in regular index"
     if params[:merchant_id]
       unless allowed_user(params[:merchant_id])
         return
       end
     end
-    puts "I made it past the allowed_user check"
-    puts "these are my params: #{params}"
+    #puts "I made it past the allowed_user check"
+    #puts "these are my params: #{params}"
 
     #The below is nessesary for the merchant user stories.
     if params[:merchant_id] && params[:category_id]
-      puts "I have a merchant id and a category id"
+      #puts "I have a merchant id and a category id"
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @category = Category.find_by(id: params[:category_id])
       @products = @category.products.where(merchant: @merchant)
     elsif params[:category_id]
-      puts "I only have a category id"
+      #puts "I only have a category id"
       category = Category.find_by(id: params[:category_id])
       @products = category.products
     elsif params[:merchant_id]
-      puts "I only have a merchant id"
+      #puts "I only have a merchant id"
       @merchant = Merchant.find_by(id: params[:merchant_id])
+      #puts "merchant id #{@merchant.id}"
       @products = @merchant.products
-      render :merchant_products, status: :success
+      render :merchant_products, merchant_id: @merchant.id, status: :ok
     else
-      puts "I got nothing"
+      #puts "I got nothing"
       @products = Product.all
     end
   end
 
   #if we have time, add a render 404 for bogus merchants
   def index_by_merchant
-    puts "i am in index_by_merchant"
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products
     render :index
@@ -103,7 +103,6 @@ class ProductsController < ApplicationController
 
   #if we have time, add a render 404 for bogus categories
   def index_by_category
-    puts "i am in index_by_category"
     @category = Category.find_by(id: params[:id])
     @products = @category.products
     render :index
