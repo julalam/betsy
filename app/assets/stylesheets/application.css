@@ -25,6 +25,7 @@
  /*grey category buttons #a6a6a6;*/
  /*dark grey for text #666666;*/
  /*very light grey status button, flash #f2f2f2;*/
+ /*dark yellow on cart hover #cca300;*/
 
  /** {
    border: 1px solid red;
@@ -50,6 +51,11 @@
    background-color: #ffd24d;
    font-weight: bold;
  }
+
+/*not working*/
+ /*.cart a:hover {
+   background-color: #cca300;
+ }*/
 
  .flash {
    background-color: #f2f2f2;
