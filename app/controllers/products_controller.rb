@@ -7,11 +7,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    #if price is entered, change to cents
-    # if params[:product][:price] != ""
-    #   @product.price = (params[:product][:price].to_i * 100)
-    # end
-
     @product[:merchant_id] = session[:merchant_id]
     @product[:retired] = false
     if @product.save
@@ -22,17 +17,26 @@ class ProductsController < ApplicationController
       flash.now[:status] = :failure
       flash.now[:message] = "Could not create new product #{@product.name}"
       flash.now[:messages] = @product.errors.messages
-      render :new, status: :bad_request
+      render :new
     end
   end
 
   def edit
     @product = Product.find(params[:id])
+    unless allowed_user(@product.merchant.id)
+      return
+    end
+    @product = Product.find(params[:id])
+
   end
 
   def show
-    @product = Product.find(params[:id])
-    @order_item = OrderItem.new(product_id: params[:id])
+    @product = Product.find_by(id: params[:id])
+    if @product == nil
+      render_404
+    else
+      @order_item = OrderItem.new(product_id: params[:id])
+    end
   end
 
   def update
@@ -63,29 +67,31 @@ class ProductsController < ApplicationController
       end
     end
 
-#The below is nessesary for the merchant user stories.
+    #The below is nessesary for the merchant user stories.
     if params[:merchant_id] && params[:category_id]
-        @merchant = Merchant.find_by(id: params[:merchant_id])
-        @category = Category.find_by(id: params[:category_id])
-        @products = @category.products.where(merchant: @merchant)
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @category = Category.find_by(id: params[:category_id])
+      @products = @category.products.where(merchant: @merchant)
     elsif params[:category_id]
-        category = Category.find_by(id: params[:category_id])
-        @products = category.products
+      category = Category.find_by(id: params[:category_id])
+      @products = category.products
     elsif params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @products = @merchant.products
-      render :merchant_products
+      render :merchant_products, status: :success
     else
       @products = Product.all
     end
   end
 
+#if we have time, add a render 404 for bogus merchants
   def index_by_merchant
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products
     render :index
   end
 
+#if we have time, add a render 404 for bogus categories
   def index_by_category
     @category = Category.find_by(id: params[:id])
     @products = @category.products

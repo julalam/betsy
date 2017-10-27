@@ -6,12 +6,9 @@ class OrderItemsController < ApplicationController
     @order_items = OrderItem.where(order_id: session[:order_id])
   end
 
+#if you have a problem with the shopping cart right after resetting the database, try resetting you session[:order_id] = nil.
   def create
     #if there is already an open order, set the order_item order_id to that order. Otherwise make a new order
-    # if params[:order_id]
-    #   session[:order_id] = params[:order_id]
-    # end
-
     if session[:order_id] == nil
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
@@ -25,7 +22,7 @@ class OrderItemsController < ApplicationController
 
     #if the request is a the first order for a shopping cart, make the orderitem and set the session_id
     @order_item = OrderItem.new(order_item_params)
-    @order_item.order_id = session[:order_id]
+    @order_item[:order_id] = session[:order_id]
     if @order_item.save
       flash[:status] = :success
       flash[:message] = "Successfully added #{@order_item.product.name} to your cart"
@@ -56,9 +53,11 @@ class OrderItemsController < ApplicationController
   def destroy
     #Normal case: if there is an order delete the order item
     if @order_item = OrderItem.find_by(id: params[:id])
+      order = @order_item.order_id
       if @order_item.destroy
         flash[:status] = :success
         flash[:message] = "Successfully removed #{@order_item.product.name} from your cart"
+        other_items_in_cart = OrderItem.where(order_id: order)
         redirect_to order_items_path
         return
       end
