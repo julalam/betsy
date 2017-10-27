@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :products
   resources :merchants
 
-  resources :orders
+  resources :orders, except: [:show]
   resources :reviews, except: [:new]
   root 'main#index'
 
@@ -48,4 +48,5 @@ Rails.application.routes.draw do
   get 'logout', to: 'merchants#logout', as: 'logout'
 
   get "*path", to:'application#render_404'
+
 end

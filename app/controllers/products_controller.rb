@@ -7,11 +7,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    #if price is entered, change to cents
-    # if params[:product][:price] != ""
-    #   @product.price = (params[:product][:price].to_i * 100)
-    # end
-
     @product[:merchant_id] = session[:merchant_id]
     @product[:retired] = false
     if @product.save
@@ -22,27 +17,38 @@ class ProductsController < ApplicationController
       flash.now[:status] = :failure
       flash.now[:message] = "Could not create new product #{@product.name}"
       flash.now[:messages] = @product.errors.messages
-      render :new, status: :bad_request
+      render :new
     end
   end
 
   def edit
-    @product = Product.find(params[:id])
+    product = Product.find(params[:id])
+    unless allowed_user(product.merchant.id)
+      return
+    end
+    @product = product
+
   end
 
   def show
-    @product = Product.find(params[:id])
-    @order_item = OrderItem.new(product_id: params[:id])
+    @product = Product.find_by(id: params[:id])
+    if @product == nil
+      render_404
+    else
+      @order_item = OrderItem.new(product_id: params[:id])
+    end
   end
 
   def update
-    @product = Product.find(params[:id])
+    product = Product.find(params[:id])
+    puts product.merchant.id
+    puts session[:merchant_id]
+    unless allowed_user(product.merchant.id)
+      return
+    end
+    @product = product
     @product.update_attributes(product_params)
-    #if price is entered, change to cents
-    # if params[:product][:price].to_i != @product.price
-    #   @product.price = (params[:product][:price].to_i * 100)
-    # end
-
+    puts @product.inspect
     if @product.save
       flash[:status] = :success
       flash[:message] = "Successfully updated #{@product.name}, ID number #{@product.id}"
@@ -57,36 +63,47 @@ class ProductsController < ApplicationController
 
 
   def index
+    puts "I am in regular index"
     if params[:merchant_id]
       unless allowed_user(params[:merchant_id])
         return
       end
     end
+    puts "I made it past the allowed_user check"
+    puts "these are my params: #{params}"
 
-#The below is nessesary for the merchant user stories.
+    #The below is nessesary for the merchant user stories.
     if params[:merchant_id] && params[:category_id]
-        @merchant = Merchant.find_by(id: params[:merchant_id])
-        @category = Category.find_by(id: params[:category_id])
-        @products = @category.products.where(merchant: @merchant)
+      puts "I have a merchant id and a category id"
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @category = Category.find_by(id: params[:category_id])
+      @products = @category.products.where(merchant: @merchant)
     elsif params[:category_id]
-        category = Category.find_by(id: params[:category_id])
-        @products = category.products
+      puts "I only have a category id"
+      category = Category.find_by(id: params[:category_id])
+      @products = category.products
     elsif params[:merchant_id]
+      puts "I only have a merchant id"
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @products = @merchant.products
-      render :merchant_products
+      render :merchant_products, status: :success
     else
+      puts "I got nothing"
       @products = Product.all
     end
   end
 
+  #if we have time, add a render 404 for bogus merchants
   def index_by_merchant
+    puts "i am in index_by_merchant"
     @merchant = Merchant.find_by(id: params[:id])
     @products = @merchant.products
     render :index
   end
 
+  #if we have time, add a render 404 for bogus categories
   def index_by_category
+    puts "i am in index_by_category"
     @category = Category.find_by(id: params[:id])
     @products = @category.products
     render :index
