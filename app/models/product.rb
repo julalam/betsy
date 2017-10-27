@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
   validates :price, numericality: { greater_than: 0 }
+  validates :stock, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
 
   def self.random_products(number)
@@ -26,7 +27,7 @@ class Product < ApplicationRecord
   end
 
   def self.bestseller(number)
-    return Product.all.sort_by { |product| -product.orders.count }.first(number)
+    return Product.all.sort_by { |product| -product.order.count }.first(number)
   end
 
 end

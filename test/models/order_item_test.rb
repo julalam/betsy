@@ -79,12 +79,15 @@ describe OrderItem do
 
     describe "total cost" do
       it "returns the right total cost" do
-        total = OrderItem.total_cost([@order_item, @other_order_item])
-        if total < 50
-          total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price + 10
-        else
-          total.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price
-        end
+        total1 = OrderItem.total_cost([@order_item, @other_order_item])
+        order_item = OrderItem.new(order_id: orders(:one).id, product_id: products(:one).id, quantity: 50000000)
+        total2 = OrderItem.total_cost([order_item, @other_order_item])
+
+        # total is less than 5000 cents so have to pay 1000 cents in shipping
+        total1.must_equal @order_item.quantity * @order_item.product.price + @other_order_item.quantity * @other_order_item.product.price + 1000
+        # total is greater than 5000 cents so don't have to pay 1000 cents in shipping
+
+        total2.must_equal order_item.quantity * order_item.product.price + @other_order_item.quantity * @other_order_item.product.price
       end
     end
 

@@ -43,43 +43,68 @@ describe Product do
   describe "validations" do
 
     it "allows a product to be created with name and price" do
-      product = Product.new(name: "new_product", price: 10, merchant: merchants(:emma))
+      product = Product.new(name: "new_product", price: 10, merchant: merchants(:emma), stock: 5000)
 
       product.must_be :valid?
     end
 
     it "requires a name to be created" do
-      product = Product.new(price: 10, merchant: merchants(:emma))
+      product = Product.new(price: 10, merchant: merchants(:emma), stock: 5000)
 
       product.wont_be :valid?
     end
 
     it "requires a unique name to be created" do
-      product_1 = Product.create(name: "new_product", price: 10, merchant: merchants(:emma))
-      product_2 = Product.new(name: "new_product", price: 10, merchant: merchants(:emma))
+      product_1 = Product.create(name: "new_product", price: 10, merchant: merchants(:emma), stock: 5000)
+      product_2 = Product.new(name: "new_product", price: 10, merchant: merchants(:emma), stock: 5000)
 
       product_2.wont_be :valid?
     end
 
     it "requires a price to be created" do
-      product = Product.new(name: "new_product", merchant: merchants(:emma))
+      product = Product.new(name: "new_product", merchant: merchants(:emma), stock: 5000)
 
       product.wont_be :valid?
     end
 
     it "requires the price be greater than 0" do
 
-      product_0 = Product.new(name: "new_product", price: 0, merchant: merchants(:emma))
+      product_0 = Product.new(name: "new_product", price: 0, merchant: merchants(:emma), stock: 5000)
 
-      product_less_than_0 = Product.new(name: "new_product", price: -10, merchant_id: (:emma))
+      product_less_than_0 = Product.new(name: "new_product", price: -10, merchant_id: (:emma), stock: 5000)
 
-      product_ten = Product.new(name: "new_product", price: "ten", merchant: merchants(:emma))
+      product_ten = Product.new(name: "new_product", price: "ten", merchant: merchants(:emma), stock: 5000)
 
       product_0.wont_be :valid?
       product_less_than_0.wont_be :valid?
       product_ten.wont_be :valid?
     end
 
+
+    it "cannot be created without stock" do
+      invalid_prod = Product.new(name: "test", price: 3000, merchant: merchants(:emma))
+      invalid_prod.wont_be :valid?
+      invalid_prod.errors.messages.must_include :stock
+    end
+
+    it "cannot be created with a float" do
+      invalid_prod = Product.new(name: "test", price: 3000, merchant: merchants(:emma), stock: 3.4)
+      invalid_prod.wont_be :valid?
+      invalid_prod.errors.messages.must_include :stock
+    end
+
+
+    it "cannot be created with a stock of 0" do
+      invalid_prod = Product.new(name: "test", price: 3000, merchant: merchants(:emma), stock: 0)
+      invalid_prod.wont_be :valid?
+      invalid_prod.errors.messages.must_include :stock
+    end
+
+    it "cannot be created with a negative quantity" do
+      invalid_prod = Product.new(name: "test", price: 3000, merchant: merchants(:emma), stock: -5)
+      invalid_prod.wont_be :valid?
+      invalid_prod.errors.messages.must_include :stock
+    end
   end
 
   describe "custom methods" do
@@ -99,7 +124,7 @@ describe Product do
 
       it "must return all products if there are less products that it was asked in random method" do
         Product.destroy_all
-        Product.create(name: "new_product", price: 10, merchant: merchants(:emma))
+        Product.create(name: "new_product", price: 10, merchant: merchants(:emma), retired: false, stock: 4)
         rand_products = Product.random_products(6)
         rand_products.must_be_kind_of Array
         rand_products.length.must_equal 1
@@ -128,7 +153,7 @@ describe Product do
 
       it "must return all products if there are less products that it was asked in new method" do
         Product.destroy_all
-        Product.create(name: "new_product", price: 10, merchant: merchants(:emma))
+        Product.create(name: "new_product", price: 10, merchant: merchants(:emma), retired: false, stock: 1)
         new_products = Product.new_products(5)
         new_products.must_be_kind_of Array
         new_products.length.must_equal 1
@@ -142,8 +167,8 @@ describe Product do
 
       it "must return products in the right order" do
         Product.destroy_all
-        Product.create(name: "new_product", price: 10, merchant: merchants(:emma))
-        Product.create(name: "another_new_product", price: 15, merchant: merchants(:emma))
+        Product.create(name: "new_product", price: 10, merchant: merchants(:emma), retired: false, stock: 4)
+        Product.create(name: "another_new_product", price: 15, merchant: merchants(:emma), retired: false, stock: 7)
         new_products = Product.new_products(2)
         new_products.first.created_at.must_be :>, new_products.last.created_at
       end
@@ -174,25 +199,32 @@ describe Product do
     #     @product_2 = products(:two)
     #     @product_3 = products(:three)
     #
-    #     customer_data = {
-    #       customer_name: "customer",
-    #       customer_email: "customer@email.com",
-    #       customer_address: "address",
-    #       cc_number: 1234,
-    #       cc_expiration: Date.today,
-    #       cc_ccv: 123,
-    #       zip_code: 12345
-    #     }
+    #     #
+    #     # customer_data = {
+    #     #   customer_name: "customer",
+    #     #   customer_email: "customer@email.com",
+    #     #   customer_address: "address",
+    #     #   cc_number: 1234,
+    #     #   cc_expiration: Date.today,
+    #     #   cc_ccv: 123,
+    #     #   zip_code: 12345
+    #     # }
     #
-    #     order_data = {
+    #     @order1 = Order.create!(status: 'paid', customer_name: 'Sue', customer_email: 'Sue@gmail.com', customer_address:'123 internet street', cc_number: '123123123', cc_expiration: '2020-10-01', cc_ccv: '980', zip_code: '98101')
+    #     @order2 = Order.create!(status: 'paid', customer_name: 'Suzie', customer_email: 'Sue@gmail.com', customer_address:'123 internet street', cc_number: '123123123', cc_expiration: '2020-10-01', cc_ccv: '980', zip_code: '98101')
+    #     @order3 = Order.create!(status: 'pending', customer_name: 'Susie', customer_email: 'Sue@gmail.com', customer_address:'123 internet street', cc_number: '123123123', cc_expiration: '2020-10-01', cc_ccv: '980', zip_code: '98101')
     #
-    #     }
+    #     OrderItem.create!(order_id: @order1.id, product_id: @product_1.id, quantity: 2)
+    #     OrderItem.create!(order_id: @order1.id, product_id: @product_1.id, quantity: 5)
+    #     OrderItem.create!(order_id: @order1.id, product_id: @product_1.id, quantity: 8)
+    #     OrderItem.create!(order_id: @order2.id, product_id: @product_1.id, quantity: 2)
+    #
     #   end
     #
     #   it "must return an array" do
-    #     @product_1.orders.length = 1
-    #     @product_2.orders.length = 2
-    #     @product_3.orders.length = 3
+    #     @product_1.orders.length.must_equal 1
+    #     @product_2.orders.length.must_equal 2
+    #     @product_3.orders.length.must_equal 3
     #
     #     Order.bestseller.must_be_kind_of Array
     #     Order.bestseller.first.must_be_kind_of Products
