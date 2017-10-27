@@ -73,17 +73,17 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
     if params[:merchant_id]
-      @order = Order.find(params[:id])
       @order_items = @order.order_items.find_all{ |order_item| order_item.merchant == Merchant.find_by(id: params[:merchant_id]) }
       if @order_items.empty?
         redirect_to merchant_path(params[:merchant_id]), status: :bad_request
       else
         render :merchant_order, status: :ok
       end
-    else
-      @order = Order.find(params[:id])
-      @order_items = OrderItem.where(order_id: params[:id])
+      #looks like we do not need this
+    # else
+    #   @order_items = OrderItem.where(order_id: params[:id])
     end
   end
 end
