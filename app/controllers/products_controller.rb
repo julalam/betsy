@@ -83,11 +83,13 @@ class ProductsController < ApplicationController
       category = Category.find_by(id: params[:category_id])
       @products = category.products
     elsif params[:merchant_id]
-      #puts "I only have a merchant id"
+      puts "I only have a merchant id"
       @merchant = Merchant.find_by(id: params[:merchant_id])
-      #puts "merchant id #{@merchant.id}"
       @products = @merchant.products
-      render :merchant_products, merchant_id: @merchant.id, status: :ok
+
+      render :merchant_products, status: :ok
+      # @merchant_id = params[:merchant_id]
+      #merchant_id: @merchant.id
     else
       #puts "I got nothing"
       @products = Product.all
