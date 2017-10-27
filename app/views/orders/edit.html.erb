@@ -2,25 +2,25 @@
   <h3>Please enter billing and shipping information</h3>
 
   <%= form_for @order do |f| %>
-  <%= f.label :customer_name %>
+  <%= f.label :customer_name, "Name on a credit card" %>
   <%= f.text_field :customer_name %>
 
-  <%= f.label :customer_email %>
+  <%= f.label :customer_email, "Email address" %>
   <%= f.text_field :customer_email %>
 
-  <%= f.label :customer_address %>
+  <%= f.label :customer_address, "Shipping address" %>
   <%= f.text_field :customer_address %>
 
-  <%= f.label :cc_number %>
+  <%= f.label :cc_number, "Credit card number"%>
   <%= f.text_field :cc_number %>
 
-  <%= f.label :cc_expiration %>
+  <%= f.label :cc_expiration, "Creadit card expiration date" %>
   <%= f.text_field :cc_expiration %>
 
-  <%= f.label :cc_ccv %>
+  <%= f.label :cc_ccv, "Credit card security code" %>
   <%= f.text_field :cc_ccv %>
 
-  <%= f.label :zip_code %>
+  <%= f.label :zip_code, "Billing zip code" %>
   <%= f.text_field :zip_code %>
 
   <%= f.submit "Checkout", class: "cart button"%>
