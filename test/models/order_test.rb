@@ -9,8 +9,8 @@ describe Order do
     it "has many products" do
       @order.must_respond_to :products
       @order.products.each do |product|
-        product.must_be_kind_of Product
-      end
+         product.must_be_kind_of Product
+       end
     end
 
     it "has many order_items" do

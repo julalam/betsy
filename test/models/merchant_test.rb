@@ -115,7 +115,7 @@ describe Merchant do
     describe "order_items_quantity" do
       # eva has two order items each with a quantity of 3 and 1
       it "returns total quantity of a merchant's order items" do
-        merchants(:eva).order_items_quantity.must_equal 4
+        merchants(:eva).order_items_quantity.must_equal 5
       end
 
       it "returns 0 for a merchant with no order items" do
@@ -129,7 +129,8 @@ describe Merchant do
     describe "order_items_total" do
       # eva has two order items each with a quantity of 3 and 1 and a price of 2.
       it "returns sum of a merchant's order items" do
-        merchants(:eva).order_items_total.must_equal 8
+        puts "orderitems #{merchants(:eva).order_items.inspect}"
+        merchants(:eva).order_items_total.must_equal 11
       end
 
       it "returns 0 for a merchant with no order items" do
@@ -171,7 +172,7 @@ describe Merchant do
       it "returns right numbers" do
         (Merchant.revenue_by_status(@order_items_paid) + Merchant.revenue_by_status(@order_items_pending)).must_equal merchants(:eva).order_items_total
 
-        Merchant.revenue_by_status(@order_items_paid).must_equal 8
+        Merchant.revenue_by_status(@order_items_paid).must_equal 11
 
 
         #if there is time, revisit this.  We were trying to add another order_item and make sure that the revenue increased.  But it was not working...
