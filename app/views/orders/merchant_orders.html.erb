@@ -49,10 +49,8 @@
     <% if @order_items.present? %>
         <tr class="total">
           <td colspan="4">total</td>
-          <td>
-            <%= @order_items.inject(0) { |sum, order_item| sum + order_item.quantity } %>
-          </td>
-          <td><%=format_money(@merchant.order_items_total)%></td>
+          <td><%= @order_items.inject(0) { |sum, order_item| sum + order_item.quantity } %></td>
+          <td><%=format_money(Merchant.revenue_by_status(@order_items))%></td>
           <td colspan="2"></td>
         </tr>
     <% else %>
