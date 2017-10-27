@@ -1,0 +1,19 @@
+<section class="row">
+  <h3>Order Confirmation Page</h3>
+  <p>Congratulations on submitting your order!</p>
+
+  <section class="small-4 columns">
+    <p>Total Cost: <%= format_money(OrderItem.total_cost(@order_items)) %></p>
+    <p>
+      Order Placed: <%=readable_date(@order.created_at) %>
+    </p>
+    <p>Status: <%= @order.status %></p>
+    <%= link_to "Continue Shopping", products_path, class: "cart button" %>
+  </section>
+
+  <section class="small-8 columns">
+    <%= render partial: "order_summary.html.erb" %>
+
+  </section>
+
+</section>
