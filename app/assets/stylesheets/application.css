@@ -347,7 +347,7 @@
 }
 
 /*404 page*/
-#four {
+/*#four {
   width: 100%
 }
 .overlay-container {
@@ -366,4 +366,24 @@
 .overlay h1 {
   font-size: 5rem;
   font-weight: bolder;
+}*/
+
+.huge, .big, .med {
+  font-weight: lighter;
+  text-align: center;
+}
+
+.huge {
+  font-size: 9rem;
+  padding: 0;
+  margin: 0;
+}
+
+.big {
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+.sad-bird img {
+  height: 400px;
 }
