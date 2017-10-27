@@ -27,7 +27,7 @@ class Product < ApplicationRecord
   end
 
   def self.bestseller(number)
-    return Product.all.sort_by { |product| -product.order.count }.first(number)
+    return Product.all.sort_by { |product| -product.orders.count }.first(number)
   end
 
 end
