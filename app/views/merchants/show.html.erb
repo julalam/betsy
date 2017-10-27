@@ -17,7 +17,7 @@
             <tr>
               <td><%= "#{type}" %></td>
               <td><%= @merchant.orders.where(status: type).uniq.count %></td>
-              <td><%= Merchant.revenue_by_status(order_items) %></td>
+              <td><%= format_money(Merchant.revenue_by_status(order_items)) %></td>
             </tr>
           <% end %>
         <% end %>
