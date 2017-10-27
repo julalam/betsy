@@ -77,8 +77,8 @@ category1 = Category.first
 category2 = Category.last
 category1.products << Product.first
 category1.products << Product.last
-category2.products << Product.last
-category2.products << Product.first
+category2.products << Product.all[6]
+category2.products << Product.all[7]
 
 category1.products.each do |product|
   puts "#{category1.name} has #{product.name}"
