@@ -47,4 +47,5 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'merchants#logout', as: 'logout'
 
+  get "*path", to:'application#render_404'
 end

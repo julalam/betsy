@@ -345,3 +345,25 @@
 .merchant-order section:first-of-type {
   border-right: 1px solid #cccccc;
 }
+
+/*404 page*/
+#four {
+  width: 100%
+}
+.overlay-container {
+  position: relative;
+}
+
+.overlay-container .overlay {
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.overlay h1 {
+  font-size: 5rem;
+  font-weight: bolder;
+}
