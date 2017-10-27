@@ -1,17 +1,6 @@
 require "test_helper"
 
 describe ProductsController do
-  # describe "controller functions" do
-  #   it "tests index by merchant method" do
-  #     get products_merchant_path(Merchant.first.id)
-  #     must_respond_with :success
-  #   end
-  #
-  #   it "tests index by category method " do
-  #     get products_category_path(Category.first.id)
-  #     must_respond_with :success
-  #   end
-  # end
 
   describe "require a user to be logged in" do
     before do
@@ -66,20 +55,65 @@ describe ProductsController do
       end
     end
 
-    describe "index" do
-      it "a logged in user can see their products" do
+    describe "update" do
+      it "a logged in user cannot update other's products" do
+        Product.destroy_all
+        product_data = {
+          product: {
+            name: "test product",
+            price: 20,
+            stock: 3,
+            merchant_id: merchants(:emma).id,
+            retired: false
+          }
+        }
+        only_product = Product.create!(product_data[:product])
+        new_merchant = merchants(:eva)
+        login(new_merchant)
 
+        update_product = {
+          product: {
+            retired: true
+          }
+        }
+        patch product_path(only_product), params: update_product
+
+        Product.first.retired.must_equal false
+        flash[:status].must_equal :failure
+        flash[:message].must_equal "Failure: You cannot access account pages for other users"
+        must_redirect_to root_path
       end
     end
 
-    #TODO it "a logged in user can see their products organized by category" do
-    #end
+    describe "index" do
+      it "a logged in user cannot see others products" do
+        params = {
+          merchant_id: merchants(:emma).id
+        }
+        get products_path(params)
+        flash[:status].must_equal :failure
+        flash[:message].must_equal "Failure: You cannot access account pages for other users"
+        must_redirect_to root_path
+      end
+
+
+      it "a logged in user cannot see other's products organized by category" do
+        params = {
+          merchant_id: merchants(:emma).id,
+          category_id: categories(:one)
+        }
+        get products_path(params)
+        flash[:status].must_equal :failure
+        flash[:message].must_equal "Failure: You cannot access account pages for other users"
+        must_redirect_to root_path
+      end
+    end
 
     describe "edit" do
-      it "if you are the wrong logged in user, you can not edit another person's products" do
+      it "if you a logged in user, you cannot edit another person's products" do
         merchant = merchants(:emma)
-        get edit_product_path(merchant.id)
-        must_redirect_to root_path
+        product = Product.find_by(merchant_id: merchant.id)
+        get edit_product_path(product.id)
         flash[:message].must_equal "Failure: You cannot access account pages for other users"
         flash[:status].must_equal :failure
       end
@@ -101,26 +135,111 @@ describe ProductsController do
     end
 
     describe "index" do
-      #TODO it "a logged in user can see their own products" do
-      #end
+      it "a logged in user can see their own products" do
+        params = {
+          merchant_id: merchants(:eva).id
+        }
+        get products_path(params)
+        must_respond_with :success
+      end
 
-      #TODO it "a logged in user can see their own products organized by category" do
-      #end
-
+      it "a logged in user can see their own products organized by category" do
+        params = {
+          merchant_id: merchants(:eva).id,
+          category_id: categories(:one)
+        }
+        get products_path(params)
+        must_respond_with :success
+      end
     end
 
-    #update
-    #index
+    it "a logged in user can navigate to a page displaying all the products of one category from their merchant page" do #Note: this does same function as index_by_category but uses a different route.  Ask Julia if this is nessesary.
+      params = {
+        category_id: categories(:one)
+      }
+      get products_path(params)
+      must_respond_with :success
+    end
+
+    describe "update" do
+      it "a logged in user can update their own products" do
+        Product.destroy_all
+        product_data = {
+          product: {
+            name: "test product",
+            price: 20,
+            stock: 3,
+            merchant_id: merchants(:eva).id,
+            retired: false
+          }
+        }
+        only_product = Product.create!(product_data[:product])
+
+        update_product = {
+          product: {
+            retired: true
+          }
+        }
+        patch product_path(only_product), params: update_product
+
+        Product.first.retired.must_equal true
+        must_redirect_to merchant_products_path(@merchant)
+      end
+
+      it "a logged in user cannot update their own products with bogus updates" do
+        Product.destroy_all
+        product_data = {
+          product: {
+            name: "test product",
+            price: 20,
+            stock: 3,
+            merchant_id: merchants(:eva).id,
+            retired: false
+          }
+        }
+        only_product = Product.create!(product_data[:product])
+
+        update_product = {
+          product: {
+            price: -20
+          }
+        }
+        patch product_path(only_product), params: update_product
+
+        flash[:status].must_equal :failure
+        flash[:message].must_equal "Could not updated test product, ID number #{only_product.id}"
+        must_respond_with :bad_request
+      end
+    end
   end
+
 
   describe "all users can do these things" do
     describe "edit" do
       it "if you are not logged in, you can not edit products" do
         merchant = merchants(:emma)
-        get edit_product_path(merchant.id)
+        product = Product.find_by(merchant_id: merchant.id)
+        get edit_product_path(product.id)
         must_redirect_to root_path
         flash[:message].must_equal "You must be logged in to do that"
         flash[:status].must_equal :failure
+      end
+    end
+
+    describe "update" do
+      it "a guest user cannot update products" do
+        product = products(:one)
+        update_product = {
+          product: {
+            description: "this description has been updated"
+          }
+        }
+        patch product_path(products(:one)), params: update_product
+
+        product.description.wont_equal "this description has been updated"
+        flash[:status].must_equal :failure
+        flash[:message].must_equal "You must be logged in to do that"
+        must_redirect_to root_path
       end
     end
 
@@ -178,6 +297,7 @@ describe ProductsController do
     end
   end
 end
+
 #
 #
 #
@@ -469,5 +589,3 @@ end
 #     get merchant_category_products_path(merchant.id, category.id)
 #     must_respond_with :success
 #   end
-# end
-# end
